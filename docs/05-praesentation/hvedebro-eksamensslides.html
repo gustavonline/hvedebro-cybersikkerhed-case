@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hvedebro – Eksamensslides</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --line: #d6dde8;
+      --text: #1b2533;
+      --muted: #5f6f83;
+      --accent: #1d4ed8;
+      --red: #c62828;
+      --yellow: #8a6d00;
+      --green: #2e7d32;
+      --shadow: 0 6px 18px rgba(12, 32, 62, 0.08);
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: "Segoe UI", "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .topbar {
+      height: 56px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: 20;
+    }
+
+    .topbar .title {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .topbar .count {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    #deck {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding-top: 56px;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 56px 0 0 0;
+      padding: 28px 40px 72px;
+      overflow: auto;
+      display: none;
+    }
+
+    .slide.active { display: block; }
+
+    h1, h2, h3 {
+      margin: 0 0 12px;
+      line-height: 1.2;
+      font-weight: 750;
+    }
+
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.65rem; }
+    h3 { font-size: 1.05rem; }
+
+    p { margin: 0 0 10px; line-height: 1.5; color: #2d3a4a; }
+
+    .muted { color: var(--muted); }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+    }
+
+    ul { margin: 0; padding-left: 18px; line-height: 1.5; }
+    li { margin: 5px 0; }
+
+    .pill {
+      display: inline-block;
+      background: #e9efff;
+      color: #2346a8;
+      border: 1px solid #cfdcfb;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 650;
+      padding: 4px 10px;
+      margin: 4px 4px 0 0;
+    }
+
+    .kicker {
+      color: var(--accent);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    th, td {
+      border-bottom: 1px solid #e7edf6;
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #eff4fb;
+      color: #233247;
+      font-weight: 700;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    .r { color: var(--red); font-weight: 700; }
+    .y { color: var(--yellow); font-weight: 700; }
+    .g { color: var(--green); font-weight: 700; }
+
+    .top-risk {
+      background: #fff5f5;
+      border: 1px solid #f3c8c8;
+      border-radius: 8px;
+      padding: 2px 6px;
+      color: #9f1f1f;
+      font-weight: 700;
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .mini {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .phase-canvas {
+      border: 1px solid #d5dfed;
+      border-radius: 10px;
+      background: #fbfdff;
+      padding: 10px;
+    }
+
+    .axis-head {
+      display: grid;
+      grid-template-columns: 90px repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 8px;
+      align-items: center;
+    }
+
+    .axis-y {
+      font-size: 0.76rem;
+      color: #607186;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .axis-x {
+      grid-column: 2 / 6;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      align-items: center;
+      gap: 4px;
+      font-size: 0.76rem;
+      color: #607186;
+      font-weight: 700;
+    }
+
+    .axis-x span { text-align: center; }
+
+    .axis-phase {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #41556b;
+      font-weight: 700;
+      border: 1px dashed #cfdae9;
+      border-radius: 8px;
+      padding: 5px 6px;
+      background: #fff;
+    }
+
+    .phase-grid {
+      display: grid;
+      grid-template-columns: 90px repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      align-items: stretch;
+    }
+
+    .phase-y {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      text-align: center;
+      font-size: 0.76rem;
+      color: #607186;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      border: 1px dashed #cfdae9;
+      border-radius: 8px;
+      background: #fff;
+      padding: 8px 4px;
+    }
+
+    .phase-box {
+      border: 1px solid #dbe5f2;
+      border-radius: 10px;
+      background: #fff;
+      min-height: 182px;
+      padding: 10px;
+    }
+
+    .phase-box h4 {
+      margin: 0 0 8px;
+      font-size: 0.92rem;
+      color: #1e3148;
+    }
+
+    .phase-box.p1 { background: #eef4ff; border-color: #cfdffd; }
+    .phase-box.p2 { background: #eefcf2; border-color: #cfe9d8; }
+    .phase-box.p3 { background: #fff9eb; border-color: #f3e3b8; }
+    .phase-box.p4 { background: #fff1f1; border-color: #efcdcd; }
+
+    .subtiles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .subtile {
+      font-size: 0.76rem;
+      line-height: 1.35;
+      border: 1px solid #d7e1ee;
+      border-radius: 7px;
+      background: #fff;
+      padding: 6px 6px;
+      color: #2b3d54;
+      min-height: 44px;
+    }
+
+    .phase-note {
+      margin-top: 8px;
+      font-size: 0.82rem;
+      color: #586b81;
+    }
+
+    .legend {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: #415267;
+      margin-top: 10px;
+    }
+
+    .legend span::before {
+      content: "";
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-right: 6px;
+      border-radius: 3px;
+      border: 1px solid #c9d5e7;
+      vertical-align: -1px;
+    }
+
+    .legend .l1::before { background: #eef4ff; }
+    .legend .l2::before { background: #eefcf2; }
+    .legend .l3::before { background: #fff9eb; }
+    .legend .l4::before { background: #fff1f1; }
+
+    .ref {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: #5d6d82;
+      border-top: 1px dashed #d5deeb;
+      padding-top: 8px;
+    }
+
+    .controls {
+      position: fixed;
+      right: 16px;
+      bottom: 14px;
+      display: flex;
+      gap: 8px;
+      z-index: 30;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 10px;
+      box-shadow: var(--shadow);
+    }
+
+    button {
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      color: #24354a;
+    }
+
+    button:hover { background: #f1f5fb; }
+
+    .hint { font-size: 0.78rem; color: var(--muted); align-self: center; margin-left: 4px; }
+
+    @media (max-width: 1100px) {
+      .slide { padding: 20px 16px 70px; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .axis-head, .phase-grid { grid-template-columns: 1fr; }
+      .axis-x, .axis-phase { grid-column: auto; }
+      .phase-y { writing-mode: horizontal-tb; transform: none; }
+      .subtiles { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      html, body { overflow: visible; }
+      .topbar, .controls { display: none; }
+      .slide {
+        display: block !important;
+        position: relative;
+        inset: auto;
+        min-height: auto;
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="title">Hvedebro – Eksamensslides (cybersikkerhed)</div>
+    <div class="count" id="count">Slide 1 / 10</div>
+  </div>
+
+  <main id="deck">
+
+    <section class="slide active">
+      <div class="kicker">Slide 1 · Indledning</div>
+      <h1>Hvedebro Maskinfabrik: opdateret sikkerhedsbillede</h1>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Case-kontekst</h3>
+          <ul>
+            <li>Virksomheden er i vækst og bliver mere digitaliseret (IT + OT + data).</li>
+            <li>Der er allerede realiserede hændelser: ransomware, OT-driftsstop, fysisk indbrud og muligt IP-læk.</li>
+            <li>Kundekrav presser virksomheden mod NIS2-niveau i supply chain.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Præsentationsflow</h3>
+          <ul>
+            <li>Sikkerhedspolitik og modenhed</li>
+            <li>Risikoanalyse med valgt skabelon</li>
+            <li>Top-risici og initiativområder</li>
+            <li>Roadmap (fase 1-4) med digital fremtidssikring</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ref"><strong>Reference:</strong> `docs/01-overblik/opdateret-overblik.md`</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Slide 2 · Sikkerhedspolitik</div>
+      <h2>Sikkerhedspolitik: konkret retning (IT, OT, fysisk, cloud og AI)</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Kerneprincipper</h3>
+          <ul>
+            <li>Least privilege + MFA på kritiske adgange</li>
+            <li>Segmentering mellem IT og OT</li>
+            <li>Kontrolleret fjernadgang og sessionslogning</li>
+            <li>Backup + restore-test som driftskrav</li>
+            <li>Cloud/lokal drift vælges via risikovurdering (ikke ad hoc)</li>
+            <li>Leverandørkrav ind i kontrakter</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Rammeværk (hvorfor nævnes NIS2/ISO/CER?)</h3>
+          <p>De bruges som styringsretning, så policy og kontroller kan dokumenteres over for kunder og samarbejdspartnere.</p>
+          <div>
+            <span class="pill">NIS2-ready (supply chain)</span>
+            <span class="pill">ISO/IEC 27001 alignment</span>
+            <span class="pill">CER-principper for fysisk robusthed</span>
+          </div>
+          <p class="mini">Pointen i eksamen: ikke at påstå certificering nu, men at vise struktureret retning.</p>
+        </div>
+      </div>
+      <div class="ref"><strong>Reference:</strong> `docs/02-governance/it-sikkerhedspolitik.md`</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Slide 3 · Modenhed</div>
+      <h2>Modenhedsanalyse (CSF-inspireret) – baseline og mål</h2>
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>Område</th>
+              <th>Nu</th>
+              <th>Status</th>
+              <th>Mål 12 mdr.</th>
+              <th>Mål 24 mdr.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Governance/politik</td><td>1</td><td class="r">🔴</td><td>3</td><td>4</td></tr>
+            <tr><td>Risikostyring</td><td>2</td><td class="y">🟡</td><td>3</td><td>4</td></tr>
+            <tr><td>IAM/MFA</td><td>1</td><td class="r">🔴</td><td>3</td><td>4</td></tr>
+            <tr><td>IT/OT-segmentering</td><td>1</td><td class="r">🔴</td><td>3</td><td>4</td></tr>
+            <tr><td>Backup/restore/beredskab</td><td>2</td><td class="y">🟡</td><td>3</td><td>4</td></tr>
+            <tr><td>Leverandørstyring</td><td>1</td><td class="r">🔴</td><td>3</td><td>4</td></tr>
+            <tr><td>Logning/detektion</td><td>1</td><td class="r">🔴</td><td>3</td><td>4</td></tr>
+            <tr><td>Awareness</td><td>2</td><td class="y">🟡</td><td>3</td><td>4</td></tr>
+            <tr><td>Cloud-/platformstyring</td><td>1</td><td class="r">🔴</td><td>3</td><td>4</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mini">Modenheden forklarer hvorfor sandsynligheden i risikoanalysen er høj på flere kritiske områder.</p>
+      <div class="ref"><strong>Reference:</strong> `docs/03-analyse/modenhedsanalyse-csf.md` + `undervisning-slides/Modul7.md` (grøn/gul/rød) + `undervisning-slides/Noter til grundkursus i cybersikkerhed version 0.97.md` (CSF 1-5)</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Slide 4 · Risikomodel</div>
+      <h2>Valgt risikoskabelon og behandlingsvalg (4T)</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Valgt skabelon (undervisningsnær)</h3>
+          <ul>
+            <li>5x5 risikomatrix + risikoregister</li>
+            <li>Score = Sandsynlighed × Konsekvens</li>
+            <li>Metodekobling: Modul 2 + ISO/IEC 27005 + ISO 31000 + NIST SP 800-30</li>
+          </ul>
+          <table style="margin-top:8px; font-size:0.84rem;">
+            <thead><tr><th>Score</th><th>Kategori</th><th>Typisk handling</th></tr></thead>
+            <tbody>
+              <tr><td>1-7</td><td>Lav</td><td>Acceptere / monitorere</td></tr>
+              <tr><td>8-10</td><td>Mellem</td><td>Nærmere vurdering + plan</td></tr>
+              <tr><td>11-25</td><td>Høj</td><td>Handlingsplan nu</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h3>4 behandlingsstrategier (4T)</h3>
+          <ul>
+            <li><strong>Mitigere:</strong> reducér sandsynlighed/konsekvens</li>
+            <li><strong>Undgå:</strong> stop aktivitet/løsning</li>
+            <li><strong>Overføre:</strong> kontrakt/forsikring/managed service</li>
+            <li><strong>Acceptere:</strong> bevidst rest-risiko med ejer og revurdering</li>
+          </ul>
+          <p class="mini"><strong>Skabelonfelter fra undervisning:</strong> risikoejer, accepteret ja/nej, nye foranstaltninger, restrisiko.</p>
+        </div>
+      </div>
+      <div class="ref"><strong>Reference:</strong> `docs/03-analyse/risikoanalyse-score.md` + `undervisning-slides/Modul2.md` (simpel skabelon)</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Slide 5 · Risikoregister</div>
+      <h2>Samlet risikobillede – top 4 markeret</h2>
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Risiko</th>
+              <th>S</th>
+              <th>K</th>
+              <th>Score</th>
+              <th>Behandling</th>
+              <th>Markering</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>R01</td><td>Ukontrolleret OT-fjernadgang</td><td>4</td><td>5</td><td>20</td><td>Mitigere</td><td><span class="top-risk">TOP 4</span></td></tr>
+            <tr><td>R02</td><td>Manglende backup/restore-test</td><td>4</td><td>5</td><td>20</td><td>Mitigere</td><td><span class="top-risk">TOP 4</span></td></tr>
+            <tr><td>R03</td><td>Fladt IT/OT-netværk</td><td>4</td><td>4</td><td>16</td><td>Mitigere</td><td><span class="top-risk">TOP 4</span></td></tr>
+            <tr><td>R04</td><td>Shadow IT (Proshop-server/CAD)</td><td>4</td><td>4</td><td>16</td><td>Undgå + Mitigere</td><td><span class="top-risk">TOP 4</span></td></tr>
+            <tr><td>R05</td><td>Uklar cloud-vs-lokal strategi (regnskab)</td><td>3</td><td>4</td><td>12</td><td>Mitigere + Overføre</td><td>-</td></tr>
+            <tr><td>R06</td><td>Svag IAM/MFA</td><td>4</td><td>4</td><td>16</td><td>Mitigere</td><td>-</td></tr>
+            <tr><td>R07</td><td>Leverandørkrav mangler i kontrakter</td><td>4</td><td>4</td><td>16</td><td>Overføre + Mitigere</td><td>-</td></tr>
+            <tr><td>R08</td><td>IP-tyveri/industrispionage</td><td>3</td><td>5</td><td>15</td><td>Mitigere</td><td>-</td></tr>
+            <tr><td>R11</td><td>Ransomware mod økonomi-/administrationssystemer</td><td>4</td><td>4</td><td>16</td><td>Mitigere</td><td>-</td></tr>
+            <tr><td>R13</td><td>AI-datalæk ved uautoriseret brug</td><td>3</td><td>4</td><td>12</td><td>Mitigere</td><td>-</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ref"><strong>Reference:</strong> `docs/03-analyse/risikoanalyse-score.md` (fuldt register) + `undervisning-slides/Modul2.md` (risk owner/restrisiko)</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Slide 6 · Initiativområder</div>
+      <h2>Fra toprisici til konkrete initiativer</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Top 4 risiko -> kontrol</h3>
+          <ul>
+            <li>R01 -> kontrolleret fjernadgang + MFA + sessionslog</li>
+            <li>R02 -> 3-2-1 backup + faste restore-tests</li>
+            <li>R03 -> IT/OT-segmentering + OT-DMZ</li>
+            <li>R04 -> udfas shadow IT + styret platformstrategi</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Tværgående initiativområder</h3>
+          <div>
+            <span class="pill">Governance</span>
+            <span class="pill">IT</span>
+            <span class="pill">OT</span>
+            <span class="pill">Fysisk sikkerhed</span>
+            <span class="pill">Leverandørstyring</span>
+            <span class="pill">Awareness</span>
+          </div>
+          <p class="mini">Risikologik i praksis: hver aktivitet skal reducere en identificeret risiko.</p>
+        </div>
+      </div>
+      <div class="ref"><strong>Reference:</strong> `docs/04-roadmap/initiativkatalog.md`</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Slide 7 · Roadmap</div>
+      <h2>Roadmap-figur: faser som store blokke, områder som underblokke</h2>
+      <div class="card">
+        <div class="phase-canvas">
+          <div class="axis-head">
+            <div class="axis-y">Akser</div>
+            <div class="axis-x"><span>0 mdr</span><span>6 mdr</span><span>12 mdr</span><span>24 mdr</span><span>36 mdr</span></div>
+            <div></div>
+            <div class="axis-phase">Fase 1</div>
+            <div class="axis-phase">Fase 2</div>
+            <div class="axis-phase">Fase 3</div>
+            <div class="axis-phase">Fase 4</div>
+          </div>
+
+          <div class="phase-grid">
+            <div class="phase-y">Y-akse: områder pr. fase</div>
+
+            <div class="phase-box p1">
+              <h4>Fundament (0-6 mdr)</h4>
+              <div class="subtiles">
+                <div class="subtile">Governance + politikker</div>
+                <div class="subtile">Asset inventory</div>
+                <div class="subtile">Fjernadgang + MFA</div>
+                <div class="subtile">Backup baseline</div>
+              </div>
+            </div>
+
+            <div class="phase-box p2">
+              <h4>Stabilisering (6-12 mdr)</h4>
+              <div class="subtiles">
+                <div class="subtile">IT/OT-segmentering</div>
+                <div class="subtile">IAM recertificering</div>
+                <div class="subtile">Leverandørkrav i kontrakt</div>
+                <div class="subtile">Logning + playbooks</div>
+              </div>
+            </div>
+
+            <div class="phase-box p3">
+              <h4>Fremtidssikring (12-24 mdr)</h4>
+              <div class="subtiles">
+                <div class="subtile">Hjemmearbejdsstandard</div>
+                <div class="subtile">Awareness-årshjul</div>
+                <div class="subtile">AI-governance</div>
+                <div class="subtile">Første AI-audit</div>
+              </div>
+            </div>
+
+            <div class="phase-box p4">
+              <h4>Løbende forbedring (24-36 mdr)</h4>
+              <div class="subtiles">
+                <div class="subtile">Intern audit + review</div>
+                <div class="subtile">AI-audit som fast kontrol</div>
+                <div class="subtile">Tværgående øvelser</div>
+                <div class="subtile">Security-by-design</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phase-note">Top 4-risici håndteres først i fase 1-2. Fase 3-4 adresserer digitalisering, skalering og fremtidige trusselsmønstre.</div>
+        </div>
+        <div class="legend">
+          <span class="l1">Fase 1</span>
+          <span class="l2">Fase 2</span>
+          <span class="l3">Fase 3</span>
+          <span class="l4">Fase 4</span>
+        </div>
+      </div>
+      <div class="ref"><strong>Reference:</strong> `docs/04-roadmap/faseplan-1-4.md` (Gantt) + `undervisning-slides/Modul7.md` (implementering/processer)</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Slide 8 · Fremtidssikring</div>
+      <h2>Fase 3-4: fremtidssikring ved digitalisering</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Skalering og hjemmearbejde</h3>
+          <ul>
+            <li>Managed devices og sikker remote-adgang</li>
+            <li>Standarder for datahåndtering udenfor kontoret</li>
+            <li>Kontrol af nye integrationspunkter</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Mennesker og awareness</h3>
+          <ul>
+            <li>Rollebaseret træning pr. funktion</li>
+            <li>Ledertræning mod BEC/deepfake</li>
+            <li>Awareness som årshjul (ikke engangskursus)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>AI-governance</h3>
+          <ul>
+            <li>Godkendte AI-værktøjer + AI-register</li>
+            <li>Forbud mod upload af fortrolige data i uautoriserede tjenester</li>
+            <li>Kvartalsvis AI-audit med ledelsesrapportering</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ref"><strong>Reference:</strong> `docs/02-governance/ai-politik-og-audit.md` + `docs/04-roadmap/faseplan-1-4.md`</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Slide 9 · Samlet anbefaling</div>
+      <h2>Konklusion: realistisk løft med tydelig risikoreduktion</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Det vigtigste i analysen</h3>
+          <ul>
+            <li>Virksomheden har allerede realiserede hændelser og tydelige modenhedsgab.</li>
+            <li>Top 4-risici kan reduceres markant med fase 1-2 tiltag.</li>
+            <li>Fase 3-4 gør planen robust ift. digitalisering, hjemmearbejde og AI.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Eksamenspointer</h3>
+          <ul>
+            <li>Risikobaseret prioritering (ikke tool-first)</li>
+            <li>Kobling mellem analyse, politik og roadmap</li>
+            <li>Balance mellem cyber, fysisk sikkerhed og organisation</li>
+            <li>Dokumenterbar retning mod NIS2/ISO-alignment</li>
+          </ul>
+        </div>
+      </div>
+      <div class="ref"><strong>Reference:</strong> samlet dokumentpakke i `docs/`</div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Slide 10 · Bilag</div>
+      <h2>Bilag og kilder I kan henvise til under eksamen</h2>
+      <div class="card">
+        <ul>
+          <li>`docs/02-governance/it-sikkerhedspolitik.md`</li>
+          <li>`docs/03-analyse/modenhedsanalyse-csf.md`</li>
+          <li>`docs/03-analyse/risikoanalyse-score.md`</li>
+          <li>`docs/04-roadmap/initiativkatalog.md`</li>
+          <li>`docs/04-roadmap/faseplan-1-4.md`</li>
+          <li>`docs/05-praesentation/slides-noter.md`</li>
+          <li>`docs/05-praesentation/gruppe-validering-checkliste.md`</li>
+          <li>`docs/05-praesentation/eksamensvalg-fra-undervisning.md`</li>
+          <li>`undervisning-slides/Modul2.md` (risikomodel)</li>
+          <li>`undervisning-slides/Modul3.md` (NIS2 minimumskrav)</li>
+          <li>`undervisning-slides/Modul7.md` (assessment + processer)</li>
+        </ul>
+      </div>
+      <p class="mini">Tip: Brug denne slide, hvis censor spørger “hvor kommer jeres vurderinger fra?”.</p>
+    </section>
+
+  </main>
+
+  <div class="controls">
+    <button id="prev" title="Forrige">◀</button>
+    <button id="next" title="Næste">▶</button>
+    <span class="hint">← / → · F = fullscreen</span>
+  </div>
+
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    const countEl = document.getElementById('count');
+    let i = 0;
+
+    function show(idx) {
+      i = Math.max(0, Math.min(idx, slides.length - 1));
+      slides.forEach((s, n) => s.classList.toggle('active', n === i));
+      countEl.textContent = `Slide ${i + 1} / ${slides.length}`;
+    }
+
+    document.getElementById('prev').addEventListener('click', () => show(i - 1));
+    document.getElementById('next').addEventListener('click', () => show(i + 1));
+
+    document.addEventListener('keydown', (e) => {
+      if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); show(i + 1); }
+      if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); show(i - 1); }
+      if (e.key.toLowerCase() === 'f') {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+        else document.exitFullscreen?.();
+      }
+      if (e.key === 'Home') show(0);
+      if (e.key === 'End') show(slides.length - 1);
+    });
+
+    show(0);
+  </script>
+</body>
+</html>

@@ -1,5 +1,7 @@
 # Hvedebro Maskinfabrik – cybersikkerhedscase (kondenseret og virkelighedsnær)
 
+> **Note:** For den opdaterede eksamenspakke (sikkerhedspolitik, modenhedsanalyse, risikoscoring og faseplan 1-4), se `docs/README.md`.
+
 *Udarbejdet som undervisnings-/studienote med fokus på at skære støj fra uden at miste de praktiske forhold i casen.*
 
 ---
