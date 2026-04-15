@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hvedebro - noter til endelig præsentation</title>
+  <style>
+    :root {
+      --bg: #f6f1e8;
+      --paper: #fffdf8;
+      --ink: #1f2a24;
+      --muted: #5f6c62;
+      --line: #d6ccbf;
+      --accent: #0d5c4f;
+      --accent-soft: #d9efe9;
+      --warm: #c96a2b;
+      --warm-soft: #f8e2d0;
+      --shadow: 0 18px 40px rgba(31, 42, 36, 0.08);
+      --radius: 22px;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(201, 106, 43, 0.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(13, 92, 79, 0.14), transparent 26%),
+        linear-gradient(180deg, #efe6d8 0%, var(--bg) 34%, #f9f6ef 100%);
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(248, 242, 233, 0.94));
+      border: 1px solid rgba(214, 204, 191, 0.9);
+      border-radius: calc(var(--radius) + 6px);
+      box-shadow: var(--shadow);
+      padding: 34px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      top: -80px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(13, 92, 79, 0.16), transparent 68%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      line-height: 1.1;
+    }
+
+    h1 {
+      max-width: 12ch;
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      margin-bottom: 18px;
+    }
+
+    .lede {
+      max-width: 72ch;
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin: 0 0 22px;
+    }
+
+    .hero-actions,
+    .quick-grid,
+    .note-grid,
+    .index {
+      display: grid;
+      gap: 14px;
+    }
+
+    .hero-actions {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 22px;
+    }
+
+    .action,
+    .quick,
+    .note-card {
+      background: var(--paper);
+      border: 1px solid rgba(214, 204, 191, 0.92);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .action {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 18px;
+      text-decoration: none;
+      transition: transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    .action:hover {
+      transform: translateY(-2px);
+      border-color: rgba(13, 92, 79, 0.45);
+    }
+
+    .action strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .action span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .action .arrow {
+      color: var(--accent);
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .quick-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin: 24px 0 28px;
+    }
+
+    .quick {
+      padding: 18px;
+    }
+
+    .quick h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+
+    .quick p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .index {
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      margin: 0 0 28px;
+    }
+
+    .index a {
+      text-decoration: none;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: rgba(13, 92, 79, 0.08);
+      border: 1px solid rgba(13, 92, 79, 0.16);
+      color: var(--accent);
+      font-size: 0.94rem;
+      text-align: center;
+    }
+
+    .notes {
+      display: grid;
+      gap: 20px;
+    }
+
+    .note-card {
+      padding: 24px;
+    }
+
+    .note-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px 18px;
+      margin-bottom: 18px;
+    }
+
+    .note-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .time {
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--warm-soft);
+      color: #8a4617;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .note-card h2 {
+      font-size: clamp(1.55rem, 2.4vw, 2rem);
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .note-grid {
+      grid-template-columns: 1.1fr 1fr;
+      align-items: start;
+      margin-top: 18px;
+    }
+
+    .panel {
+      background: rgba(246, 241, 232, 0.68);
+      border: 1px solid rgba(214, 204, 191, 0.75);
+      border-radius: 18px;
+      padding: 16px 18px;
+    }
+
+    .panel strong {
+      color: var(--accent);
+    }
+
+    .panel p {
+      margin: 0;
+    }
+
+    .stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini {
+      font-size: 0.94rem;
+      color: var(--muted);
+    }
+
+    .mini strong {
+      color: var(--ink);
+    }
+
+    footer {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 820px) {
+      .hero,
+      .note-card {
+        padding: 22px;
+      }
+
+      .note-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .shell {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      .hero,
+      .quick,
+      .note-card {
+        box-shadow: none;
+      }
+
+      .action {
+        border-color: var(--line);
+      }
+
+      .note-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">Hvedebro Maskinfabrik · Talenoter</p>
+      <h1>Noter til den endelige præsentation</h1>
+      <p class="lede">
+        Dokumentet er lavet som mundtlig støtte til <em>endelig-praesentation-slides.html</em>. Tanken er ikke,
+        at du skal læse det ordret op, men at hver slide får et klart kernebudskab, nogle gode formuleringer
+        og en naturlig overgang, så præsentationen flyder bedre og holder sig omkring et minut pr. slide.
+      </p>
+
+      <div class="hero-actions">
+        <a class="action" href="endelig-praesentation-slides.html">
+          <div>
+            <strong>Åbn slides</strong>
+            <span>Brug dette dokument som støtte ved siden af decket</span>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+        <a class="action" href="#slide-1">
+          <div>
+            <strong>Start ved slide 1</strong>
+            <span>Ni slide-noter med korte overgange hele vejen igennem</span>
+          </div>
+          <span class="arrow">↓</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="quick-grid" aria-label="Hurtige tips">
+      <article class="quick">
+        <h3>Tal i lag</h3>
+        <p>Start med hovedpointen, brug ét caseeksempel, og gå videre. Så undgår du at drukne i detaljer.</p>
+      </article>
+      <article class="quick">
+        <h3>Hold top 4 i live</h3>
+        <p>Nævn R01-R04 flere steder, så censor tydeligt mærker den røde tråd fra analyse til roadmap.</p>
+      </article>
+      <article class="quick">
+        <h3>Brug flueben rigtigt</h3>
+        <p>I roadmap-slidet betyder flueben, at materialet er udarbejdet i projektet, ikke at Hvedebro allerede har implementeret alt.</p>
+      </article>
+      <article class="quick">
+        <h3>Hvis tiden løber</h3>
+        <p>Kort først slide 4 og 5 ned til metode, top 4 og faseprioritet. Det giver mindst tab af mening.</p>
+      </article>
+    </section>
+
+    <nav class="index" aria-label="Slideindeks">
+      <a href="#slide-1">1. Introduktion</a>
+      <a href="#slide-2">2. Nuværende situation</a>
+      <a href="#slide-3">3. Modenhed</a>
+      <a href="#slide-4">4. Risikoanalyse</a>
+      <a href="#slide-5">5. Roadmap</a>
+      <a href="#slide-6">6. Fase 1-2 ansvar</a>
+      <a href="#slide-7">7. Fase 3-4</a>
+      <a href="#slide-8">8. KPI og konklusion</a>
+      <a href="#slide-9">9. RACI og ressourcer</a>
+    </nav>
+
+    <section class="notes">
+      <article class="note-card" id="slide-1">
+        <div class="note-top">
+          <div>
+            <div class="note-label">Slide 1 · Introduktion</div>
+            <h2>Cybersikkerhedsplan for Hvedebro Maskinfabrik</h2>
+            <p class="subtitle">Sæt rammen: hvorfor cybersikkerhed er et forretningsspørgsmål og ikke bare et IT-problem.</p>
+          </div>
+          <div class="time">Ca. 45-60 sek</div>
+        </div>
+        <div class="note-grid">
+          <div class="panel">
+            <p><strong>Kernebudskab:</strong> Planen skal beskytte Hvedebros vækst, drift og nøglekunder gennem en realistisk, risikobaseret sikkerhedsindsats over 2-3 år.</p>
+          </div>
+          <div class="stack">
+            <div class="panel mini">
+              <p><strong>Forslag til, hvad du kan sige:</strong> "Vores udgangspunkt er, at cybersikkerhed i Hvedebro ikke handler om at købe flest mulige værktøjer, men om at understøtte forretningen. Virksomheden vokser, digitaliserer og bliver mere afhængig af både produktion, udvikling og nøglekunder med høje krav. Derfor har vi lavet en plan, som kobler analyse, prioritering, initiativer og ansvar sammen. Målet er ikke perfektion fra dag ét, men et markant og dokumenterbart løft over de næste 2-3 år, så Hvedebro kan vokse uden at bygge ny sikkerhedsgæld op."</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Hvis tiden presser:</strong> "Cybersikkerhed er her en forudsætning for vækst, leveringsstabilitet og kundetillid."</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Bro til næste slide:</strong> "For at vise hvorfor planen er nødvendig, starter vi med at se på de hændelser og modenhedsgab, som allerede findes i casen."</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="note-card" id="slide-2">
+        <div class="note-top">
+          <div>
+            <div class="note-label">Slide 2 · Hvor står Hvedebro nu?</div>
+            <h2>Nuværende situation: hændelser og modenhedsgab</h2>
+            <p class="subtitle">Vis at risiciene allerede er realiserede og rammer både IT, OT, fysisk sikkerhed og compliance.</p>
+          </div>
+          <div class="time">Ca. 50-60 sek</div>
+        </div>
+        <div class="note-grid">
+          <div class="panel">
+            <p><strong>Kernebudskab:</strong> Hvedebro står ikke med teoretiske risici; virksomheden har allerede set OT-nedbrud, ransomware, shadow IT, fysisk tyveri og kundepres omkring NIS2.</p>
+          </div>
+          <div class="stack">
+            <div class="panel mini">
+              <p><strong>Forslag til, hvad du kan sige:</strong> "Det vigtige her er, at casen allerede viser flere konkrete advarsler. Vi ser ukontrolleret fjernadgang til OT, ransomware mod økonomisystemet, en Proshop-server sat op uden governance, fysiske indbrud og uklare leverandøraftaler. Det betyder, at problemet ikke er ét teknisk hul, men et mønster af svag styring, uklart ansvar og høj personafhængighed. For forretningen giver det risiko for driftsstop, forsinkede leverancer, tab af IP og i sidste ende tab af kundetillid og markedsadgang."</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Hvis censor spørger:</strong> Brug robotnedbruddet, ransomware-hændelsen og industrispionage-sporet som de tre stærkeste caseeksempler.</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Bro til næste slide:</strong> "Når vi samler de hændelser, giver det mening at måle, hvor moden virksomheden faktisk er i dag, og hvor den realistisk kan løftes hen."</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="note-card" id="slide-3">
+        <div class="note-top">
+          <div>
+            <div class="note-label">Slide 3 · Modenhedsanalyse</div>
+            <h2>Modenhed (NIST/CSF-inspireret): nu -> 12 mdr -> 24 mdr</h2>
+            <p class="subtitle">Forklar tabellen som et styringsværktøj: hvor er de røde felter, og hvad er et realistisk mål.</p>
+          </div>
+          <div class="time">Ca. 55-60 sek</div>
+        </div>
+        <div class="note-grid">
+          <div class="panel">
+            <p><strong>Kernebudskab:</strong> Hvedebro er flere steder på begyndende modenhed, men kan løftes til et styret niveau på kerneområderne over 24 måneder, hvis de starter med fundamentet.</p>
+          </div>
+          <div class="stack">
+            <div class="panel mini">
+              <p><strong>Forslag til, hvad du kan sige:</strong> "Her bruger vi en CSF-inspireret modenhedsskala fra 1 til 5 kombineret med trafiklys, fordi det gør analysen lettere at styre og forklare. Det tydelige billede er, at governance, IAM, segmentering og leverandørstyring starter i rødt. Efter 12 måneder forventer vi primært gult, fordi fundamentet er etableret, og efter 24 måneder bør Hvedebro være tæt på grønt samlet set. Vi har bevidst ladet OT-sikkerhed og awareness modne lidt langsommere, fordi de områder typisk kræver mere tid, adfærdsændring og afhængighed af drift og leverandører."</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Faglig kobling:</strong> Modul 7s trafiklys- og modenhedstænkning plus den CSF-inspirerede 1-5 skala fra analysearbejdet.</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Bro til næste slide:</strong> "Modenheden viser retningen, men den fortæller ikke alene, hvad vi skal starte med. Derfor kobler vi den nu med en konkret risikoanalyse."</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="note-card" id="slide-4">
+        <div class="note-top">
+          <div>
+            <div class="note-label">Slide 4 · Risikoanalyse</div>
+            <h2>Metode, kriterier og risikomatrix (S x K + CIA + 4T)</h2>
+            <p class="subtitle">Forklar metoden kort og brug den til at legitimere, hvorfor top 4 bliver første prioritet.</p>
+          </div>
+          <div class="time">Ca. 55-60 sek</div>
+        </div>
+        <div class="note-grid">
+          <div class="panel">
+            <p><strong>Kernebudskab:</strong> Prioriteringen er ikke mavefornemmelse; den bygger på en enkel, sporbar metode med score, CIA-fokus og valgt behandlingsstrategi.</p>
+          </div>
+          <div class="stack">
+            <div class="panel mini">
+              <p><strong>Forslag til, hvad du kan sige:</strong> "Metoden er bevidst holdt enkel og styrbar. Vi bruger en 5x5-risikomatrix, hvor score er sandsynlighed gange konsekvens, og vi supplerer med CIA for at vise, om risikoen primært rammer fortrolighed, integritet eller tilgængelighed. Derudover vælger vi behandlingstype efter 4T: mitigere, undgå, overføre eller acceptere. Det betyder, at vi kan forklare både hvorfor en risiko er rød, og hvad vi vil gøre ved den. Top 4 er R01 til R04, fordi de rammer drift, recovery, netværk og governance direkte og derfor giver størst samlet forretningspåvirkning."</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Faglig kobling:</strong> CIA fra Modul 1 og risikomatrix plus 4T fra Modul 2.</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Bro til næste slide:</strong> "Når top-risiciene er tydelige, kan vi oversætte dem til et roadmap, hvor indsatsen er delt op i faser og lagt i den rigtige rækkefølge."</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="note-card" id="slide-5">
+        <div class="note-top">
+          <div>
+            <div class="note-label">Slide 5 · Initiativer og roadmap</div>
+            <h2>Faseblok-roadmap (1-4) med underområder og status</h2>
+            <p class="subtitle">Vis logikken i faserne og forklar hvorfor fundamentet kommer før digital fremtidssikring.</p>
+          </div>
+          <div class="time">Ca. 55-60 sek</div>
+        </div>
+        <div class="note-grid">
+          <div class="panel">
+            <p><strong>Kernebudskab:</strong> Roadmappet viser en bevidst rækkefølge: først styring og hurtig risikoreduktion, derefter stabilisering, fremtidssikring og løbende forbedring.</p>
+          </div>
+          <div class="stack">
+            <div class="panel mini">
+              <p><strong>Forslag til, hvad du kan sige:</strong> "Her er pointen, at vi ikke forsøger at gøre alting på én gang. Fase 1 handler om fundamentet: politik, RACI, risikoregister, MFA, fjernadgang, backup og stop for ny shadow IT. Fase 2 stabiliserer med segmentering, IAM, leverandørkrav og restore-disciplin. Fase 3 og 4 handler først derefter om fremtidssikring, AI-governance, awareness og kontinuerlig forbedring. Fluebenene betyder, at vi allerede har udarbejdet nogle af styringsartefakterne i projektet, ikke at Hvedebro har implementeret dem fuldt ud endnu. Det er også derfor, roadmapet er realistisk og ikke bare en ønskeliste."</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Hvis du vil fremhæve én ting:</strong> "Vi starter med R01-R04, fordi de giver den hurtigste reduktion af drifts- og forretningsrisiko."</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Bro til næste slide:</strong> "Når rækkefølgen er på plads, giver det mening at zoome ind på, hvem der konkret skal gøre hvad i fase 1 og 2."</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="note-card" id="slide-6">
+        <div class="note-top">
+          <div>
+            <div class="note-label">Slide 6 · Fase 1-2 ansvar</div>
+            <h2>Hvem gør hvad i fase 1-2 (hvordan og hvorfor)</h2>
+            <p class="subtitle">Gør det tydeligt, at de første faser handler om eksekvering, ejerskab og dokumentation, ikke kun teknik.</p>
+          </div>
+          <div class="time">Ca. 50-60 sek</div>
+        </div>
+        <div class="note-grid">
+          <div class="panel">
+            <p><strong>Kernebudskab:</strong> De vigtigste tidlige indsatser får en tydelig ejer, en konkret måde at blive gennemført på og en klar begrundelse i top-risiciene.</p>
+          </div>
+          <div class="stack">
+            <div class="panel mini">
+              <p><strong>Forslag til, hvad du kan sige:</strong> "Det her slide er vigtigt, fordi roadmapet først bliver troværdigt, når ansvar og metode er tydelige. Governance og politik ligger hos Kasim og direktionen, fordi det kræver ledelsesforankring. Fjernadgang, MFA og IAM ligger hos IT-drift, fordi det er de kontroller, der direkte reducerer R01 og svage adgange. Backup og restore er et delt ansvar mellem IT og OT, fordi hændelserne i casen viser, at uklart ejerskab er en del af problemet. Segmentering og leverandørkrav ligger tilsvarende hos OT-lead, netværk og indkøb, fordi de områder skal være både teknisk og kontraktuelt understøttet."</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Faglig kobling:</strong> Governance, leverandørkrav og NIS2-retning fra Modul 6 samt RACI-tænkning fra Modul 7.</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Bro til næste slide:</strong> "Når fundamentet er på plads, kan vi begynde at tale om de initiativer, der ikke bare lukker huller, men fremtidssikrer Hvedebros digitalisering."</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="note-card" id="slide-7">
+        <div class="note-top">
+          <div>
+            <div class="note-label">Slide 7 · Fase 3-4</div>
+            <h2>Fremtidssikring ved digitalisering (fase 3-4)</h2>
+            <p class="subtitle">Forklar at senere faser handler om at kunne vokse sikkert, ikke om at pynte på planen.</p>
+          </div>
+          <div class="time">Ca. 50-60 sek</div>
+        </div>
+        <div class="note-grid">
+          <div class="panel">
+            <p><strong>Kernebudskab:</strong> Fase 3 og 4 skal forhindre, at Hvedebro bygger ny sikkerhedsgæld op, mens virksomheden digitaliserer, får flere integrationspunkter og bruger nye teknologier.</p>
+          </div>
+          <div class="stack">
+            <div class="panel mini">
+              <p><strong>Forslag til, hvad du kan sige:</strong> "Når de største, aktuelle risici er reduceret, flytter fokus til fremtidssikring. Her kommer ERP-sporet, hjemmearbejdsstandarden, fuld IAM-modning, AI-governance, awareness-årshjul og et egentligt OT-sikkerhedsprogram ind. Pointen er, at Hvedebro ikke kun skal reagere på gamle problemer, men også kunne digitalisere uden at gentage de samme fejl. AI er et godt eksempel: vi behandler det ikke som hype, men som et governance-spørgsmål med politik, register og audit. På den måde bliver vækst og digitalisering understøttet af kontrol i stedet for at skabe nye røde risici."</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Hvis du vil gøre det skarpt:</strong> "Fase 3-4 handler om skalerbarhed, ikke brandslukning."</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Bro til næste slide:</strong> "Det næste spørgsmål er så, hvilken effekt planen forventes at have, og hvordan vi kan måle, at Hvedebro faktisk bevæger sig i den rigtige retning."</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="note-card" id="slide-8">
+        <div class="note-top">
+          <div>
+            <div class="note-label">Slide 8 · Konklusion og KPI</div>
+            <h2>Forventet risikoreduktion og KPI-opfølgning efter 2-3 år</h2>
+            <p class="subtitle">Saml planen op: hvad bliver bedre, og hvordan ved ledelsen det.</p>
+          </div>
+          <div class="time">Ca. 50-60 sek</div>
+        </div>
+        <div class="note-grid">
+          <div class="panel">
+            <p><strong>Kernebudskab:</strong> Hvis roadmapet gennemføres, falder top-risiciene markant, og ledelsen kan følge udviklingen gennem få, klare KPI'er.</p>
+          </div>
+          <div class="stack">
+            <div class="panel mini">
+              <p><strong>Forslag til, hvad du kan sige:</strong> "Her viser vi, at planen ikke bare er aktivitet, men forventet effekt. Top-risiciene går fra høje røde niveauer til lavere gule niveauer, fordi både sandsynlighed og konsekvens bliver reduceret. Det gælder især fjernadgang, backup, segmentering og shadow IT. Samtidig foreslår vi KPI'er, som ledelsen faktisk kan bruge: andel restore-tests der består, andel kritiske konti med MFA, antal åbne røde risici, MTTD og MTTR, leverandører med sikkerhedsbilag og andel AI-anvendelser med godkendelse. Dermed bliver sikkerhed en ledelsesdisciplin med opfølgning, ikke bare et teknisk sideprojekt."</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Hvis tiden presser:</strong> "Fase 1-2 reducerer de største risici hurtigt, og KPI'erne dokumenterer, at forbedringen faktisk sker."</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Bro til næste slide:</strong> "For at kunne levere den udvikling, skal organisationen også have en tydelig rollefordeling og et realistisk ressourcebillede."</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="note-card" id="slide-9">
+        <div class="note-top">
+          <div>
+            <div class="note-label">Slide 9 · RACI</div>
+            <h2>Ansvar, roller og ressourcer (RACI + organisation)</h2>
+            <p class="subtitle">Afslut med at vise, at planen kan gennemføres, fordi ansvar og styring er gjort tydelige.</p>
+          </div>
+          <div class="time">Ca. 45-55 sek</div>
+        </div>
+        <div class="note-grid">
+          <div class="panel">
+            <p><strong>Kernebudskab:</strong> Planen er eksekverbar, fordi den fordeler ansvar mellem ledelse, IT, OT, indkøb, HR og et lille kerneteam i stedet for at lægge det hele på én person.</p>
+          </div>
+          <div class="stack">
+            <div class="panel mini">
+              <p><strong>Forslag til, hvad du kan sige:</strong> "Vi afslutter med organisationen, fordi god cybersikkerhed i Hvedebro kræver mere end teknik. RACI'en viser, hvem der er ansvarlig, hvem der godkender, og hvem der skal høres og informeres. CEO og direktion sætter retning og risikovillighed, IT-drift og OT-lead driver de tekniske kontroller, og indkøb, HR og forretningen skal være med, fordi leverandører, awareness og dataejerskab er en del af sikkerheden. Vores anbefaling er et lille kerneteam på 3-5 personer, en månedlig styregruppe og ekstern støtte på de områder, hvor Hvedebro ikke selv har modenheden endnu. Det gør planen realistisk og ledelsesegnet."</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Faglig kobling:</strong> RACI og ansvarsfordeling fra undervisningen, koblet til governance og kontinuerlig opfølgning.</p>
+            </div>
+            <div class="panel mini">
+              <p><strong>Mulig afslutningssætning:</strong> "Vores samlede anbefaling er derfor en risikobaseret og faseopdelt sikkerhedsplan, som både reducerer de aktuelle top-risici og gør Hvedebro klar til videre vækst og digitalisering."</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      Brug noterne som talestøtte. Hvis du vil øve skarpere, så marker de 2-3 sætninger pr. slide, du helst vil have til at sidde helt naturligt.
+    </footer>
+  </main>
+</body>
+</html>
