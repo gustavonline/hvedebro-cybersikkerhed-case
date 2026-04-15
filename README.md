@@ -16,7 +16,17 @@ Dette repository er struktureret til analyse, dokumentation og præsentation af 
 11. `docs/05-praesentation/eksamensvalg-fra-undervisning.md`
 12. `docs/05-praesentation/slide-outline.md`
 
+## Endelig præsentation (gruppeversion)
+- `endelig præsentation/endelig-praesentation-slides.html`
+- `endelig præsentation/kilde-noter.md`
+- `endelig præsentation/todo.md`
+
 Åbn slides i browser:
+```bash
+open "endelig præsentation/endelig-praesentation-slides.html"
+```
+
+(Alternativ tidligere version)
 ```bash
 open docs/05-praesentation/hvedebro-eksamensslides.html
 ```

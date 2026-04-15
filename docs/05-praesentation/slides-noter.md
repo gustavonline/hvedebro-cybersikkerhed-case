@@ -11,8 +11,9 @@ Disse noter hører til: `hvedebro-eksamensslides.html`
 - NIS2/ISO/CER nævnes som retning og dokumentationsramme.
 
 ## Slide 3 – Modenhed
-- Peg på røde områder: governance, segmentering, leverandørstyring, detektion.
-- Forklar hvorfor lav modenhed driver høj sandsynlighed i risikobilledet.
+- Peg på røde områder i baseline: governance, segmentering, leverandørstyring, detektion.
+- Forklar trafiklyset over tid: nu -> 12 mdr -> 24 mdr.
+- Nævn at 24 mdr er “tæt på grønt” samlet set, men OT-sikkerhed/awareness typisk modner langsommere.
 - Nævn undervisningskobling: grøn/gul/rød fra Modul 7 + CSF 1-5 fra noterne.
 
 ## Slide 4 – Risikomodel

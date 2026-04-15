@@ -21,6 +21,7 @@ Denne guide følger jeres ønskede struktur:
 ### 2) Vis styringsfundamentet
 - Politik: ansvar, principper, cloud/AI/OT/fysisk
 - Modenhed: hvor er vi nu, hvor skal vi hen
+- Brug trafiklys for **nu / 12 mdr / 24 mdr** (CSF-kernesporet skal være tæt på grønt efter 24 mdr)
 
 ### 3) Forklar risikomodellen
 - Valgt skabelon

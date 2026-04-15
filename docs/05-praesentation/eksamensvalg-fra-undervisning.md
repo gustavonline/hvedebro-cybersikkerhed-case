@@ -14,7 +14,8 @@ Formål: koble jeres slides direkte til underviserens begreber/skabeloner, så d
 - `undervisning-slides/Noter til grundkursus i cybersikkerhed version 0.97.md` (CSF-niveau 1-5)
 
 **Hvordan på slide:**
-- Én tabel med områder + nuværende farve + mål 12/24 mdr.
+- Én tabel med områder + farve for **nu / 12 mdr / 24 mdr**.
+- Supplér med CSF-kernesporet (Govern/Identify/Protect/Detect/Respond/Recover) i samme logik.
 - Kort tekst: “lav modenhed => højere sandsynlighed for hændelser”.
 
 ---

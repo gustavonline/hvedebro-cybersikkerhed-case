@@ -16,7 +16,17 @@ Dette `docs/`-område er bygget til eksamensarbejde og præsentation.
 11. `05-praesentation/eksamensvalg-fra-undervisning.md`
 12. `05-praesentation/slide-outline.md`
 
+## Endelig præsentation (udenfor docs)
+- `../endelig præsentation/endelig-praesentation-slides.html`
+- `../endelig præsentation/kilde-noter.md`
+- `../endelig præsentation/todo.md`
+
 Åbn slides i browser:
+```bash
+open ../endelig\ præsentation/endelig-praesentation-slides.html
+```
+
+(Alternativ docs-version)
 ```bash
 open 05-praesentation/hvedebro-eksamensslides.html
 ```
