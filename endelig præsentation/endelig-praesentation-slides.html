@@ -230,12 +230,84 @@
 
     .legend { margin-top: 8px; font-size: .8rem; color: var(--muted); }
 
-    .ref {
-      margin-top: 10px;
-      border-top: 1px dashed #d5deeb;
-      padding-top: 7px;
-      color: #5c6c81;
+    .brand-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+    }
+    .brand-logo {
+      width: 100%;
+      max-width: 340px;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .flow-chain {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 8px 0 10px;
+    }
+    .flow-step {
+      padding: 4px 10px;
+      border: 1px solid #d5dff1;
+      border-radius: 999px;
+      background: #fff;
       font-size: .8rem;
+      font-weight: 700;
+      color: #2a4366;
+    }
+    .flow-arrow {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .phase-icon {
+      width: 18px;
+      height: 18px;
+      vertical-align: -3px;
+      margin-right: 5px;
+    }
+    .priority-phase {
+      box-shadow: inset 0 0 0 2px #9dbfff;
+    }
+    .single-asset {
+      max-width: 440px;
+      margin: 10px auto 0;
+    }
+
+    .notes-panel {
+      position: fixed;
+      left: 14px;
+      right: 14px;
+      bottom: 56px;
+      z-index: 24;
+      max-height: 36vh;
+      overflow: auto;
+      background: rgba(13, 25, 43, 0.95);
+      color: #f3f7ff;
+      border: 1px solid #2f425f;
+      border-radius: 10px;
+      padding: 10px 12px;
+      box-shadow: var(--shadow);
+      display: none;
+    }
+    .notes-panel.visible { display: block; }
+    .notes-panel h3 {
+      margin: 0 0 7px;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: #c2d4f7;
+    }
+    .notes-text {
+      margin: 0;
+      white-space: pre-wrap;
+      line-height: 1.45;
+      font-size: .88rem;
     }
 
     .controls {
@@ -281,59 +353,79 @@
 
   <section class="slide active">
     <div class="kicker">Slide 1 · Introduktion</div>
-    <h1>Cybersikkerhedsplan for Hvedebro Maskinfabrik</h1>
+    <h1>Cybersikkerhedsplan for Hvedebro Maskinfabrik (2-3 år)</h1>
     <div class="grid-2">
       <div class="card">
-        <h3>Forretningsmål</h3>
+        <h3>Forretningsmål vi beskytter</h3>
         <ul>
-          <li>Understøtte vækst og digitalisering</li>
-          <li>Sikre udvikling, drift og leveringsstabilitet</li>
-          <li>Bevare nøglekunder via dokumenterbar sikkerhed</li>
-          <li>Møde compliancepres (NIS2-retning + ISO-alignment)</li>
+          <li>Sikre stabil produktion og leverancer til eksisterende kunder</li>
+          <li>Understøtte vækst og digitalisering uden at skabe ny sikkerhedsgæld</li>
+          <li>Beskytte IP, driftsdata og forretningskritiske processer</li>
+          <li>Stå stærkere i kundedialogen med dokumenterbar sikkerhed og governance</li>
         </ul>
       </div>
-      <div class="card">
-        <h3>Formål med planen</h3>
-        <ul>
-          <li>Løfte sikkerhedsniveauet over 2-3 år</li>
-          <li>Prioritere ud fra konkrete case-risici</li>
-          <li>Koble analyse -> initiativer -> faser -> ansvar</li>
-        </ul>
-        <div style="margin-top:8px;">
+      <div class="card brand-card">
+        <img class="brand-logo" src="assets/Gemini_Generated_Image_jzztysjzztysjzzt.png" alt="Hvedebro logo" />
+        <p class="mini">Planen er lavet, så sikkerhed bliver et middel til stabil drift, tillid og vækst.</p>
+        <div>
           <span class="pill">Risikobaseret</span>
-          <span class="pill">Pragmatisk</span>
-          <span class="pill">Skalerbar</span>
+          <span class="pill">Forretningsdrevet</span>
+          <span class="pill">Eksekverbar</span>
         </div>
       </div>
     </div>
-    <div class="ref"><strong>Kilde:</strong> endelig præsentationsnoter, slide 1.</div>
+    <div class="card" style="margin-top:10px;">
+      <h3>Rød tråd i planen</h3>
+      <div class="flow-chain">
+        <span class="flow-step">Analyse</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">Initiativer</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">Faser</span>
+        <span class="flow-arrow">→</span>
+        <span class="flow-step">Ansvar</span>
+      </div>
+      <ul>
+        <li>Vi starter med hændelserne og modenhedsniveauet i casen.</li>
+        <li>Derfra prioriterer vi konkrete indsatser, der reducerer de største risici først.</li>
+        <li>Indsatserne placeres i kontrollerede faser med tydelige ejere og opfølgning.</li>
+      </ul>
+    </div>
   </section>
 
   <section class="slide">
     <div class="kicker">Slide 2 · Hvor står Hvedebro nu?</div>
-    <h2>Nuværende situation: hændelser og modenhedsgab</h2>
+    <h2>Nuværende situation: kritiske hændelser og samlet usikkert billede</h2>
     <div class="grid-2">
       <div class="card">
-        <h3>Observerede problemer i casen</h3>
+        <h3>Hændelser og svagheder i casen</h3>
         <ul>
-          <li>Svagt IT/OT setup (OT-nedbrud, ransomware, shadow IT)</li>
-          <li>Uklar kontrol og ansvar (ejerskab/politikker)</li>
-          <li>Svag fysisk sikkerhed (indbrud, nøglestyring, lager)</li>
-          <li>Umodne leverandørkrav og kontrakter</li>
-          <li>Kundekrav om NIS2-niveau i supply chain</li>
+          <li>Svag fysisk sikkerhed med adgangs- og nøgleproblemer</li>
+          <li>Desegmenteret IT/OT med historik på ransomware og OT-nedbrud</li>
+          <li>Afdelinger køber og driver IT-løsninger uden fælles ansvar/politik</li>
+          <li>Lokalt økonomisystem øger drifts- og datarisiko ved fejl eller nedbrud</li>
+          <li>Umoden governance/compliance med utydelige krav til leverandører</li>
         </ul>
       </div>
       <div class="card">
         <h3>Konsekvens for forretningen</h3>
         <ul>
-          <li>Driftsstop og leveranceforsinkelser</li>
-          <li>Øget risiko for tab af IP og kundetillid</li>
-          <li>Høj personafhængighed i IT/OT</li>
-          <li>Pres på compliance og markedsadgang</li>
+          <li>Det er ikke ét teknisk hul, men et samlet usikkert driftsbillede</li>
+          <li>Høj personafhængighed (bus factor) gør virksomheden sårbar ved sygdom, ferie og fravær</li>
+          <li>Forsinkelser rammer leverancer, relationer til kunder og fremtidig vækst</li>
+          <li>Manglende struktur gør recovery langsom og dyr, når noget går galt</li>
         </ul>
       </div>
     </div>
-    <div class="ref"><strong>Kilde:</strong> endelig præsentationsnoter, slide 2.</div>
+    <div class="grid-2" style="margin-top:10px; grid-template-columns: .9fr 1.1fr;">
+      <div class="card">
+        <h3>Hvorfor det haster</h3>
+        <p>Hvis Hvedebro fortsætter som nu, flyttes driften fra processer over på enkeltpersoner. Det er en direkte forretningsrisiko – ikke kun en teknisk risiko.</p>
+      </div>
+      <div class="img-wrap">
+        <img src="assets/bus-factor-risk.svg" alt="Illustration af bus factor og høj personafhængighed" />
+      </div>
+    </div>
   </section>
 
   <section class="slide">
@@ -364,27 +456,37 @@
             <tr><td>Awareness</td><td>2</td><td class="y">🟡</td><td>3</td><td class="y">🟡</td><td>3</td><td class="y">🟡</td></tr>
           </tbody>
         </table>
-        <p class="mini">Trafiklys: 🔴=1, 🟡=2-3, 🟢=4-5. Efter 24 mdr er samlet modenhed tæt på grønt.</p>
+        <p class="mini">Trafiklys gør det let at læse: 🔴 akut, 🟡 under udvikling, 🟢 stabilt niveau.</p>
       </div>
-      <div class="img-wrap">
-        <img src="assets/nist-maturity.png" alt="NIST maturity model" />
+      <div>
+        <div class="img-wrap">
+          <img src="assets/nist-maturity.png" alt="NIST maturity model" />
+        </div>
+        <div class="card" style="margin-top:10px;">
+          <h3>Hurtig tolkning</h3>
+          <ul>
+            <li>Hvedebro ligger samlet omkring niveau 1-2 nu, altså tidlig modenhed.</li>
+            <li>Røde områder er især governance, adgang, segmentering og OT-kontrol.</li>
+            <li>Målet er tydelig bevægelse mod gul/grøn efter 12-24 måneder.</li>
+            <li>OT-sikkerhed og awareness modnes bevidst langsommere pga. driftspres og behov for ekstern støtte.</li>
+          </ul>
+        </div>
       </div>
     </div>
-    <div class="ref"><strong>Kilder:</strong> endelig præsentationsnoter slide 3 + NIST maturity model billede.</div>
   </section>
 
   <section class="slide">
     <div class="kicker">Slide 4 · Risikoanalyse</div>
-    <h2>Metode, kriterier og risikomatrix (S x K + CIA + 4T)</h2>
+    <h2>Risikotabel: prioritering med S x K, CIA og 4T</h2>
     <div class="grid-2">
       <div class="card">
-        <h3>Matrix kriterier</h3>
+        <h3>Vurderingskriterier</h3>
         <ul>
-          <li>Metode: 5x5 matrix og risikoregister (ISO27005 / ISO31000 / NIST SP 800-30)</li>
-          <li>Score: Sandsynlighed x Konsekvens</li>
-          <li>Intervaller: <span class="zone-g">1-7 GRØN</span> <span class="zone-y">8-10 GUL</span> <span class="zone-r">11-25 RØD</span></li>
-          <li>CIA-fokus: C = Fortrolighed, I = Integritet, A = Tilgængelighed</li>
-          <li>Risikobehandling (4T): Mitigere, Undgå, Overføre, Acceptere</li>
+          <li>Vi bruger en enkel og styrbar model: Sandsynlighed (S) x Konsekvens (K).</li>
+          <li>Farvezoner: <span class="zone-g">1-7 GRØN</span> <span class="zone-y">8-10 GUL</span> <span class="zone-r">11-25 RØD</span></li>
+          <li>CIA synliggør forretningseffekt: C (fortrolighed), I (integritet), A (tilgængelighed).</li>
+          <li>4T viser hvordan hver risiko behandles: Mitigere, Undgå, Overføre eller Acceptere.</li>
+          <li>Top-risici prioriteres først, så vi får hurtig reduktion af drifts- og leverancerisiko.</li>
         </ul>
       </div>
       <div class="img-wrap">
@@ -402,29 +504,28 @@
             <th>K</th>
             <th>Score</th>
             <th>Zone</th>
-            <th>CIA-fokus</th>
-            <th>Kort beskrivelse (punktform)</th>
+            <th>CIA</th>
+            <th>4T</th>
+            <th>Kort beskrivelse</th>
             <th>Korthandling</th>
           </tr>
         </thead>
         <tbody>
-          <tr><td>R01 ⭐</td><td>Ukontrolleret OT-fjernadgang</td><td>4</td><td>5</td><td>20</td><td><span class="zone-r">RØD</span></td><td>I/A</td><td>• Uklare adgange • Høj driftsrisiko</td><td>Luk åben remote-adgang, MFA, tidsstyring</td></tr>
-          <tr><td>R02 ⭐</td><td>Manglende backup/restore-test</td><td>4</td><td>5</td><td>20</td><td><span class="zone-r">RØD</span></td><td>A/I</td><td>• Uforudsigelig recovery • Risiko for nedetid</td><td>3-2-1 backup + månedlig restore-test</td></tr>
-          <tr><td>R03 ⭐</td><td>Fladt IT/OT-netværk</td><td>4</td><td>4</td><td>16</td><td><span class="zone-r">RØD</span></td><td>C/I/A</td><td>• Lateral bevægelse • Større skadesradius</td><td>Segmentering og OT-DMZ</td></tr>
-          <tr><td>R04 ⭐</td><td>Shadow IT (server/CAD)</td><td>4</td><td>4</td><td>16</td><td><span class="zone-r">RØD</span></td><td>C/I/A</td><td>• Uautoriseret drift • Manglende kontrol</td><td>Udfas og migrér til styret platform</td></tr>
-          <tr><td>R05</td><td>Uklar cloud-vs-lokal strategi</td><td>3</td><td>4</td><td>12</td><td><span class="zone-r">RØD</span></td><td>C/I/A</td><td>• Ad hoc-beslutninger • Uklart driftsansvar</td><td>Fast driftsmodel og leverandørkrav</td></tr>
-          <tr><td>R13</td><td>AI-datalæk ved uautoriseret brug</td><td>3</td><td>4</td><td>12</td><td><span class="zone-r">RØD</span></td><td>C/I</td><td>• Risiko for læk af fortrolige data</td><td>AI-politik, AI-register, AI-audit</td></tr>
+          <tr><td>R01 ⭐</td><td>Ukontrolleret OT-fjernadgang</td><td>4</td><td>5</td><td>20</td><td><span class="zone-r">RØD</span></td><td>I/A</td><td>Mitigere</td><td>Uklare adgange og høj driftsrisiko</td><td>Luk åben remote-adgang, MFA og tidsstyring</td></tr>
+          <tr><td>R02 ⭐</td><td>Manglende backup/restore-test</td><td>4</td><td>5</td><td>20</td><td><span class="zone-r">RØD</span></td><td>A/I</td><td>Mitigere</td><td>Recovery er usikker ved nedbrud</td><td>3-2-1 backup og månedlig gendannelsestest</td></tr>
+          <tr><td>R03 ⭐</td><td>Fladt IT/OT-netværk</td><td>4</td><td>4</td><td>16</td><td><span class="zone-r">RØD</span></td><td>C/I/A</td><td>Mitigere</td><td>Stor skadesradius ved kompromittering</td><td>Segmentering i zoner og OT-DMZ</td></tr>
+          <tr><td>R04 ⭐</td><td>Shadow IT (server/CAD)</td><td>4</td><td>4</td><td>16</td><td><span class="zone-r">RØD</span></td><td>C/I/A</td><td>Mitigere</td><td>Uautoriseret drift uden kontrol</td><td>Udfas lokale løsninger og flyt til styret drift</td></tr>
+          <tr><td>R05</td><td>Uklar cloud-vs-lokal strategi</td><td>3</td><td>4</td><td>12</td><td><span class="zone-r">RØD</span></td><td>C/I/A</td><td>Mitigere</td><td>Uklart driftsansvar og ad hoc beslutninger</td><td>Fast driftsmodel med beslutningskriterier</td></tr>
+          <tr><td>R13</td><td>AI-datalæk ved uautoriseret brug</td><td>3</td><td>4</td><td>12</td><td><span class="zone-r">RØD</span></td><td>C/I</td><td>Mitigere</td><td>Fortrolige data kan deles ukontrolleret</td><td>AI-politik, godkendelsesliste og audit</td></tr>
         </tbody>
       </table>
-      <p class="mini">Top 4 (⭐) mitigeres først: R01-R04.</p>
+      <p class="mini">Top 4 (⭐) håndteres først: R01-R04. Det giver den tydeligste forretningseffekt hurtigst.</p>
     </div>
-
-    <div class="ref"><strong>Kilder:</strong> endelig præsentationsnoter slide 4 + risikoregistermetode fra undervisning (Modul 2).</div>
   </section>
 
   <section class="slide">
     <div class="kicker">Slide 5 · Initiativer + roadmap</div>
-    <h2>Faseblok-roadmap (1-4) med underområder og status</h2>
+    <h2>Roadmap: tid på x-akse, områder/indsatser på y-akse</h2>
     <div class="phase-canvas">
       <div class="axis">
         <div class="yl">Akser</div>
@@ -439,45 +540,45 @@
       <div class="phase-grid">
         <div class="phase-y">Y-akse: områder/indsatser</div>
 
-        <div class="phase-box p1">
-          <h4>Fundament (0-6 mdr)</h4>
+        <div class="phase-box p1 priority-phase">
+          <h4><img class="phase-icon" src="assets/icon-iam-mfa.svg" alt="IAM/MFA ikon" />Fundament (0-6 mdr) · prioriteret</h4>
           <div class="tiles">
-            <div class="tile done"><span class="check">✓</span>IT-sikkerhedspolitik v1.0</div>
-            <div class="tile done"><span class="check">✓</span>RACI udkast for ledelse/IT/OT</div>
-            <div class="tile done"><span class="check">✓</span>Risikoregister + top 4 prioritet</div>
-            <div class="tile"><span class="check">✓</span>MFA baseline på kritiske konti</div>
-            <div class="tile">Fjernadgang: godkendelse + log</div>
-            <div class="tile">Incident/beredskab v1 + tabletop</div>
-            <div class="tile">Backup 3-2-1 baseline</div>
+            <div class="tile done"><span class="check">✓</span>IT-sikkerhedspolitik klar til ledelsesgodkendelse</div>
+            <div class="tile done"><span class="check">✓</span>RACI-udkast for ledelse, IT og OT</div>
+            <div class="tile done"><span class="check">✓</span>Top 4 risici prioriteret i rækkefølge</div>
+            <div class="tile">MFA på kritiske konti</div>
+            <div class="tile">Luk og styr fjernadgang</div>
+            <div class="tile">Beredskabsplan + første øvelse</div>
+            <div class="tile">Backup 3-2-1 + gendannelsestest</div>
             <div class="tile">Stop ny shadow IT</div>
           </div>
         </div>
 
         <div class="phase-box p2">
-          <h4>Stabilisering (6-12 mdr)</h4>
+          <h4><img class="phase-icon" src="assets/icon-segmentering.svg" alt="Segmentering ikon" />Stabilisering (6-12 mdr)</h4>
           <div class="tiles">
-            <div class="tile">IT/OT segmentering + OT-DMZ</div>
-            <div class="tile">IAM recertificering + JML</div>
-            <div class="tile">Azure/Entra ID etablering</div>
-            <div class="tile">SIEM-light + use-cases</div>
-            <div class="tile">Leverandørkrav i kontrakter</div>
-            <div class="tile">Restore-test: månedlig dokumentation</div>
-            <div class="tile">Fysisk sikring: nøgle/ID/lager</div>
-            <div class="tile">Cloud/lokal beslutningskriterier</div>
+            <div class="tile">Segmentering af IT og OT i zoner</div>
+            <div class="tile">IAM/Entra ID med faste roller</div>
+            <div class="tile">Månedlig backup-test med dokumentation</div>
+            <div class="tile">Fysisk sikring med nøglekort og lagerkontrol</div>
+            <div class="tile">Leverandørkrav ind i kontrakter</div>
+            <div class="tile">Godkendt hjemmearbejdsstandard</div>
+            <div class="tile">Enkel overvågning af kritiske hændelser</div>
+            <div class="tile">Klar beslutning om lokal vs cloud drift</div>
           </div>
         </div>
 
         <div class="phase-box p3">
-          <h4>Fremtidssikring (12-24 mdr)</h4>
+          <h4><img class="phase-icon" src="assets/icon-erp.svg" alt="ERP ikon" />Fremtidssikring (12-24 mdr)</h4>
           <div class="tiles">
-            <div class="tile">ERP-spor: Dynamics 365 vurdering/migrering</div>
-            <div class="tile">Home office-standard fuldt udrullet</div>
-            <div class="tile">AI-governance + godkendte værktøjer</div>
-            <div class="tile">Første AI-audit + ledelsesrapport</div>
-            <div class="tile">Awareness-årshjul pr. rolle</div>
-            <div class="tile">OT patch/asset-program (IEC62443-inspireret)</div>
-            <div class="tile">KPI til direktion månedligt</div>
-            <div class="tile">Bestyrelsesrapport kvartalsvist</div>
+            <div class="tile">ERP-foranalyse og migreringsplan</div>
+            <div class="tile">Pilot på nyt økonomi/ERP-setup</div>
+            <div class="tile">Awareness-program pr. rolle</div>
+            <div class="tile">OT-sikkerhed løftet med ekstern støtte</div>
+            <div class="tile">AI-politik og godkendt brug</div>
+            <div class="tile">KPI-rapportering til direktion</div>
+            <div class="tile">Leverandørmålinger på sikkerhed og drift</div>
+            <div class="tile">Årlig gennemgang af de største risici</div>
           </div>
         </div>
 
@@ -485,32 +586,20 @@
           <h4>Løbende forbedring (24-36 mdr)</h4>
           <div class="tiles">
             <div class="tile">Intern audit og ledelsesreview</div>
-            <div class="tile">AI-audit som fast kontrol</div>
-            <div class="tile">Sikkerhed-by-design i nye projekter</div>
-            <div class="tile">Tværgående øvelser (cyber/fysisk/drift)</div>
-            <div class="tile">Leverandør-performance på SLA/KPI</div>
-            <div class="tile">Målbar risikoreduktion i top 4</div>
-            <div class="tile">Compliance-opfølgning NIS2/CER</div>
-            <div class="tile">Kontinuerlig forbedringssløjfe</div>
+            <div class="tile">Faste tværgående øvelser</div>
+            <div class="tile">Sikkerhed ind i nye projekter fra start</div>
+            <div class="tile">Kontinuerlig opdatering af politikker og ansvar</div>
+            <div class="tile">Målbar reduktion af top-risici</div>
+            <div class="tile">Opfølgning på compliancekrav</div>
+            <div class="tile">Forbedring af leverandørsamarbejder</div>
+            <div class="tile">Kontinuerlig læringssløjfe i organisationen</div>
           </div>
         </div>
       </div>
-      <div class="legend">Store bokse = faser · Små hvide bokse = konkrete områder · ✓ = allerede udarbejdet i projektmaterialet</div>
+      <div class="legend">Fase 1 er markeret som prioriteret, fordi den reducerer de største risici hurtigst.</div>
     </div>
 
-    <div class="grid-2" style="margin-top:10px;">
-      <div class="card">
-        <h3>Fase 1 prioritet</h3>
-        <ul>
-          <li>R01: fjernadgangskontrol</li>
-          <li>R02: backup/restore</li>
-          <li>R03: segmentering</li>
-          <li>R04: shadow IT udfasning</li>
-        </ul>
-      </div>
-      <div class="img-wrap"><img src="assets/backup-3-2-1.png" alt="3-2-1 backup rule" /></div>
-    </div>
-    <div class="ref"><strong>Kilder:</strong> endelig præsentationsnoter slide 5 + 3-2-1 backup billede.</div>
+    <div class="img-wrap single-asset"><img src="assets/backup-3-2-1.png" alt="3-2-1 backup rule" /></div>
   </section>
 
   <section class="slide">
@@ -536,7 +625,6 @@
         </tbody>
       </table>
     </div>
-    <div class="ref"><strong>Kilder:</strong> endelig præsentationsnoter slide 6 + undervisning Modul 6/7.</div>
   </section>
 
   <section class="slide">
@@ -555,35 +643,43 @@
         <tbody>
           <tr><td>ERP-spor (Dynamics 365) / cloud økonomi</td><td>Kasim + økonomi</td><td>Risikovurderet migrering og fallback-plan</td><td>Robust drift + bogføringskrav</td></tr>
           <tr><td>Entra ID/IAM fuld modenhed</td><td>IT-drift</td><td>Recertificering, conditional access</td><td>NIS2/CER-alignment på adgang</td></tr>
-          <tr><td>AI-governance og AI-audit</td><td>Sikkerhedsansvarlig</td><td>AI-register, kvartalsvis audit</td><td>Forebygger datalæk i vækstfasen</td></tr>
+          <tr><td>AI-governance og AI-audit</td><td>Sikkerhedsansvarlig</td><td>AI-overblik, kvartalsvis audit</td><td>Forebygger datalæk i vækstfasen</td></tr>
           <tr><td>Awareness-program</td><td>HR + ledere</td><td>Rollebaseret træning + phishing-måling</td><td>Reducerer menneskelig risiko</td></tr>
           <tr><td>Leverandørstyring end-to-end</td><td>Indkøb + IT/OT</td><td>Audit-ret, exit-plan, KPI/SLA</td><td>Sikrer stabil supply-chain</td></tr>
           <tr><td>OT-sikkerhedsprogram</td><td>OT-lead</td><td>Asset/patch/backup disciplin</td><td>Sikrer produktionens kontinuitet</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="ref"><strong>Kilder:</strong> endelig præsentationsnoter slide 7.</div>
   </section>
 
   <section class="slide">
     <div class="kicker">Slide 8 · Konklusion + KPI</div>
-    <h2>Forventet risikoreduktion og KPI-opfølgning efter 2-3 år</h2>
+    <h2>Forventet risikoreduktion efter 2-3 år: fra rød til gul/grøn</h2>
     <div class="grid-2">
       <div class="card">
-        <h3>Top-risici (før -> efter roadmap)</h3>
+        <h3>Top-risici: score, zone og hvorfor de falder</h3>
         <table>
-          <thead><tr><th>Risiko</th><th>Nu</th><th>Efter 24 mdr (mål)</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Risiko</th>
+              <th>Nu</th>
+              <th>Mål</th>
+              <th>Zonebevægelse</th>
+              <th>Primær reduktion</th>
+              <th>Indsatsområder</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>R01 OT-fjernadgang</td><td>20</td><td>9-10</td></tr>
-            <tr><td>R02 Backup/restore</td><td>20</td><td>8-10</td></tr>
-            <tr><td>R03 IT/OT segmentering</td><td>16</td><td>8-9</td></tr>
-            <tr><td>R04 Shadow IT</td><td>16</td><td>6-8</td></tr>
+            <tr><td>R01 OT-fjernadgang</td><td>20</td><td>9-10</td><td><span class="zone-r">RØD</span> → <span class="zone-y">GUL</span></td><td>Sandsynlighed (S) ned</td><td>MFA, tidsstyret adgang, logning, streng godkendelse</td></tr>
+            <tr><td>R02 Backup/restore</td><td>20</td><td>8-10</td><td><span class="zone-r">RØD</span> → <span class="zone-y">GUL</span></td><td>Konsekvens (K) ned</td><td>3-2-1, offline kopi, månedlig restore-test</td></tr>
+            <tr><td>R03 IT/OT segmentering</td><td>16</td><td>8-9</td><td><span class="zone-r">RØD</span> → <span class="zone-y">GUL</span></td><td>Konsekvens (K) ned</td><td>Zoner, firewallregler, OT-DMZ</td></tr>
+            <tr><td>R04 Shadow IT</td><td>16</td><td>6-8</td><td><span class="zone-r">RØD</span> → <span class="zone-y">GUL</span>/<span class="zone-g">GRØN</span></td><td>Sandsynlighed (S) ned + Konsekvens (K) ned</td><td>Governance, godkendelsesflow, udfasning til styret platform</td></tr>
           </tbody>
         </table>
-        <p class="mini">Målet er dokumenterbar reduktion i både sandsynlighed og konsekvens.</p>
+        <p class="mini">Hovedpointen: R01 falder primært på sandsynlighed (MFA/adgangskontrol), R02-R03 falder primært på konsekvens (recovery/segmentering), og R04 falder på både sandsynlighed og konsekvens ved udfasning af shadow IT.</p>
       </div>
       <div class="card">
-        <h3>KPI-ramme</h3>
+        <h3>KPI-ramme (måling af effekt)</h3>
         <ul>
           <li>% kritiske systemer med bestået restore-test</li>
           <li>% kritiske konti med MFA og recertificering</li>
@@ -596,10 +692,13 @@
       </div>
     </div>
     <div class="card" style="margin-top:10px;">
-      <h3>Overordnet konklusion</h3>
-      <p>Fase 1-2 reducerer de største nuværende risici hurtigt. Fase 3-4 sikrer, at Hvedebro kan vokse og digitalisere uden at opbygge ny sikkerhedsgæld. Dermed styrkes både drift, compliance-position og kundetillid.</p>
+      <h3>Statlige kataloger vi har læst (ekstern pejling)</h3>
+      <ul>
+        <li><strong>Digitaliseringsstyrelsen + Center for Cybersikkerhed (2020):</strong> <em>Vejledning i anvendelse af cloudservices</em>, v1.1 (juli 2020) med fokus på risikovurdering, leverandørstyring og exit-strategi.</li>
+        <li><strong>Styrelsen for Samfundssikkerhed / CFCS (2023):</strong> <em>Reducer risikoen for ransomware</em>, 2. udgave (april 2023), som anbefaler bl.a. MFA på fjernadgang, netværkssegmentering og backup med offline kopi + test af reetablering.</li>
+        <li>Vores prioriteringer i fase 1-2 følger samme retning, derfor forventer vi dokumenterbar reduktion i top-risici.</li>
+      </ul>
     </div>
-    <div class="ref"><strong>Kilder:</strong> endelig præsentationsnoter slide 8 + risikoregister/KPI-praksis.</div>
   </section>
 
   <section class="slide">
@@ -631,33 +730,136 @@
         <p>Planen er eksekverbar, fordi ansvar og beslutningsveje er tydelige.</p>
       </div>
     </div>
-    <div class="ref"><strong>Kilder:</strong> endelig præsentationsnoter slide 9 + RACI-praksis fra undervisning.</div>
   </section>
+
+  <div id="notesPanel" class="notes-panel" aria-live="polite">
+    <h3>Talernoter (tryk N)</h3>
+    <p id="notesText" class="notes-text"></p>
+  </div>
 
   <div class="controls">
     <button id="prev">◀</button>
     <button id="next">▶</button>
-    <span class="hint">← / → · F = fullscreen</span>
+    <button id="toggleNotes" title="Vis/skjul noter">N</button>
+    <span class="hint">← / → · N = noter · F = fullscreen</span>
   </div>
 
   <script>
     const slides = [...document.querySelectorAll('.slide')];
     const count = document.getElementById('count');
+    const notesPanel = document.getElementById('notesPanel');
+    const notesText = document.getElementById('notesText');
     let i = 0;
+    let notesVisible = false;
+
+    const speakerNotes = [
+`hej mit navn er xx, jeg vil de næste 10 minutters tid tage jeg igennem den 2-3 årige cybersikkerhedsplan for hvedebromaskin fabrik. Vi skal igennem lidt af hvert, så lad os komme igang. Til en start vil jeg gerne kort gennemgå Hvedebros overordnet forretningsmål og formål med plan uden at dykke for meget ned i casen, den kender i allerede, men så har vi ligesom den røde tråd med igennem det hele.
+
+Kernebudskab: Cybersikkerhed er her et forretningsgreb og ikke bare et IT-projekt. Planen skal beskytte stabil drift, leveringer, kundetillid og vækst over de næste 2-3 år.
+
+Det vigtige at sige her er, at vi arbejder i en fast kæde: analyse, prioriterede initiativer, faseopdeling og tydeligt ansvar. På den måde bliver planen eksekverbar i praksis, ikke bare en ønskeliste.
+
+Bro til slide 2: Nu viser jeg, hvorfor planen er nødvendig, ved at samle de konkrete hændelser og svagheder fra casen.`,
+`Kernebudskab: Hvedebro står ikke med én isoleret fejl, men med et samlet usikkert driftsbillede på tværs af IT, OT, fysisk sikkerhed og governance.
+
+Det vi ser i casen er blandt andet svag fysisk sikkerhed, desegmenteret IT/OT, ransomware-hændelser, OT-nedbrud uden klar handlingsplan og afdelinger der køber/drifter IT-udstyr uden fælles ansvar eller politik. Derudover giver lokalt økonomisystem en ekstra drifts- og datarisiko, når noget fejler.
+
+Her er bus factor vigtigt: virksomheden er for personafhængig. Hvis en nøgleperson er syg, på ferie, barsel eller stopper, kan kritiske adgangsveje og driftsrutiner ikke håndteres robust. Så det er ikke kun en teknisk sårbarhed, men en forretningssårbarhed.
+
+Konsekvensen er forsinkelser, ustabile leverancer, svagere kunderelationer og begrænset vækst. Bro til slide 3: derfor har vi målt modenheden systematisk, så vi kan vise hvor vi er nu, og hvor vi realistisk kan løfte Hvedebro hen.`,
+`Kernebudskab: Modenhedsanalysen giver os et objektivt udgangspunkt for prioritering.
+
+Metoden er CSF/NIST-inspireret. Vi bruger niveau 1-5 sammen med trafiklysfarver, så det bliver lettere at forstå både hvor modne områderne er, og hvor stor forretningsrisikoen er.
+
+Tolkningen er, at Hvedebro samlet ligger omkring niveau 1-2 på flere centrale områder. Det forklarer, hvorfor hændelserne er sket. Røde områder er især governance, adgangsstyring, segmentering og OT-kontrol. Målet er at flytte virksomheden tydeligt mod gul inden for det første år, og derefter mod gul/grøn i år 2-3.
+
+Vi har bevidst lagt OT-sikkerhed og awareness i en langsommere modenhedskurve, fordi de kræver mere tid, kulturarbejde og ofte ekstern ekspertise, især når driften kører højt.
+
+Bro til slide 4: modenhed viser retning, men risikoanalysen viser hvad vi skal starte med først.`,
+`Kernebudskab: Prioriteringen er data- og metodebaseret, ikke mavefornemmelse.
+
+Vi bruger S x K, altså sandsynlighed gange konsekvens, kombineret med farvezoner for at gøre prioriteringen enkel at kommunikere. Vi kobler samtidig hver risiko til CIA, så vi kan forklare konsekvensen i forretningsmæssige termer: fortrolighed, integritet og tilgængelighed.
+
+Derudover har vi 4T med for hver risiko: mitigere, undgå, overføre eller acceptere. Det gør tabellen operationel, fordi den viser både alvor og handling.
+
+Top 4 risici er røde, fordi de rammer drift, recovery, netværk og governance direkte. Rækkefølgen er på plads, og det skaber en stærk rød tråd til roadmapet: hvem gør hvad, hvornår og hvorfor.
+
+Bro til slide 5: nu oversætter vi top-risici og modenhed til en kontrolleret faseplan.`,
+`Kernebudskab: Roadmapet er lavet i en bevidst rækkefølge, så vi reducerer mest risiko hurtigst og bygger videre derfra.
+
+X-akse er tid, og y-akse er områder/indsatser. Fase 1 er fundament: politik, RACI, tydeligt ejerskab og direkte håndtering af top 4-risici. Vi har allerede udarbejdet dele af fundamentet, blandt andet udkast til IT-sikkerhedspolitik, som skal godkendes i direktionen og derefter kommunikeres bredt.
+
+Fase 2 er stabilisering med segmentering af IT/OT, IAM med MFA, bedre fysisk sikring og disciplin i backup/gendannelse. Fase 3 og 4 er fremtidssikring og løbende forbedring, blandt andet ERP-retning, leverandørstyring, awareness og AI-governance.
+
+Pointen er: vi starter ikke med avancerede buzzwords, vi starter med det der løfter modenhed og driftssikkerhed nu.
+
+Bro til slide 6: når rækkefølgen er tydelig, skal vi vise ejerskab og udførelse i fase 1-2.`,
+`Kernebudskab: De første faser handler om eksekvering med tydelige ejere, ikke kun teknik.
+
+Her forklarer vi hvem der ejer hvilke initiativer i fase 1-2, hvordan de gennemføres, og hvorfor de reducerer de konkrete top-risici. Ledelsen forankrer governance og politik. IT-drift ejer adgangskontroller og IAM. IT og OT deler ansvar for backup og recovery. OT-lead og netværk driver segmentering. Indkøb og ledelse løfter leverandørkrav.
+
+Det her reducerer både risiko og personafhængighed, fordi viden og ansvar flyttes fra enkeltpersoner over i processer og styring.
+
+Bro til slide 7: når fundamentet er i drift, kan vi fokusere på sikker vækst og digitalisering.`,
+`Kernebudskab: Fase 3-4 skal forhindre ny sikkerhedsgæld, mens Hvedebro vokser.
+
+Her kobler vi sikkerhed til digitalisering: ERP-spor, moden IAM/Entra ID, leverandørkrav, OT-program, awareness-årshjul og AI-governance med audit.
+
+Budskabet er, at fase 3-4 ikke er pynt. Det er det, der gør at virksomheden kan skalere uden at genopbygge de samme svagheder, vi har set i casen.
+
+Bro til slide 8: næste skridt er at vise den forventede effekt og de KPI'er, der dokumenterer fremdriften.`,
+`Kernebudskab: Planen skal kunne måles på reel effekt, ikke kun på aktiviteter.
+
+Her skal vi være præcise: hvad der reduceres først, afhænger af risikoen.
+
+Kort gennemgang af top 4:
+R01 går primært ned på sandsynlighed (S), fordi MFA, tidsstyret adgang og streng godkendelse gør det markant sværere at kompromittere fjernadgang.
+R02 går primært ned på konsekvens (K), fordi 3-2-1 backup og faste restore-tests reducerer nedetid og forretningstab, når hændelser sker.
+R03 går primært ned på konsekvens (K), fordi segmentering og OT-DMZ begrænser skadesradius i drift og produktion.
+R04 går ned på både sandsynlighed (S) og konsekvens (K), fordi governance og udfasning af shadow IT både forebygger nye hændelser og reducerer impact ved fejl.
+
+Så når vi fx siger 20 til 9-10, er forklaringen ikke den samme for alle risici. For R01 er det især sandsynligheden, mens det for R02-R03 er konsekvensen, og for R04 er det begge dele.
+
+Vi kobler planen til konkrete statslige kataloger, som vi har læst: Digitaliseringsstyrelsen og CFCS' vejledning om cloudservices (v1.1, juli 2020) samt CFCS' vejledning Reducer risikoen for ransomware (2. udgave, april 2023). I ransomware-vejledningen peges der direkte på netværkssegmentering, MFA på fjernadgang og backup med offline kopi samt test af reetablering. Det matcher vores fase 1-2 prioriteringer 1:1, så den forventede risikoreduktion er understøttet af anerkendt praksis.
+
+KPI'erne gør det målbart måned for måned, så ledelsen kan se om reduktionen faktisk sker.
+
+Bro til slide 9: til sidst viser vi den organisatoriske ramme, der gør planen realistisk at drive.`,
+`Kernebudskab: Planen er gennemførbar, fordi ansvar, beslutningsveje og ressourcer er tydeligt fordelt.
+
+RACI'en viser hvem der er Responsible, Accountable, Consulted og Informed på tværs af ledelse, IT, OT, indkøb og HR. Det sikrer, at sikkerhed ikke ender hos én person eller én afdeling.
+
+Vi anbefaler et lille kerneteam, fast styregruppeopfølgning og ekstern støtte på de områder, hvor modenheden stadig er lav. Så bliver planen både realistisk, styrbar og robust over tid.
+
+Mulig afslutningssætning: Vores samlede anbefaling er en risikobaseret og faseopdelt cybersikkerhedsplan, der både reducerer de aktuelle top-risici og gør Hvedebro klar til sikker vækst og digitalisering.`
+    ];
+
+    function updateNotes() {
+      notesText.textContent = speakerNotes[i] || 'Ingen noter for denne slide.';
+    }
+
+    function toggleNotes(forceState) {
+      notesVisible = typeof forceState === 'boolean' ? forceState : !notesVisible;
+      notesPanel.classList.toggle('visible', notesVisible);
+      document.getElementById('toggleNotes').setAttribute('aria-pressed', String(notesVisible));
+    }
 
     function show(n) {
       i = Math.max(0, Math.min(n, slides.length - 1));
       slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
       count.textContent = `Slide ${i + 1} / ${slides.length}`;
       document.title = `Hvedebro – Endelig præsentation (${i + 1}/${slides.length})`;
+      updateNotes();
     }
 
     document.getElementById('prev').addEventListener('click', () => show(i - 1));
     document.getElementById('next').addEventListener('click', () => show(i + 1));
+    document.getElementById('toggleNotes').addEventListener('click', () => toggleNotes());
 
     document.addEventListener('keydown', (e) => {
       if (["ArrowRight", "PageDown", " "].includes(e.key)) { e.preventDefault(); show(i + 1); }
       if (["ArrowLeft", "PageUp"].includes(e.key)) { e.preventDefault(); show(i - 1); }
+      if (e.key.toLowerCase() === 'n') { e.preventDefault(); toggleNotes(); }
       if (e.key.toLowerCase() === 'f') {
         if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
         else document.exitFullscreen?.();
