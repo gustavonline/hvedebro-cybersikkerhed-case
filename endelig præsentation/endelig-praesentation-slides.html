@@ -6,16 +6,27 @@
   <title>Hvedebro – Endelig præsentation</title>
   <style>
     :root {
-      --bg: #f6f8fb;
-      --card: #fff;
-      --line: #d7e0ec;
-      --text: #1a2433;
-      --muted: #5f6f83;
-      --accent: #1f4fd7;
-      --shadow: 0 6px 18px rgba(14, 32, 60, 0.08);
-      --r: #c62828;
-      --y: #8a6d00;
-      --g: #2e7d32;
+      --bg: #061514;
+      --bg-2: #0d2421;
+      --card: rgba(250, 247, 239, 0.92);
+      --card-strong: #fffaf0;
+      --glass: rgba(255, 250, 240, 0.12);
+      --line: rgba(255, 250, 240, 0.24);
+      --line-dark: rgba(31, 49, 44, 0.14);
+      --text: #142320;
+      --text-on-dark: #f8f0df;
+      --muted: #66756f;
+      --muted-on-dark: #c9d8d1;
+      --accent: #00a884;
+      --accent-2: #ffb84d;
+      --accent-3: #ff6b57;
+      --ink-blue: #16213f;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+      --soft-shadow: 0 14px 34px rgba(8, 26, 23, 0.16);
+      --r: #d93a31;
+      --y: #bd7a00;
+      --g: #11894f;
+      --radius: 24px;
     }
     * { box-sizing: border-box; }
     html, body {
@@ -23,9 +34,13 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
-      font-family: "Segoe UI", "Inter", system-ui, sans-serif;
+      font-family: "Avenir Next", "Gill Sans", "Trebuchet MS", sans-serif;
       color: var(--text);
-      background: var(--bg);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(0, 168, 132, 0.36), transparent 28%),
+        radial-gradient(circle at 86% 18%, rgba(255, 184, 77, 0.28), transparent 26%),
+        radial-gradient(circle at 60% 94%, rgba(255, 107, 87, 0.16), transparent 34%),
+        linear-gradient(135deg, #061514 0%, #0e2a25 46%, #16213f 100%);
     }
 
     .topbar {
@@ -35,85 +50,165 @@
       right: 0;
       z-index: 20;
       height: 56px;
-      background: #fff;
-      border-bottom: 1px solid var(--line);
+      background: rgba(6, 21, 20, 0.78);
+      border-bottom: 1px solid rgba(255, 250, 240, 0.14);
+      backdrop-filter: blur(20px);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
+      padding: 0 24px;
     }
-    .topbar .title { color: var(--accent); font-weight: 700; }
-    .topbar .count { color: var(--muted); font-size: .9rem; }
+    .topbar .title {
+      color: var(--text-on-dark);
+      font-weight: 800;
+      letter-spacing: .01em;
+    }
+    .topbar .title::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-right: 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 18px rgba(0, 168, 132, .72);
+    }
+    .topbar .count {
+      color: var(--muted-on-dark);
+      font-size: .9rem;
+      font-weight: 700;
+    }
 
     .slide {
       position: absolute;
       inset: 56px 0 0 0;
-      padding: 24px 34px 78px;
+      padding: clamp(16px, 2.2vw, 30px) clamp(22px, 3.2vw, 44px) 66px;
       display: none;
       overflow: auto;
+      isolation: isolate;
     }
     .slide.active { display: block; }
-
-    .kicker {
-      color: var(--accent);
-      font-size: .8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-      margin-bottom: 8px;
+    .slide::before {
+      content: "";
+      position: fixed;
+      inset: 70px 18px 54px;
+      z-index: -1;
+      border: 1px solid rgba(255, 250, 240, 0.16);
+      border-radius: 34px;
+      background:
+        linear-gradient(135deg, rgba(255, 250, 240, 0.92), rgba(239, 247, 242, 0.86)),
+        radial-gradient(circle at 12% 18%, rgba(0, 168, 132, 0.2), transparent 28%);
+      box-shadow: var(--shadow);
+      pointer-events: none;
     }
 
-    h1,h2,h3 { margin: 0 0 12px; line-height: 1.2; }
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.6rem; }
-    h3 { font-size: 1.05rem; }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #006e5d;
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      margin-bottom: 8px;
+      padding: 6px 11px;
+      border: 1px solid rgba(0, 168, 132, 0.18);
+      border-radius: 999px;
+      background: rgba(0, 168, 132, 0.08);
+    }
+    .kicker::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
 
-    p { margin: 0 0 10px; line-height: 1.5; }
-    .mini { color: var(--muted); font-size: .86rem; }
+    h1,h2,h3 {
+      margin: 0 0 10px;
+      line-height: 1.08;
+      color: var(--ink-blue);
+    }
+    h1,h2 {
+      font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      letter-spacing: -.035em;
+    }
+    h1 {
+      max-width: 980px;
+      font-size: clamp(2.15rem, 4vw, 4.2rem);
+    }
+    h2 {
+      max-width: 1120px;
+      font-size: clamp(1.7rem, 3vw, 3.2rem);
+    }
+    h3 {
+      font-size: 1rem;
+      letter-spacing: -.01em;
+    }
 
-    .grid-2 { display: grid; grid-template-columns: 1.2fr .8fr; gap: 14px; }
+    p { margin: 0 0 8px; line-height: 1.42; }
+    .mini { color: var(--muted); font-size: .84rem; }
+
+    .grid-2 { display: grid; grid-template-columns: 1.16fr .84fr; gap: 12px; }
     .grid-3 { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
 
     .card {
       background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 12px;
+      border: 1px solid rgba(20, 35, 32, 0.1);
+      border-radius: 18px;
       padding: 12px 14px;
-      box-shadow: var(--shadow);
+      box-shadow: var(--soft-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.24), transparent 45%);
     }
 
-    ul { margin: 0; padding-left: 18px; line-height: 1.5; }
-    li { margin: 4px 0; }
+    ul { margin: 0; padding-left: 17px; line-height: 1.42; }
+    li { margin: 3px 0; }
+    li::marker { color: var(--accent); }
 
     .pill {
       display: inline-block;
-      padding: 3px 8px;
-      margin: 3px 3px 0 0;
+      padding: 4px 9px;
+      margin: 3px 4px 0 0;
       border-radius: 999px;
-      background: #edf3ff;
-      border: 1px solid #cfddfd;
-      color: #2346a6;
-      font-size: .78rem;
-      font-weight: 600;
+      background: rgba(0, 168, 132, 0.1);
+      border: 1px solid rgba(0, 168, 132, 0.22);
+      color: #006b5b;
+      font-size: .75rem;
+      font-weight: 800;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: .88rem;
-      border: 1px solid var(--line);
-      border-radius: 10px;
+      font-size: .78rem;
+      border: 1px solid rgba(20, 35, 32, 0.1);
+      border-radius: 16px;
       overflow: hidden;
-      background: #fff;
+      background: rgba(255, 253, 247, 0.96);
     }
     th, td {
-      border-bottom: 1px solid #e7edf7;
-      padding: 7px 8px;
+      border-bottom: 1px solid rgba(20, 35, 32, 0.08);
+      padding: 5px 7px;
       text-align: left;
       vertical-align: top;
     }
-    th { background: #eff4fb; font-weight: 700; }
+    th {
+      background: rgba(0, 168, 132, 0.1);
+      color: #063b35;
+      font-weight: 800;
+    }
     tr:last-child td { border-bottom: none; }
+    tbody tr:nth-child(even) td { background: rgba(0, 168, 132, 0.025); }
 
     .r { color: var(--r); font-weight: 700; }
     .y { color: var(--y); font-weight: 700; }
@@ -127,31 +222,42 @@
       font-weight: 700;
       border: 1px solid transparent;
     }
-    .zone-r { background: #ffebe9; color: #b42318; border-color: #f3c6c3; }
-    .zone-y { background: #fff8c5; color: #8a6d00; border-color: #f0dfa0; }
-    .zone-g { background: #dafbe1; color: #116329; border-color: #bfe8c9; }
+    .zone-r { background: #ffe7e4; color: #9d211b; border-color: #ffbeb8; }
+    .zone-y { background: #fff2cf; color: #8c5700; border-color: #f2d189; }
+    .zone-g { background: #dff8e8; color: #0b6c3f; border-color: #aee7c4; }
 
     .img-wrap {
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 8px;
-      background: #fff;
-      box-shadow: var(--shadow);
+      border: 1px solid rgba(20, 35, 32, 0.1);
+      border-radius: 18px;
+      padding: 7px;
+      background: rgba(255, 253, 247, 0.92);
+      box-shadow: var(--soft-shadow);
     }
-    .img-wrap img { width: 100%; height: auto; border-radius: 6px; display: block; }
+    .img-wrap img { width: 100%; height: auto; border-radius: 14px; display: block; }
+    .img-wrap img[src$="cia-triad.jpg"],
+    .img-wrap img[src$="nist-maturity.png"] {
+      max-height: 220px;
+      object-fit: contain;
+    }
+    .bus-visual img {
+      max-height: 255px;
+      object-fit: contain;
+    }
 
     .phase-canvas {
-      border: 1px solid #d2dced;
-      border-radius: 10px;
-      background: #fbfdff;
-      padding: 10px;
+      border: 1px solid rgba(20, 35, 32, 0.1);
+      border-radius: 20px;
+      background:
+        linear-gradient(135deg, rgba(255, 253, 247, 0.94), rgba(237, 248, 241, 0.88));
+      padding: 9px;
+      box-shadow: var(--soft-shadow);
     }
 
     .axis {
       display: grid;
       grid-template-columns: 90px repeat(4, minmax(0,1fr));
-      gap: 7px;
-      margin-bottom: 8px;
+      gap: 6px;
+      margin-bottom: 6px;
       align-items: center;
     }
     .axis .x {
@@ -161,74 +267,75 @@
       gap: 4px;
       color: var(--muted);
       font-size: .76rem;
-      font-weight: 700;
+      font-weight: 800;
       text-align: center;
     }
-    .axis .yl { font-size: .74rem; color: var(--muted); font-weight: 700; text-transform: uppercase; }
+    .axis .yl { font-size: .72rem; color: var(--muted); font-weight: 800; text-transform: uppercase; }
     .phase-head {
       text-align: center;
       font-size: .78rem;
-      font-weight: 700;
-      color: #41566d;
-      border: 1px dashed #cfd9e8;
-      border-radius: 7px;
-      background: #fff;
-      padding: 5px;
+      font-weight: 800;
+      color: #13433c;
+      border: 1px solid rgba(0, 168, 132, 0.18);
+      border-radius: 999px;
+      background: rgba(0, 168, 132, 0.08);
+      padding: 4px;
     }
 
     .phase-grid {
       display: grid;
       grid-template-columns: 90px repeat(4, minmax(0,1fr));
-      gap: 7px;
+      gap: 6px;
     }
     .phase-y {
       writing-mode: vertical-rl;
       transform: rotate(180deg);
       text-align: center;
-      border: 1px dashed #cfd9e8;
-      border-radius: 7px;
-      background: #fff;
+      border: 1px solid rgba(20, 35, 32, 0.1);
+      border-radius: 12px;
+      background: rgba(255, 253, 247, 0.72);
       font-size: .74rem;
       color: var(--muted);
-      font-weight: 700;
+      font-weight: 800;
       padding: 6px 3px;
     }
 
     .phase-box {
-      border: 1px solid #dbe5f3;
-      border-radius: 9px;
-      min-height: 220px;
+      border: 1px solid rgba(20, 35, 32, 0.08);
+      border-radius: 20px;
+      min-height: 155px;
       padding: 8px;
-      background: #fff;
+      background: rgba(255, 253, 247, 0.86);
+      box-shadow: 0 10px 28px rgba(6, 21, 20, 0.08);
     }
-    .p1 { background: #eef4ff; border-color: #cfddfd; }
-    .p2 { background: #eefcf2; border-color: #cde8d8; }
-    .p3 { background: #fff9eb; border-color: #f2e0b0; }
-    .p4 { background: #fff1f1; border-color: #edcdcd; }
+    .p1 { background: linear-gradient(180deg, #e5fff6, #fbfff9); border-color: rgba(0, 168, 132, 0.2); }
+    .p2 { background: linear-gradient(180deg, #eaf2ff, #fbfdff); border-color: rgba(22, 33, 63, 0.16); }
+    .p3 { background: linear-gradient(180deg, #fff4d9, #fffdf6); border-color: rgba(255, 184, 77, 0.32); }
+    .p4 { background: linear-gradient(180deg, #ffe8e3, #fffaf7); border-color: rgba(255, 107, 87, 0.26); }
 
-    .phase-box h4 { margin: 0 0 7px; font-size: .9rem; }
+    .phase-box h4 { margin: 0 0 6px; font-size: .8rem; color: #12211e; }
 
     .tiles {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6px;
+      gap: 5px;
     }
     .tile {
-      border: 1px solid #d8e2f0;
-      border-radius: 6px;
-      background: #fff;
-      font-size: .75rem;
-      line-height: 1.35;
+      border: 1px solid rgba(20, 35, 32, 0.09);
+      border-radius: 9px;
+      background: rgba(255, 253, 247, 0.9);
+      font-size: .66rem;
+      line-height: 1.25;
       padding: 5px 6px;
-      min-height: 44px;
+      min-height: 34px;
     }
     .done {
-      border-color: #b8ddc5;
-      background: #ecf9f0;
+      border-color: rgba(0, 168, 132, 0.28);
+      background: rgba(0, 168, 132, 0.1);
     }
-    .check { color: #0f8b3a; font-weight: 800; margin-right: 4px; }
+    .check { color: #007f67; font-weight: 900; margin-right: 4px; }
 
-    .legend { margin-top: 8px; font-size: .8rem; color: var(--muted); }
+    .legend { margin-top: 6px; font-size: .74rem; color: var(--muted); }
 
     .brand-card {
       display: flex;
@@ -252,13 +359,13 @@
       margin: 8px 0 10px;
     }
     .flow-step {
-      padding: 4px 10px;
-      border: 1px solid #d5dff1;
+      padding: 6px 12px;
+      border: 1px solid rgba(0, 168, 132, 0.2);
       border-radius: 999px;
-      background: #fff;
+      background: rgba(0, 168, 132, 0.08);
       font-size: .8rem;
-      font-weight: 700;
-      color: #2a4366;
+      font-weight: 800;
+      color: #0d5248;
     }
     .flow-arrow {
       color: var(--muted);
@@ -272,42 +379,48 @@
       margin-right: 5px;
     }
     .priority-phase {
-      box-shadow: inset 0 0 0 2px #9dbfff;
+      box-shadow: inset 0 0 0 2px rgba(0, 168, 132, 0.28), 0 14px 28px rgba(0, 168, 132, 0.08);
     }
     .single-asset {
-      max-width: 440px;
-      margin: 10px auto 0;
+      max-width: 235px;
+      margin: 7px auto 0;
+    }
+    .single-asset img {
+      max-height: 126px;
+      object-fit: contain;
     }
 
     .notes-panel {
       position: fixed;
       left: 14px;
       right: 14px;
-      bottom: 56px;
+      bottom: 66px;
       z-index: 24;
-      max-height: 36vh;
+      max-height: 42vh;
       overflow: auto;
-      background: rgba(13, 25, 43, 0.95);
-      color: #f3f7ff;
-      border: 1px solid #2f425f;
-      border-radius: 10px;
-      padding: 10px 12px;
-      box-shadow: var(--shadow);
+      background: rgba(6, 21, 20, 0.92);
+      color: var(--text-on-dark);
+      border: 1px solid rgba(255, 250, 240, 0.2);
+      border-radius: 24px;
+      padding: 16px 18px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+      backdrop-filter: blur(22px);
       display: none;
     }
     .notes-panel.visible { display: block; }
     .notes-panel h3 {
-      margin: 0 0 7px;
-      font-size: .78rem;
+      margin: 0 0 9px;
+      font-size: .8rem;
       text-transform: uppercase;
-      letter-spacing: .05em;
-      color: #c2d4f7;
+      letter-spacing: .12em;
+      color: #91f2dd;
     }
     .notes-text {
       margin: 0;
       white-space: pre-wrap;
-      line-height: 1.45;
-      font-size: .88rem;
+      line-height: 1.52;
+      font-size: .92rem;
+      color: #f7f0df;
     }
 
     .controls {
@@ -315,33 +428,66 @@
       right: 14px;
       bottom: 12px;
       z-index: 25;
-      background: #fff;
-      border: 1px solid var(--line);
+      background: rgba(255, 250, 240, 0.92);
+      border: 1px solid rgba(20, 35, 32, 0.12);
       border-radius: 999px;
-      padding: 6px 10px;
-      box-shadow: var(--shadow);
+      padding: 7px 12px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
       display: flex;
       gap: 8px;
       align-items: center;
+      backdrop-filter: blur(18px);
     }
     .controls button {
       width: 32px;
       height: 32px;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(20, 35, 32, 0.12);
       border-radius: 999px;
-      background: #fff;
+      background: #fffaf0;
       cursor: pointer;
       font-size: 1rem;
+      font-weight: 800;
+    }
+    .controls button:hover,
+    .controls button[aria-pressed="true"] {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
     }
     .controls .hint { font-size: .76rem; color: var(--muted); }
 
     @media (max-width: 1100px) {
-      .slide { padding: 18px 14px 70px; }
+      .slide { padding: 18px 14px 76px; }
+      .slide::before { inset: 66px 8px 70px; border-radius: 22px; }
       .grid-2, .grid-3 { grid-template-columns: 1fr; }
       .axis, .phase-grid { grid-template-columns: 1fr; }
       .axis .x { grid-column: auto; }
       .phase-y { writing-mode: horizontal-tb; transform: none; }
       .tiles { grid-template-columns: 1fr; }
+    }
+
+    @media (max-height: 820px) and (min-width: 1000px) {
+      .slide { padding: 13px 28px 54px; }
+      .slide::before { inset: 68px 16px 50px; border-radius: 22px; }
+      .kicker { margin-bottom: 6px; padding: 5px 10px; font-size: .7rem; }
+      h1 { font-size: clamp(1.95rem, 3.1vw, 3.15rem); }
+      h2 { font-size: clamp(1.55rem, 2.65vw, 2.75rem); }
+      h3 { font-size: .9rem; margin-bottom: 7px; }
+      .card { padding: 10px 12px; border-radius: 15px; }
+      .grid-2, .grid-3 { gap: 10px; }
+      p, ul { font-size: .83rem; }
+      table { font-size: .66rem; }
+      th, td { padding: 4px 6px; }
+      .phase-canvas { padding: 7px; border-radius: 16px; }
+      .phase-box { min-height: 135px; padding: 6px; border-radius: 14px; }
+      .phase-box h4 { font-size: .72rem; margin-bottom: 5px; }
+      .tile { min-height: 29px; font-size: .58rem; padding: 4px 5px; border-radius: 7px; }
+      .bus-visual img { max-height: 215px; }
+      .img-wrap img[src$="cia-triad.jpg"],
+      .img-wrap img[src$="nist-maturity.png"] { max-height: 155px; }
+      .single-asset { max-width: 185px; margin-top: 5px; }
+      .single-asset img { max-height: 96px; }
+      .notes-panel { max-height: 38vh; }
     }
   </style>
 </head>
@@ -411,7 +557,7 @@
         <h3>Konsekvens for forretningen</h3>
         <ul>
           <li>Det er ikke ét teknisk hul, men et samlet usikkert driftsbillede</li>
-          <li>Høj personafhængighed (bus factor) gør virksomheden sårbar ved sygdom, ferie og fravær</li>
+          <li>Høj bus factor/personafhængighed gør virksomheden sårbar ved sygdom, ferie og fravær</li>
           <li>Forsinkelser rammer leverancer, relationer til kunder og fremtidig vækst</li>
           <li>Manglende struktur gør recovery langsom og dyr, når noget går galt</li>
         </ul>
@@ -420,9 +566,9 @@
     <div class="grid-2" style="margin-top:10px; grid-template-columns: .9fr 1.1fr;">
       <div class="card">
         <h3>Hvorfor det haster</h3>
-        <p>Hvis Hvedebro fortsætter som nu, flyttes driften fra processer over på enkeltpersoner. Det er en direkte forretningsrisiko – ikke kun en teknisk risiko.</p>
+        <p>Hvis Hvedebro fortsætter som nu, flyttes driften fra dokumenterede processer over på enkeltpersoner. Det er en direkte forretningsrisiko – ikke kun en teknisk risiko.</p>
       </div>
-      <div class="img-wrap">
+      <div class="img-wrap bus-visual">
         <img src="assets/bus-factor-risk.svg" alt="Illustration af bus factor og høj personafhængighed" />
       </div>
     </div>
@@ -753,85 +899,96 @@
     let notesVisible = false;
 
     const speakerNotes = [
-`hej mit navn er xx, jeg vil de næste 10 minutters tid tage jeg igennem den 2-3 årige cybersikkerhedsplan for hvedebromaskin fabrik. Vi skal igennem lidt af hvert, så lad os komme igang. Til en start vil jeg gerne kort gennemgå Hvedebros overordnet forretningsmål og formål med plan uden at dykke for meget ned i casen, den kender i allerede, men så har vi ligesom den røde tråd med igennem det hele.
+`Ca. 45-60 sek.
 
-Kernebudskab: Cybersikkerhed er her et forretningsgreb og ikke bare et IT-projekt. Planen skal beskytte stabil drift, leveringer, kundetillid og vækst over de næste 2-3 år.
+Kernebudskab:
+Planen skal beskytte Hvedebros vækst, drift og nøglekunder gennem en realistisk, risikobaseret sikkerhedsindsats over 2-3 år.
 
-Det vigtige at sige her er, at vi arbejder i en fast kæde: analyse, prioriterede initiativer, faseopdeling og tydeligt ansvar. På den måde bliver planen eksekverbar i praksis, ikke bare en ønskeliste.
+Sig fx:
+Vores udgangspunkt er, at cybersikkerhed i Hvedebro ikke handler om at købe flest mulige værktøjer, men om at understøtte forretningen. Virksomheden vokser, digitaliserer og bliver mere afhængig af produktion, udvikling og nøglekunder med høje krav. Derfor har vi lavet en plan, som kobler analyse, prioritering, initiativer og ansvar sammen. Målet er ikke perfektion fra dag ét, men et markant og dokumenterbart løft, så Hvedebro kan vokse uden at bygge ny sikkerhedsgæld op.
 
-Bro til slide 2: Nu viser jeg, hvorfor planen er nødvendig, ved at samle de konkrete hændelser og svagheder fra casen.`,
-`Kernebudskab: Hvedebro står ikke med én isoleret fejl, men med et samlet usikkert driftsbillede på tværs af IT, OT, fysisk sikkerhed og governance.
+Bro:
+For at vise hvorfor planen er nødvendig, starter vi med de hændelser og modenhedsgab, som allerede findes i casen.`,
+`Ca. 50-60 sek.
 
-Det vi ser i casen er blandt andet svag fysisk sikkerhed, desegmenteret IT/OT, ransomware-hændelser, OT-nedbrud uden klar handlingsplan og afdelinger der køber/drifter IT-udstyr uden fælles ansvar eller politik. Derudover giver lokalt økonomisystem en ekstra drifts- og datarisiko, når noget fejler.
+Kernebudskab:
+Hvedebro står ikke med teoretiske risici. Virksomheden har allerede set OT-nedbrud, ransomware, shadow IT, fysisk tyveri og kundepres omkring NIS2.
 
-Her er bus factor vigtigt: virksomheden er for personafhængig. Hvis en nøgleperson er syg, på ferie, barsel eller stopper, kan kritiske adgangsveje og driftsrutiner ikke håndteres robust. Så det er ikke kun en teknisk sårbarhed, men en forretningssårbarhed.
+Sig fx:
+Det vigtige her er, at casen allerede viser flere konkrete advarsler. Vi ser ukontrolleret fjernadgang til OT, ransomware mod økonomisystemet, en Proshop-server sat op uden governance, fysiske indbrud og uklare leverandøraftaler. Problemet er derfor ikke ét teknisk hul, men et mønster af svag styring, uklart ansvar og høj personafhængighed. For forretningen giver det risiko for driftsstop, forsinkede leverancer, tab af IP og i sidste ende tab af kundetillid og markedsadgang.
 
-Konsekvensen er forsinkelser, ustabile leverancer, svagere kunderelationer og begrænset vækst. Bro til slide 3: derfor har vi målt modenheden systematisk, så vi kan vise hvor vi er nu, og hvor vi realistisk kan løfte Hvedebro hen.`,
-`Kernebudskab: Modenhedsanalysen giver os et objektivt udgangspunkt for prioritering.
+Bro:
+Når vi samler de hændelser, giver det mening at måle, hvor moden virksomheden faktisk er i dag, og hvor den realistisk kan løftes hen.`,
+`Ca. 55-60 sek.
 
-Metoden er CSF/NIST-inspireret. Vi bruger niveau 1-5 sammen med trafiklysfarver, så det bliver lettere at forstå både hvor modne områderne er, og hvor stor forretningsrisikoen er.
+Kernebudskab:
+Hvedebro er flere steder på begyndende modenhed, men kan løftes til et styret niveau på kerneområderne over 24 måneder, hvis de starter med fundamentet.
 
-Tolkningen er, at Hvedebro samlet ligger omkring niveau 1-2 på flere centrale områder. Det forklarer, hvorfor hændelserne er sket. Røde områder er især governance, adgangsstyring, segmentering og OT-kontrol. Målet er at flytte virksomheden tydeligt mod gul inden for det første år, og derefter mod gul/grøn i år 2-3.
+Sig fx:
+Her bruger vi en CSF-inspireret modenhedsskala fra 1 til 5 kombineret med trafiklys, fordi det gør analysen lettere at styre og forklare. Det tydelige billede er, at governance, IAM, segmentering og leverandørstyring starter i rødt. Efter 12 måneder forventer vi primært gult, fordi fundamentet er etableret, og efter 24 måneder bør Hvedebro være tæt på grønt samlet set. Vi har bevidst ladet OT-sikkerhed og awareness modne lidt langsommere, fordi de områder typisk kræver mere tid, adfærdsændring og afhængighed af drift og leverandører.
 
-Vi har bevidst lagt OT-sikkerhed og awareness i en langsommere modenhedskurve, fordi de kræver mere tid, kulturarbejde og ofte ekstern ekspertise, især når driften kører højt.
+Bro:
+Modenheden viser retningen, men den fortæller ikke alene, hvad vi skal starte med. Derfor kobler vi den nu med en konkret risikoanalyse.`,
+`Ca. 55-60 sek.
 
-Bro til slide 4: modenhed viser retning, men risikoanalysen viser hvad vi skal starte med først.`,
-`Kernebudskab: Prioriteringen er data- og metodebaseret, ikke mavefornemmelse.
+Kernebudskab:
+Prioriteringen er ikke mavefornemmelse. Den bygger på en enkel, sporbar metode med score, CIA-fokus og valgt behandlingsstrategi.
 
-Vi bruger S x K, altså sandsynlighed gange konsekvens, kombineret med farvezoner for at gøre prioriteringen enkel at kommunikere. Vi kobler samtidig hver risiko til CIA, så vi kan forklare konsekvensen i forretningsmæssige termer: fortrolighed, integritet og tilgængelighed.
+Sig fx:
+Metoden er bevidst holdt enkel og styrbar. Vi bruger en 5x5-risikomatrix, hvor score er sandsynlighed gange konsekvens, og vi supplerer med CIA for at vise, om risikoen primært rammer fortrolighed, integritet eller tilgængelighed. Derudover vælger vi behandlingstype efter 4T: mitigere, undgå, overføre eller acceptere. Det betyder, at vi kan forklare både hvorfor en risiko er rød, og hvad vi vil gøre ved den. Top 4 er R01 til R04, fordi de rammer drift, recovery, netværk og governance direkte og derfor giver størst samlet forretningspåvirkning.
 
-Derudover har vi 4T med for hver risiko: mitigere, undgå, overføre eller acceptere. Det gør tabellen operationel, fordi den viser både alvor og handling.
+Bro:
+Når top-risiciene er tydelige, kan vi oversætte dem til et roadmap, hvor indsatsen er delt op i faser og lagt i den rigtige rækkefølge.`,
+`Ca. 55-60 sek.
 
-Top 4 risici er røde, fordi de rammer drift, recovery, netværk og governance direkte. Rækkefølgen er på plads, og det skaber en stærk rød tråd til roadmapet: hvem gør hvad, hvornår og hvorfor.
+Kernebudskab:
+Roadmappet viser en bevidst rækkefølge: først styring og hurtig risikoreduktion, derefter stabilisering, fremtidssikring og løbende forbedring.
 
-Bro til slide 5: nu oversætter vi top-risici og modenhed til en kontrolleret faseplan.`,
-`Kernebudskab: Roadmapet er lavet i en bevidst rækkefølge, så vi reducerer mest risiko hurtigst og bygger videre derfra.
+Sig fx:
+Pointen er, at vi ikke forsøger at gøre alting på én gang. Fase 1 handler om fundamentet: politik, RACI, risikoregister, MFA, fjernadgang, backup og stop for ny shadow IT. Fase 2 stabiliserer med segmentering, IAM, leverandørkrav og restore-disciplin. Fase 3 og 4 handler først derefter om fremtidssikring, AI-governance, awareness og kontinuerlig forbedring. Fluebenene betyder, at vi allerede har udarbejdet nogle af styringsartefakterne i projektet, ikke at Hvedebro har implementeret dem fuldt ud endnu. Det er også derfor, roadmapet er realistisk og ikke bare en ønskeliste.
 
-X-akse er tid, og y-akse er områder/indsatser. Fase 1 er fundament: politik, RACI, tydeligt ejerskab og direkte håndtering af top 4-risici. Vi har allerede udarbejdet dele af fundamentet, blandt andet udkast til IT-sikkerhedspolitik, som skal godkendes i direktionen og derefter kommunikeres bredt.
+Bro:
+Når rækkefølgen er på plads, giver det mening at zoome ind på, hvem der konkret skal gøre hvad i fase 1 og 2.`,
+`Ca. 50-60 sek.
 
-Fase 2 er stabilisering med segmentering af IT/OT, IAM med MFA, bedre fysisk sikring og disciplin i backup/gendannelse. Fase 3 og 4 er fremtidssikring og løbende forbedring, blandt andet ERP-retning, leverandørstyring, awareness og AI-governance.
+Kernebudskab:
+De vigtigste tidlige indsatser får en tydelig ejer, en konkret måde at blive gennemført på og en klar begrundelse i top-risiciene.
 
-Pointen er: vi starter ikke med avancerede buzzwords, vi starter med det der løfter modenhed og driftssikkerhed nu.
+Sig fx:
+Det her slide er vigtigt, fordi roadmapet først bliver troværdigt, når ansvar og metode er tydelige. Governance og politik ligger hos Kasim og direktionen, fordi det kræver ledelsesforankring. Fjernadgang, MFA og IAM ligger hos IT-drift, fordi det er de kontroller, der direkte reducerer R01 og svage adgange. Backup og restore er et delt ansvar mellem IT og OT, fordi hændelserne i casen viser, at uklart ejerskab er en del af problemet. Segmentering og leverandørkrav ligger tilsvarende hos OT-lead, netværk og indkøb, fordi de områder skal være både teknisk og kontraktuelt understøttet.
 
-Bro til slide 6: når rækkefølgen er tydelig, skal vi vise ejerskab og udførelse i fase 1-2.`,
-`Kernebudskab: De første faser handler om eksekvering med tydelige ejere, ikke kun teknik.
+Bro:
+Når fundamentet er på plads, kan vi tale om de initiativer, der ikke bare lukker huller, men fremtidssikrer Hvedebros digitalisering.`,
+`Ca. 50-60 sek.
 
-Her forklarer vi hvem der ejer hvilke initiativer i fase 1-2, hvordan de gennemføres, og hvorfor de reducerer de konkrete top-risici. Ledelsen forankrer governance og politik. IT-drift ejer adgangskontroller og IAM. IT og OT deler ansvar for backup og recovery. OT-lead og netværk driver segmentering. Indkøb og ledelse løfter leverandørkrav.
+Kernebudskab:
+Fase 3 og 4 skal forhindre, at Hvedebro bygger ny sikkerhedsgæld op, mens virksomheden digitaliserer, får flere integrationspunkter og bruger nye teknologier.
 
-Det her reducerer både risiko og personafhængighed, fordi viden og ansvar flyttes fra enkeltpersoner over i processer og styring.
+Sig fx:
+Når de største, aktuelle risici er reduceret, flytter fokus til fremtidssikring. Her kommer ERP-sporet, hjemmearbejdsstandarden, fuld IAM-modning, AI-governance, awareness-årshjul og et egentligt OT-sikkerhedsprogram ind. Pointen er, at Hvedebro ikke kun skal reagere på gamle problemer, men også kunne digitalisere uden at gentage de samme fejl. AI er et godt eksempel: vi behandler det ikke som hype, men som et governance-spørgsmål med politik, register og audit. På den måde bliver vækst og digitalisering understøttet af kontrol i stedet for at skabe nye røde risici.
 
-Bro til slide 7: når fundamentet er i drift, kan vi fokusere på sikker vækst og digitalisering.`,
-`Kernebudskab: Fase 3-4 skal forhindre ny sikkerhedsgæld, mens Hvedebro vokser.
+Bro:
+Det næste spørgsmål er, hvilken effekt planen forventes at have, og hvordan vi kan måle, at Hvedebro faktisk bevæger sig i den rigtige retning.`,
+`Ca. 50-60 sek.
 
-Her kobler vi sikkerhed til digitalisering: ERP-spor, moden IAM/Entra ID, leverandørkrav, OT-program, awareness-årshjul og AI-governance med audit.
+Kernebudskab:
+Hvis roadmapet gennemføres, falder top-risiciene markant, og ledelsen kan følge udviklingen gennem få, klare KPI'er.
 
-Budskabet er, at fase 3-4 ikke er pynt. Det er det, der gør at virksomheden kan skalere uden at genopbygge de samme svagheder, vi har set i casen.
+Sig fx:
+Her viser vi, at planen ikke bare er aktivitet, men forventet effekt. Top-risiciene går fra høje røde niveauer til lavere gule niveauer, fordi både sandsynlighed og konsekvens bliver reduceret. Det gælder især fjernadgang, backup, segmentering og shadow IT. KPI'erne er valgt, så ledelsen kan bruge dem i praksis: restore-tests, MFA, åbne røde risici, MTTD og MTTR, leverandører med sikkerhedsbilag og AI-anvendelser med godkendelse. Dermed bliver sikkerhed en ledelsesdisciplin med opfølgning, ikke bare et teknisk sideprojekt.
 
-Bro til slide 8: næste skridt er at vise den forventede effekt og de KPI'er, der dokumenterer fremdriften.`,
-`Kernebudskab: Planen skal kunne måles på reel effekt, ikke kun på aktiviteter.
+Bro:
+For at kunne levere den udvikling, skal organisationen også have en tydelig rollefordeling og et realistisk ressourcebillede.`,
+`Ca. 45-55 sek.
 
-Her skal vi være præcise: hvad der reduceres først, afhænger af risikoen.
+Kernebudskab:
+Planen er eksekverbar, fordi den fordeler ansvar mellem ledelse, IT, OT, indkøb, HR og et lille kerneteam i stedet for at lægge det hele på én person.
 
-Kort gennemgang af top 4:
-R01 går primært ned på sandsynlighed (S), fordi MFA, tidsstyret adgang og streng godkendelse gør det markant sværere at kompromittere fjernadgang.
-R02 går primært ned på konsekvens (K), fordi 3-2-1 backup og faste restore-tests reducerer nedetid og forretningstab, når hændelser sker.
-R03 går primært ned på konsekvens (K), fordi segmentering og OT-DMZ begrænser skadesradius i drift og produktion.
-R04 går ned på både sandsynlighed (S) og konsekvens (K), fordi governance og udfasning af shadow IT både forebygger nye hændelser og reducerer impact ved fejl.
+Sig fx:
+Vi afslutter med organisationen, fordi god cybersikkerhed i Hvedebro kræver mere end teknik. RACI'en viser, hvem der er ansvarlig, hvem der godkender, og hvem der skal høres og informeres. CEO og direktion sætter retning og risikovillighed, IT-drift og OT-lead driver de tekniske kontroller, og indkøb, HR og forretningen skal være med, fordi leverandører, awareness og dataejerskab er en del af sikkerheden. Vores anbefaling er et lille kerneteam på 3-5 personer, en månedlig styregruppe og ekstern støtte på de områder, hvor Hvedebro ikke selv har modenheden endnu.
 
-Så når vi fx siger 20 til 9-10, er forklaringen ikke den samme for alle risici. For R01 er det især sandsynligheden, mens det for R02-R03 er konsekvensen, og for R04 er det begge dele.
-
-Vi kobler planen til konkrete statslige kataloger, som vi har læst: Digitaliseringsstyrelsen og CFCS' vejledning om cloudservices (v1.1, juli 2020) samt CFCS' vejledning Reducer risikoen for ransomware (2. udgave, april 2023). I ransomware-vejledningen peges der direkte på netværkssegmentering, MFA på fjernadgang og backup med offline kopi samt test af reetablering. Det matcher vores fase 1-2 prioriteringer 1:1, så den forventede risikoreduktion er understøttet af anerkendt praksis.
-
-KPI'erne gør det målbart måned for måned, så ledelsen kan se om reduktionen faktisk sker.
-
-Bro til slide 9: til sidst viser vi den organisatoriske ramme, der gør planen realistisk at drive.`,
-`Kernebudskab: Planen er gennemførbar, fordi ansvar, beslutningsveje og ressourcer er tydeligt fordelt.
-
-RACI'en viser hvem der er Responsible, Accountable, Consulted og Informed på tværs af ledelse, IT, OT, indkøb og HR. Det sikrer, at sikkerhed ikke ender hos én person eller én afdeling.
-
-Vi anbefaler et lille kerneteam, fast styregruppeopfølgning og ekstern støtte på de områder, hvor modenheden stadig er lav. Så bliver planen både realistisk, styrbar og robust over tid.
-
-Mulig afslutningssætning: Vores samlede anbefaling er en risikobaseret og faseopdelt cybersikkerhedsplan, der både reducerer de aktuelle top-risici og gør Hvedebro klar til sikker vækst og digitalisering.`
+Afslutning:
+Vores samlede anbefaling er en risikobaseret og faseopdelt sikkerhedsplan, som både reducerer de aktuelle top-risici og gør Hvedebro klar til videre vækst og digitalisering.`
     ];
 
     function updateNotes() {
