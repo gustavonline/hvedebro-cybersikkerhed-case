@@ -390,6 +390,58 @@
       object-fit: contain;
     }
 
+    .kpi-grid {
+      display: grid;
+      gap: 10px;
+    }
+    .kpi-card {
+      border: 1px solid rgba(20, 35, 32, 0.1);
+      border-radius: 16px;
+      padding: 11px 12px;
+      background: rgba(255, 253, 247, 0.82);
+      box-shadow: 0 10px 24px rgba(8, 26, 23, 0.08);
+    }
+    .kpi-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 7px;
+    }
+    .kpi-title {
+      font-weight: 900;
+      color: var(--ink-blue);
+      line-height: 1.15;
+    }
+    .kpi-value {
+      min-width: 78px;
+      text-align: center;
+      padding: 6px 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), #68dec8);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1rem;
+      box-shadow: 0 8px 18px rgba(0, 168, 132, 0.24);
+    }
+    .kpi-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      font-size: .72rem;
+      color: var(--muted);
+    }
+    .kpi-meta span {
+      border-radius: 10px;
+      background: rgba(0, 168, 132, 0.07);
+      padding: 5px 7px;
+    }
+    .kpi-meta strong {
+      display: block;
+      color: #0b4a40;
+      font-size: .74rem;
+    }
+
     .notes-panel {
       position: fixed;
       left: 14px;
@@ -487,6 +539,13 @@
       .img-wrap img[src$="nist-maturity.png"] { max-height: 155px; }
       .single-asset { max-width: 185px; margin-top: 5px; }
       .single-asset img { max-height: 96px; }
+      .kpi-grid { gap: 7px; }
+      .kpi-card { padding: 8px 9px; border-radius: 12px; }
+      .kpi-top { margin-bottom: 5px; }
+      .kpi-title { font-size: .78rem; }
+      .kpi-value { min-width: 64px; padding: 5px 7px; font-size: .86rem; }
+      .kpi-meta { font-size: .62rem; gap: 5px; }
+      .kpi-meta strong { font-size: .64rem; }
       .notes-panel { max-height: 38vh; }
     }
   </style>
@@ -825,16 +884,39 @@
         <p class="mini">Hovedpointen: R01 falder primært på sandsynlighed (MFA/adgangskontrol), R02-R03 falder primært på konsekvens (recovery/segmentering), og R04 falder på både sandsynlighed og konsekvens ved udfasning af shadow IT.</p>
       </div>
       <div class="card">
-        <h3>KPI-ramme (måling af effekt)</h3>
-        <ul>
-          <li>% kritiske systemer med bestået restore-test</li>
-          <li>% kritiske konti med MFA og recertificering</li>
-          <li>Antal åbne røde risici (>30 dage)</li>
-          <li>MTTD/MTTR for incidents</li>
-          <li>% leverandører med sikkerhedsbilag</li>
-          <li>Awareness completion-rate + phishing-rate</li>
-          <li>% AI-use cases med audit/godkendelse</li>
-        </ul>
+        <h3>3 vigtigste KPI'er (måling af effekt)</h3>
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-title">Restore-test på kritiske systemer</div>
+              <div class="kpi-value">95%</div>
+            </div>
+            <div class="kpi-meta">
+              <span><strong>Baseline</strong>Ad hoc / usikkert</span>
+              <span><strong>Mål efter 12 mdr</strong>95% bestået månedligt</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-title">MFA + adgangsrecertificering</div>
+              <div class="kpi-value">100%</div>
+            </div>
+            <div class="kpi-meta">
+              <span><strong>Baseline</strong>Uens remote/admin-adgang</span>
+              <span><strong>Mål efter 12 mdr</strong>100% kritiske konti</span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-top">
+              <div class="kpi-title">Åbne røde risici over 30 dage</div>
+              <div class="kpi-value">0</div>
+            </div>
+            <div class="kpi-meta">
+              <span><strong>Baseline</strong>Ingen fast ledelsesrytme</span>
+              <span><strong>Mål efter 24 mdr</strong>0 uden accepteret plan</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="card" style="margin-top:10px;">
@@ -976,7 +1058,7 @@ Kernebudskab:
 Hvis roadmapet gennemføres, falder top-risiciene markant, og ledelsen kan følge udviklingen gennem få, klare KPI'er.
 
 Sig fx:
-Her viser vi, at planen ikke bare er aktivitet, men forventet effekt. Top-risiciene går fra høje røde niveauer til lavere gule niveauer, fordi både sandsynlighed og konsekvens bliver reduceret. Det gælder især fjernadgang, backup, segmentering og shadow IT. KPI'erne er valgt, så ledelsen kan bruge dem i praksis: restore-tests, MFA, åbne røde risici, MTTD og MTTR, leverandører med sikkerhedsbilag og AI-anvendelser med godkendelse. Dermed bliver sikkerhed en ledelsesdisciplin med opfølgning, ikke bare et teknisk sideprojekt.
+Her viser vi, at planen ikke bare er aktivitet, men forventet effekt. Top-risiciene går fra høje røde niveauer til lavere gule niveauer, fordi både sandsynlighed og konsekvens bliver reduceret. Vi har skåret KPI'erne ned til tre ledelsestal, som matcher top-risiciene direkte: 95% beståede restore-tests på kritiske systemer, 100% MFA og adgangsrecertificering på kritiske konti, og 0 åbne røde risici over 30 dage uden accepteret plan. Det er realistiske styringsmål, fordi Hvedebro starter fra ad hoc-praksis og skal kunne dokumentere fremdrift uden at drukne ledelsen i målepunkter.
 
 Ekstern pejling:
 Vi bruger tre officielle kilder til at underbygge slide 8.
