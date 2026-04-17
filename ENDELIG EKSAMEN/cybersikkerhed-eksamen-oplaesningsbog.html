@@ -1,0 +1,1361 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cybersikkerhed - oplæsningsbog til eksamen</title>
+  <style>
+    :root {
+      --ink: #17211b;
+      --muted: #5d6b63;
+      --paper: #f5f0e6;
+      --paper-strong: #fffaf0;
+      --night: #071712;
+      --moss: #25483a;
+      --mint: #a7e0c3;
+      --lime: #ddf47d;
+      --coral: #ff7f63;
+      --gold: #f4c76b;
+      --blue: #91c7ff;
+      --rose: #f4a7b9;
+      --line: rgba(23, 33, 27, 0.14);
+      --shadow: 0 24px 70px rgba(7, 23, 18, 0.16);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--night);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Avenir Next", "IBM Plex Sans", "Trebuchet MS", sans-serif;
+      line-height: 1.65;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(221, 244, 125, 0.22), transparent 28rem),
+        radial-gradient(circle at 84% 18%, rgba(145, 199, 255, 0.18), transparent 24rem),
+        linear-gradient(145deg, #071712 0%, #102a22 44%, #1d332b 100%);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page-shell {
+      width: min(1220px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 30px 0 80px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 78vh;
+      padding: clamp(34px, 6vw, 76px);
+      border: 1px solid rgba(255, 250, 240, 0.16);
+      border-radius: var(--radius-xl);
+      color: #fffaf0;
+      background:
+        linear-gradient(120deg, rgba(255, 250, 240, 0.08), rgba(255, 250, 240, 0.02)),
+        radial-gradient(circle at 88% 20%, rgba(255, 127, 99, 0.22), transparent 18rem),
+        radial-gradient(circle at 26% 90%, rgba(167, 224, 195, 0.18), transparent 22rem),
+        #081a14;
+      box-shadow: var(--shadow);
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      width: 480px;
+      height: 480px;
+      right: -160px;
+      top: -160px;
+      border: 1px solid rgba(244, 199, 107, 0.32);
+      box-shadow: inset 0 0 90px rgba(244, 199, 107, 0.08);
+    }
+
+    .hero::after {
+      width: 260px;
+      height: 260px;
+      left: -80px;
+      bottom: -80px;
+      background: rgba(167, 224, 195, 0.12);
+      filter: blur(2px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 22px;
+      padding: 9px 14px;
+      border: 1px solid rgba(221, 244, 125, 0.32);
+      border-radius: 999px;
+      color: var(--lime);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: rgba(221, 244, 125, 0.08);
+    }
+
+    .hero h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0;
+      font-family: "Fraunces", "Iowan Old Style", Georgia, serif;
+      font-size: clamp(3.1rem, 8vw, 7.8rem);
+      line-height: 0.92;
+      letter-spacing: -0.065em;
+    }
+
+    .hero .lead {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 28px 0 0;
+      color: rgba(255, 250, 240, 0.78);
+      font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 42px;
+    }
+
+    .hero-card {
+      min-height: 150px;
+      padding: 20px;
+      border: 1px solid rgba(255, 250, 240, 0.12);
+      border-radius: 22px;
+      background: rgba(255, 250, 240, 0.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #fffaf0;
+      font-size: 1.02rem;
+    }
+
+    .hero-card span {
+      color: rgba(255, 250, 240, 0.72);
+      font-size: 0.95rem;
+    }
+
+    .toc {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      margin: 20px 0;
+      padding: 12px;
+      border: 1px solid rgba(255, 250, 240, 0.14);
+      border-radius: 999px;
+      background: rgba(7, 23, 18, 0.82);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 12px 40px rgba(7, 23, 18, 0.18);
+    }
+
+    .toc a {
+      flex: 0 0 auto;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: rgba(255, 250, 240, 0.78);
+      font-size: 0.86rem;
+      font-weight: 800;
+      text-decoration: none;
+      background: rgba(255, 250, 240, 0.07);
+    }
+
+    .toc a:hover,
+    .toc a:focus {
+      color: var(--night);
+      background: var(--lime);
+      outline: none;
+    }
+
+    .book {
+      display: grid;
+      gap: 22px;
+    }
+
+    .module {
+      overflow: hidden;
+      border: 1px solid rgba(255, 250, 240, 0.22);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(180deg, rgba(255, 250, 240, 0.97), rgba(245, 240, 230, 0.97)),
+        var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .module-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 26px;
+      align-items: end;
+      padding: clamp(28px, 4vw, 52px);
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 88% 18%, rgba(255, 127, 99, 0.12), transparent 18rem),
+        linear-gradient(120deg, rgba(167, 224, 195, 0.28), rgba(255, 250, 240, 0));
+    }
+
+    .module-label {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 14px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      color: var(--moss);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: rgba(167, 224, 195, 0.42);
+    }
+
+    h2 {
+      margin: 0;
+      font-family: "Fraunces", "Iowan Old Style", Georgia, serif;
+      font-size: clamp(2.1rem, 4vw, 4.3rem);
+      line-height: 0.98;
+      letter-spacing: -0.052em;
+    }
+
+    .module-intro {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 1.07rem;
+    }
+
+    .one-liner {
+      padding: 20px;
+      border: 1px solid rgba(37, 72, 58, 0.18);
+      border-radius: 22px;
+      color: var(--paper-strong);
+      background: var(--moss);
+    }
+
+    .one-liner small {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--mint);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .one-liner p {
+      margin: 0;
+      font-weight: 780;
+      line-height: 1.45;
+    }
+
+    .module-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
+      gap: 26px;
+      padding: clamp(26px, 4vw, 52px);
+    }
+
+    .prose h3,
+    .side h3 {
+      margin: 0 0 10px;
+      color: var(--moss);
+      font-size: 0.85rem;
+      font-weight: 950;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .prose h4 {
+      margin: 28px 0 8px;
+      font-size: 1.08rem;
+    }
+
+    .prose p {
+      margin: 0 0 15px;
+      color: #243029;
+      font-size: 1.02rem;
+    }
+
+    .prose ul,
+    .side ul {
+      margin: 0 0 20px;
+      padding-left: 1.15rem;
+    }
+
+    .prose li,
+    .side li {
+      margin: 8px 0;
+    }
+
+    .side {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .note-card,
+    .term-card,
+    .exam-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 250, 240, 0.68);
+    }
+
+    .term-card {
+      background:
+        linear-gradient(150deg, rgba(221, 244, 125, 0.23), rgba(255, 250, 240, 0.72));
+    }
+
+    .exam-card {
+      color: #fffaf0;
+      background:
+        radial-gradient(circle at 96% 0%, rgba(244, 199, 107, 0.20), transparent 12rem),
+        #0b1d16;
+    }
+
+    .exam-card h3 {
+      color: var(--lime);
+    }
+
+    .exam-card p,
+    .exam-card li {
+      color: rgba(255, 250, 240, 0.82);
+    }
+
+    .key-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin: 22px 0;
+    }
+
+    .key {
+      min-height: 118px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 250, 240, 0.78);
+    }
+
+    .key b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--moss);
+    }
+
+    .key span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    .flow span {
+      min-height: 78px;
+      display: grid;
+      place-items: center;
+      padding: 10px;
+      border: 1px solid rgba(37, 72, 58, 0.16);
+      border-radius: 16px;
+      color: var(--moss);
+      text-align: center;
+      font-weight: 850;
+      background: rgba(167, 224, 195, 0.24);
+    }
+
+    .callout {
+      margin: 24px 0;
+      padding: 18px 20px;
+      border-left: 6px solid var(--coral);
+      border-radius: 0 18px 18px 0;
+      background: rgba(255, 127, 99, 0.10);
+    }
+
+    .callout p {
+      margin: 0;
+    }
+
+    .quick {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      padding: clamp(28px, 4vw, 52px);
+      border-radius: var(--radius-xl);
+      color: #fffaf0;
+      background:
+        radial-gradient(circle at 12% 22%, rgba(244, 199, 107, 0.18), transparent 20rem),
+        radial-gradient(circle at 84% 86%, rgba(145, 199, 255, 0.16), transparent 24rem),
+        #081a14;
+      box-shadow: var(--shadow);
+    }
+
+    .quick h2 {
+      grid-column: 1 / -1;
+      color: #fffaf0;
+    }
+
+    .quick-card {
+      padding: 20px;
+      border: 1px solid rgba(255, 250, 240, 0.13);
+      border-radius: 22px;
+      background: rgba(255, 250, 240, 0.07);
+    }
+
+    .quick-card h3 {
+      margin: 0 0 8px;
+      color: var(--lime);
+      font-size: 0.9rem;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .quick-card p,
+    .quick-card li {
+      color: rgba(255, 250, 240, 0.78);
+    }
+
+    .source {
+      margin-top: 22px;
+      padding: 24px;
+      border-radius: 24px;
+      color: rgba(255, 250, 240, 0.74);
+      background: rgba(255, 250, 240, 0.06);
+    }
+
+    .source h2 {
+      margin-bottom: 8px;
+      color: #fffaf0;
+      font-size: 2rem;
+    }
+
+    code {
+      padding: 0.12em 0.32em;
+      border-radius: 0.35em;
+      color: #102a22;
+      background: rgba(221, 244, 125, 0.42);
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .module-header,
+      .module-body,
+      .key-grid,
+      .quick {
+        grid-template-columns: 1fr;
+      }
+
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .toc {
+        border-radius: 24px;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .page-shell {
+        width: 100%;
+        padding: 0;
+      }
+
+      .toc {
+        display: none;
+      }
+
+      .hero,
+      .module,
+      .quick,
+      .source {
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      .module {
+        page-break-after: always;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero">
+      <p class="eyebrow">Cybersikkerhedseksamen · Hvedebro Maskinfabrik</p>
+      <h1>Oplæsningsbog til hele faget</h1>
+      <p class="lead">
+        Den her side er lavet som en lille mundtlig læsebog: ikke bare stikord, men forklaringer du kan
+        læse højt, forstå og omsætte til eksamenssvar. Tanken er, at du kan bruge hvert modul som en
+        mini-fortælling og hele tiden koble teorien til Hvedebro-casen.
+      </p>
+      <div class="hero-grid">
+        <div class="hero-card">
+          <strong>Sådan bruger du den</strong>
+          <span>Læs ét modul ad gangen. Stop efter hvert modul og prøv at forklare “hvad handler det om?” uden at kigge.</span>
+        </div>
+        <div class="hero-card">
+          <strong>Eksamenstaktik</strong>
+          <span>Start bredt, brug begreberne korrekt, og gør det konkret med Hvedebro: OT, backup, leverandører, drift og ansvar.</span>
+        </div>
+        <div class="hero-card">
+          <strong>Rød tråd</strong>
+          <span>Caseforståelse → risici → governance → tekniske kontroller → leverandører → processer → KPI og forbedring.</span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Indholdsfortegnelse">
+      <a href="#modul-1">Modul 1</a>
+      <a href="#modul-2">Modul 2</a>
+      <a href="#modul-3">Modul 3</a>
+      <a href="#modul-4">Modul 4</a>
+      <a href="#modul-5">Modul 5</a>
+      <a href="#modul-6">Modul 6</a>
+      <a href="#modul-7">Modul 7</a>
+      <a href="#repetition">Repetition</a>
+      <a href="#kilder">Kilder</a>
+    </nav>
+
+    <div class="book">
+      <section class="module" id="modul-1">
+        <div class="module-header">
+          <div>
+            <span class="module-label">Modul 1 · Grundbegreber</span>
+            <h2>Fra “IT-problem” til forretningsrisiko</h2>
+            <p class="module-intro">
+              Modul 1 giver sproget. Det er her, du lærer at forklare cybersikkerhed som noget,
+              der handler om virksomhedens drift, data, tillid og ansvar, ikke kun firewalls og passwords.
+            </p>
+          </div>
+          <div class="one-liner">
+            <small>Sig det sådan</small>
+            <p>“Cybersikkerhed er at beskytte virksomhedens vigtigste aktiver, så fortrolighed, integritet og tilgængelighed holder i praksis.”</p>
+          </div>
+        </div>
+        <div class="module-body">
+          <article class="prose">
+            <h3>Hvad modulet handler om</h3>
+            <p>
+              Det vigtigste fra første modul er, at cybersikkerhed skal kunne forklares enkelt. Hvis man
+              gør det for teknisk fra starten, mister man ledelsen, brugerne og ofte også pointen. Kernen
+              er at forstå, hvad virksomheden prøver at beskytte. I Hvedebro Maskinfabrik er det ikke bare
+              “computere”. Det er produktionslinjer, tegninger, økonomisystemer, kundeoplysninger,
+              leverandøraftaler, adgang til OT-miljøet og medarbejdernes viden om, hvordan ting faktisk
+              kører.
+            </p>
+            <p>
+              Et aktiv er noget, der har værdi for virksomheden. En trussel er noget, der kan skade aktivet,
+              for eksempel ransomware, phishing, fejlkonfiguration, en utilfreds medarbejder eller en
+              leverandørkonto uden MFA. En sårbarhed er svagheden, truslen kan udnytte, for eksempel
+              manglende patching, fælles admin-login, uklar adgangsstyring eller ingen testet backup.
+              Risiko opstår, når trussel og sårbarhed møder et vigtigt aktiv. Impact er konsekvensen,
+              hvis det faktisk går galt.
+            </p>
+
+            <div class="key-grid">
+              <div class="key">
+                <b>Fortrolighed</b>
+                <span>Kun de rigtige må se informationen. Eksempel: CAD-tegninger og kundedata må ikke lække.</span>
+              </div>
+              <div class="key">
+                <b>Integritet</b>
+                <span>Data og systemer skal være korrekte. Eksempel: Produktionsdata må ikke ændres uden kontrol.</span>
+              </div>
+              <div class="key">
+                <b>Tilgængelighed</b>
+                <span>Systemer skal virke, når de skal. Eksempel: robotter, ERP og fjernadgang må ikke stoppe driften.</span>
+              </div>
+            </div>
+
+            <p>
+              CIA-triaden er god til eksamen, fordi den får dig til at tale struktureret. Hvis Hvedebro
+              bliver ramt af ransomware, er tilgængelighed åbenlyst ramt, fordi produktionen kan stå stille.
+              Men integritet kan også være ramt, hvis man ikke ved, om data er manipuleret. Fortrolighed kan
+              være ramt, hvis angriberen har kopieret data før kryptering. Derfor er “ransomware” ikke bare
+              én type problem. Det kan påvirke alle tre sikkerhedsmål.
+            </p>
+            <p>
+              Modulet introducerer også identitet og adgang. Authentication betyder, at systemet finder ud
+              af, hvem du er, typisk via login, MFA eller certifikat. Authorization betyder, hvad du må gøre,
+              når du er logget ind. Privileged Access Management handler om de særligt farlige konti:
+              administratorer, leverandørkonti, servicekonti og brugere med adgang til kritiske systemer.
+              Her er princippet “least privilege” centralt: folk skal have nok adgang til at udføre deres
+              arbejde, men ikke mere end nødvendigt.
+            </p>
+            <p>
+              Accountability betyder, at man bagefter kan se, hvem der gjorde hvad. Det kræver logning,
+              individuelle brugere og klare processer. Hvis alle bruger samme admin-konto, kan man ikke
+              placere ansvar eller undersøge hændelser ordentligt. Segregation of duties betyder, at
+              kritiske opgaver ikke bør ligge hos én person alene. Det er vigtigt i Hvedebro, fordi casen
+              tydeligt viser personafhængighed: hvis én nøgleperson både kender fjernadgang, backup,
+              leverandørkontakt og lokale workarounds, bliver virksomheden sårbar.
+            </p>
+            <p>
+              En god måde at samle modulet på er sikkerhedskuben: kontroller kan være fysiske, tekniske
+              eller administrative, og de kan være forebyggende, opdagende eller korrigerende. Et låst
+              serverrum er fysisk og forebyggende. MFA er teknisk og forebyggende. Logovervågning er teknisk
+              og opdagende. En incident response-plan er administrativ og korrigerende. Pointen er, at god
+              sikkerhed ikke er én stor løsning, men flere lag, der arbejder sammen.
+            </p>
+            <div class="callout">
+              <p>
+                Hvis du bliver spurgt “hvad er cybersikkerhed?”, så svar ikke kun teknisk. Sig: “Det er
+                styring af risiko for de digitale aktiver, der holder forretningen kørende.”
+              </p>
+            </div>
+          </article>
+          <aside class="side">
+            <div class="term-card">
+              <h3>Begreber du skal kunne</h3>
+              <ul>
+                <li>Aktiv, trussel, sårbarhed, risiko og impact.</li>
+                <li>CIA: fortrolighed, integritet, tilgængelighed.</li>
+                <li>Authentication, authorization og accountability.</li>
+                <li>Least privilege, PAM og segregation of duties.</li>
+                <li>Forebyggende, opdagende og korrigerende kontroller.</li>
+              </ul>
+            </div>
+            <div class="note-card">
+              <h3>Hvedebro-kobling</h3>
+              <p>
+                Hvedebro har både IT og OT. Derfor kan en cyberhændelse blive meget fysisk: forsinket produktion,
+                fejl i robotter, manglende leverancer og tab af tillid hos kunder.
+              </p>
+            </div>
+            <div class="exam-card">
+              <h3>Mini-svar til eksamen</h3>
+              <p>
+                “Jeg ville starte med at kortlægge aktiverne og vurdere dem ud fra CIA. Derefter ville jeg
+                se på trusler og sårbarheder, især personafhængighed, fjernadgang, backup og leverandøradgang.”
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="module" id="modul-2">
+        <div class="module-header">
+          <div>
+            <span class="module-label">Modul 2 · Governance og risiko</span>
+            <h2>Hvordan man styrer sikkerhed i stedet for bare at håbe</h2>
+            <p class="module-intro">
+              Modul 2 handler om at gøre sikkerhed ledelsesbar: hvem beslutter, hvem ejer risikoen,
+              hvordan prioriterer man, og hvordan undgår man at sikkerhed bliver tilfældige enkeltstående tiltag?
+            </p>
+          </div>
+          <div class="one-liner">
+            <small>Sig det sådan</small>
+            <p>“Governance gør cybersikkerhed til et ledelsesansvar med roller, politikker, prioritering og opfølgning.”</p>
+          </div>
+        </div>
+        <div class="module-body">
+          <article class="prose">
+            <h3>Hvad modulet handler om</h3>
+            <p>
+              Governance betyder styring. Det handler ikke om, at ledelsen skal konfigurere firewalls.
+              Det handler om, at ledelsen skal sætte retning, acceptere eller afvise risiko, placere ansvar
+              og sørge for ressourcer. Uden governance bliver sikkerhed ofte reaktivt: man gør noget, når
+              der er sket en hændelse, eller når en kunde kræver dokumentation. Med governance arbejder man
+              mere systematisk.
+            </p>
+            <p>
+              En sikkerhedspolitik er et styringsdokument, der forklarer, hvad virksomheden vil beskytte,
+              hvilke principper der gælder, og hvem der har ansvar. Den skal ikke være en tung rapport,
+              ingen læser. Den skal give retning. For Hvedebro kunne en moden politik for eksempel sige,
+              at kritiske systemer skal have MFA, at leverandøradgang skal være tidsbegrænset og logget,
+              at backup skal testes, og at ændringer i OT skal gennem godkendt change management.
+            </p>
+            <p>
+              Risikoledelse er modulets centrale metode. Den simple model er sandsynlighed gange konsekvens.
+              Det lyder enkelt, men det er stærkt, fordi det tvinger dig til at prioritere. Ikke alle problemer
+              er lige vigtige. Et gammelt system uden patch kan være alvorligt, hvis det står tæt på produktion
+              eller kritiske data. Den samme sårbarhed kan være mindre kritisk, hvis systemet er isoleret,
+              overvåget og har gode gendannelsesmuligheder.
+            </p>
+            <div class="flow">
+              <span>Find aktiv</span>
+              <span>Find trussel</span>
+              <span>Find sårbarhed</span>
+              <span>Vurder S × K</span>
+              <span>Vælg behandling</span>
+            </div>
+            <p>
+              Risikozoner gør vurderingen lettere at forklare. Grøn risiko kan typisk accepteres eller
+              overvåges. Gul risiko kræver planlagte forbedringer. Rød risiko kræver hurtig handling eller
+              en bevidst ledelsesbeslutning. I undervisningen bruges zoner som 1-7 grøn, 8-10 gul og
+              11-25 rød. Det vigtigste er ikke de præcise tal, men at metoden er tydelig og konsekvent.
+            </p>
+            <p>
+              Når man har vurderet en risiko, kan den behandles på fire klassiske måder. Man kan acceptere
+              den, hvis den er lav eller for dyr at reducere. Man kan mitigere den ved at indføre kontroller.
+              Man kan overføre den, for eksempel via forsikring eller kontraktlige krav til leverandører.
+              Eller man kan undgå den ved at stoppe aktiviteten helt. I praksis bruger man ofte flere på
+              én gang: Hvedebro kan mitigere risikoen ved fjernadgang med MFA, logning og tidsstyring,
+              men også overføre noget ansvar gennem leverandørkontrakter.
+            </p>
+            <p>
+              RACI er et godt governance-værktøj. Responsible udfører opgaven. Accountable ejer beslutningen.
+              Consulted bliver hørt. Informed bliver orienteret. Det lyder administrativt, men det er meget
+              praktisk, når noget går galt. Hvis backup ikke er testet, hvem har så ansvaret? IT? driften?
+              leverandøren? ledelsen? RACI gør, at man ikke først diskuterer ansvar midt i en krise.
+            </p>
+            <p>
+              Modenhed er også vigtig. En umoden virksomhed arbejder personafhængigt og ad hoc. En mere
+              moden virksomhed har dokumenterede processer, gentager dem, måler dem og forbedrer dem.
+              Hvedebro behøver ikke blive perfekt fra dag ét. Men de skal kunne vise, at de ved, hvor de er,
+              hvilke risici de prioriterer, og hvordan de bevæger sig fremad.
+            </p>
+            <div class="callout">
+              <p>
+                Eksamenspointen: Risikoanalysen er broen mellem teori og handling. Den forklarer, hvorfor
+                nogle indsatser kommer før andre.
+              </p>
+            </div>
+          </article>
+          <aside class="side">
+            <div class="term-card">
+              <h3>Begreber du skal kunne</h3>
+              <ul>
+                <li>Governance, politikker og roller.</li>
+                <li>Risikoejer og ledelsesaccept.</li>
+                <li>Sandsynlighed × konsekvens.</li>
+                <li>Accept, mitigering, overførsel og undgåelse.</li>
+                <li>RACI og modenhedsniveau.</li>
+              </ul>
+            </div>
+            <div class="note-card">
+              <h3>Hvedebro-kobling</h3>
+              <p>
+                Hvedebro skal ikke lave “alt sikkerhed” på én gang. De skal vælge top-risici: fjernadgang,
+                backup, leverandørstyring, shadow IT og personafhængighed.
+              </p>
+            </div>
+            <div class="exam-card">
+              <h3>Mini-svar til eksamen</h3>
+              <p>
+                “Jeg ville lave en risikotabel med S og K, koble hver risiko til CIA og derefter lave en
+                prioriteret handlingsplan med risikoejer, deadline og forventet risikoreduktion.”
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="module" id="modul-3">
+        <div class="module-header">
+          <div>
+            <span class="module-label">Modul 3 · Compliance og standarder</span>
+            <h2>Når krav udefra bliver til dokumenteret sikkerhed</h2>
+            <p class="module-intro">
+              Modul 3 handler om love, standarder og audit. Det vigtigste er at forstå, at compliance ikke
+              er det samme som sikkerhed, men at compliance kan tvinge virksomheden til at dokumentere sin sikkerhed.
+            </p>
+          </div>
+          <div class="one-liner">
+            <small>Sig det sådan</small>
+            <p>“Compliance er beviset for, at vi ikke bare siger, vi har styr på sikkerhed, men kan dokumentere det.”</p>
+          </div>
+        </div>
+        <div class="module-body">
+          <article class="prose">
+            <h3>Hvad modulet handler om</h3>
+            <p>
+              I modul 3 møder man forskellen mellem interne sikkerhedsmål og eksterne krav. En virksomhed
+              kan være nødt til at leve op til lovgivning, kundekrav, branchekrav, standarder eller
+              forsikringskrav. Det betyder ikke nødvendigvis, at man bliver sikker af at sætte flueben.
+              Men det betyder, at man skal kunne vise, hvordan man arbejder med risiko, adgang, hændelser,
+              leverandører, backup og kontinuitet.
+            </p>
+            <p>
+              NIS2 er centralt, fordi direktivet handler om at løfte cybersikkerheden i samfundsvigtige og
+              vigtige sektorer. Hvedebro er måske ikke direkte omfattet som en stor kritisk myndighed, men
+              de kan blive ramt indirekte. Hvis de leverer til kunder, der er underlagt NIS2, kan kunderne
+              stille krav ned gennem forsyningskæden. Det er en vigtig eksamenspointe: regulering rammer
+              ikke kun direkte. Den rammer også gennem kontrakter, udbud, due diligence og kundernes krav
+              til dokumentation.
+            </p>
+            <p>
+              Typiske NIS2-relaterede krav handler om risikostyring, hændelseshåndtering, backup,
+              kontinuitet, leverandørstyring, sårbarhedshåndtering, cyberhygiejne, awareness, kryptografi,
+              adgangsstyring og MFA. Hvis Hvedebro skal vise modenhed, er det derfor ikke nok at sige
+              “vi har antivirus”. De skal kunne vise processer: hvem gør hvad, hvor ofte testes backup,
+              hvordan godkendes adgang, hvad sker der ved en hændelse, og hvordan følger ledelsen op?
+            </p>
+            <p>
+              ISO 27001 og ISO 27002 er vigtige standarder. ISO 27001 handler om ledelsessystemet for
+              informationssikkerhed, ofte kaldet ISMS. Det er rammen for at styre sikkerhed systematisk:
+              scope, risikovurdering, kontroller, ansvar, måling og forbedring. ISO 27002 indeholder
+              konkrete kontroller, som kan vælges ud fra risiko. En Statement of Applicability forklarer,
+              hvilke kontroller man har valgt, hvorfor de er relevante, og hvis nogle er fravalgt, hvorfor
+              de ikke gælder.
+            </p>
+            <p>
+              CIS Controls er mere praktisk orienterede og kan bruges som en tjekliste for tekniske og
+              organisatoriske basisforanstaltninger. De hjælper især, hvis virksomheden ikke er klar til
+              fuld ISO-certificering, men stadig vil arbejde struktureret. For Hvedebro kan CIS bruges til
+              at prioritere ting som asset inventory, adgangsstyring, sikker konfiguration, logging,
+              backup og sårbarhedsstyring.
+            </p>
+            <p>
+              Audit og assessment handler om uafhængig vurdering og evidens. En intern audit kan tjekke,
+              om man følger egne processer. En ekstern audit kan give kunder, ledelse eller myndigheder
+              mere tillid. Men audit kræver beviser. Beviser kan være logudtræk, backup-testresultater,
+              godkendte adgangslister, ændringsanmodninger, kontraktbilag, træningsregistreringer eller
+              incident-rapporter. Et godt eksamenssvar viser, at dokumentation er en del af sikkerheden.
+            </p>
+            <div class="callout">
+              <p>
+                GDPR handler primært om persondata. NIS2 handler bredere om cyber- og driftssikkerhed.
+                De overlapper, men de er ikke det samme.
+              </p>
+            </div>
+          </article>
+          <aside class="side">
+            <div class="term-card">
+              <h3>Begreber du skal kunne</h3>
+              <ul>
+                <li>NIS2, CER, DORA og indirekte kundekrav.</li>
+                <li>GDPR kontra cybersikkerhedsregulering.</li>
+                <li>ISO 27001, ISO 27002 og ISMS.</li>
+                <li>Statement of Applicability.</li>
+                <li>Audit, assessment, evidens og uafhængighed.</li>
+              </ul>
+            </div>
+            <div class="note-card">
+              <h3>Hvedebro-kobling</h3>
+              <p>
+                Hvedebro skal kunne dokumentere sikkerhed over for kunder og leverandører, selv hvis de
+                ikke selv er direkte omfattet af alle regler.
+              </p>
+            </div>
+            <div class="exam-card">
+              <h3>Mini-svar til eksamen</h3>
+              <p>
+                “Jeg ville bruge NIS2 som pejlemærke og ISO/CIS som struktur. Ikke nødvendigvis for at
+                certificere Hvedebro straks, men for at kunne dokumentere risikostyring og modne kontroller.”
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="module" id="modul-4">
+        <div class="module-header">
+          <div>
+            <span class="module-label">Modul 4 · Teknisk fundament</span>
+            <h2>Netværk, logning, OT og de tekniske basisgreb</h2>
+            <p class="module-intro">
+              Modul 4 giver den tekniske værktøjskasse. Ikke for at man skal være netværksingeniør,
+              men for at kunne forstå, hvilke tekniske kontroller der faktisk reducerer risiko.
+            </p>
+          </div>
+          <div class="one-liner">
+            <small>Sig det sådan</small>
+            <p>“Tekniske kontroller virker bedst, når de understøtter en konkret risiko: segmentering, logning, MFA, patching og backup.”</p>
+          </div>
+        </div>
+        <div class="module-body">
+          <article class="prose">
+            <h3>Hvad modulet handler om</h3>
+            <p>
+              Modul 4 handler om det tekniske fundament: IP-adresser, porte, protokoller, firewalls,
+              netværksarkitektur, sårbarhedsscanning, logning, kryptering og særligt OT/SCADA. Pointen
+              er ikke at kunne alle portnumre udenad. Pointen er at forstå, at netværket bestemmer, hvem
+              der kan tale med hvem, og at dårlig adskillelse kan gøre en lokal hændelse til en stor krise.
+            </p>
+            <p>
+              En firewall er en kontrol, der styrer trafik. Den kan tillade, blokere eller logge forbindelser.
+              Men en firewall er kun så god som reglerne, arkitekturen og vedligeholdelsen. Hvis alle systemer
+              ligger fladt på samme netværk, kan en angriber ofte bevæge sig videre fra en bruger-pc til
+              servere, backupsystemer eller produktion. Segmentering betyder, at man deler netværket op,
+              så kritiske systemer ikke er direkte eksponeret for alt andet.
+            </p>
+            <p>
+              I Hvedebro er segmentering især vigtig mellem kontor-IT og OT. OT står for operational
+              technology: maskiner, robotter, styringssystemer og produktionsudstyr. SCADA og industrielle
+              kontrolsystemer er ofte bygget til stabilitet og lang levetid, ikke til moderne internettrusler.
+              De kan være svære at patche, afhænge af gamle protokoller og være meget følsomme over for
+              nedetid. Derfor må man ikke bare behandle OT som almindelig IT.
+            </p>
+            <p>
+              OT-sikkerhed kræver asset-overblik, segmentering, styret fjernadgang, backup af konfigurationer,
+              testede recovery-planer og klare processer for ændringer. IEC 62443 nævnes som en relevant
+              standardfamilie for industriel sikkerhed. Den centrale tanke er zone- og conduit-tænkning:
+              man grupperer systemer efter kritikalitet og styrer forbindelserne mellem dem.
+            </p>
+            <p>
+              Logging er et andet centralt tema. Man kan ikke reagere på det, man ikke kan se. Men man
+              skal heller ikke logge tilfældigt. Gode logs tager udgangspunkt i risiko og kritiske aktiver.
+              For Hvedebro kunne vigtige logs være admin-logins, leverandørfjernadgang, ændringer i
+              firewallregler, fejlede loginforsøg, backup-jobs, ændringer i produktionssystemer og alarmer
+              fra endpoint-beskyttelse. Logs skal helst samles, korreleres og overvåges, for eksempel i en
+              SIEM-løsning eller en mindre logplatform afhængigt af modenhed.
+            </p>
+            <p>
+              Sårbarhedsscanning finder kendte tekniske svagheder. Det er nyttigt, men kræver prioritering.
+              En scanning kan give hundredvis af findings. Man skal fokusere på eksponerede systemer,
+              kritiske aktiver og sårbarheder, der reelt kan udnyttes. I OT skal man være ekstra forsigtig,
+              fordi aktiv scanning kan påvirke udstyr.
+            </p>
+            <p>
+              Kryptering og PKI er også grundlæggende. Symmetrisk kryptering bruger samme nøgle til kryptering
+              og dekryptering, for eksempel AES. Asymmetrisk kryptering bruger et nøglepar, for eksempel RSA
+              eller elliptiske kurver. TLS/HTTPS beskytter kommunikation, så man både får kryptering og
+              bedre sikkerhed for, hvem man taler med. I praksis betyder det, at Hvedebro skal undgå ukrypterede
+              managementinterfaces og sikre, at certifikater håndteres ordentligt.
+            </p>
+            <div class="callout">
+              <p>
+                Teknisk hovedpointe: Man skal ikke bare købe værktøjer. Man skal koble værktøjer til risiko,
+                drift og konkrete scenarier.
+              </p>
+            </div>
+          </article>
+          <aside class="side">
+            <div class="term-card">
+              <h3>Begreber du skal kunne</h3>
+              <ul>
+                <li>IP, porte, protokoller og firewalls.</li>
+                <li>Segmentering mellem IT, servere og OT.</li>
+                <li>Vulnerability scanning og patch management.</li>
+                <li>Logs, syslog, SIEM og hændelsesspor.</li>
+                <li>OT, SCADA, IEC 62443, TLS og PKI.</li>
+              </ul>
+            </div>
+            <div class="note-card">
+              <h3>Hvedebro-kobling</h3>
+              <p>
+                Hvis kontornet, leverandøradgang og produktionsudstyr hænger for tæt sammen, kan et
+                phishing-angreb ende med at påvirke fysiske maskiner.
+              </p>
+            </div>
+            <div class="exam-card">
+              <h3>Mini-svar til eksamen</h3>
+              <p>
+                “Jeg ville segmentere OT fra kontor-IT, begrænse fjernadgang med MFA og tidsvinduer,
+                etablere central logning og sikre testet backup af både data og konfigurationer.”
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="module" id="modul-5">
+        <div class="module-header">
+          <div>
+            <span class="module-label">Modul 5 · Internettrusler</span>
+            <h2>Trusselsbilledet, ransomware og cyberhygiejne</h2>
+            <p class="module-intro">
+              Modul 5 handler om de aktører og angreb, virksomheden møder udefra, og hvordan man går fra
+              reaktiv brandslukning til mere proaktiv beskyttelse.
+            </p>
+          </div>
+          <div class="one-liner">
+            <small>Sig det sådan</small>
+            <p>“Trusselsbilledet fortæller, hvad vi realistisk skal beskytte os imod, og cyberhygiejne reducerer de mest almindelige angrebsveje.”</p>
+          </div>
+        </div>
+        <div class="module-body">
+          <article class="prose">
+            <h3>Hvad modulet handler om</h3>
+            <p>
+              Modul 5 flytter fokus ud mod internettet og angriberne. Trusselsaktører kan være drengestreger,
+              cyberkriminelle, industrispionage eller statslige aktører. For en virksomhed som Hvedebro er
+              cyberkriminelle og ransomware meget relevante, fordi de ofte rammer bredt og går efter
+              virksomheder, der har brug for drift for at tjene penge. Industrispionage kan også være relevant,
+              hvis Hvedebro har særlige tegninger, produktionsmetoder eller kundedata.
+            </p>
+            <p>
+              En moden vurdering bruger eksterne trusselsvurderinger, for eksempel fra Center for
+              Cybersikkerhed, SAMSIK, SektorCERT eller branchekilder. Det gør svaret stærkere, fordi man
+              ikke bare gætter. Man viser, at risikovurderingen bygger på både intern caseforståelse og
+              ekstern pejling. Hvis ransomware vurderes som en høj trussel nationalt, giver det mening at
+              prioritere MFA, segmentering, offline backup og gendannelsestest.
+            </p>
+            <p>
+              Ransomware er et godt eksempel, fordi det rammer mange kontrolområder. Angrebet starter ofte
+              med phishing, stjålne legitimationsoplysninger, usikker fjernadgang eller en sårbar internetvendt
+              service. Derefter bevæger angriberen sig rundt, forsøger at få højere rettigheder, kopierer
+              data og krypterer systemer. Derfor er det ikke nok at have backup. Man skal også forhindre
+              adgang, opdage bevægelse, beskytte backup mod sletning og teste, at man faktisk kan gendanne.
+            </p>
+            <p>
+              Cyberhygiejne er de basale vaner og kontroller, der reducerer mange almindelige angreb.
+              Det handler om unikke passwords, password manager, MFA, opdateringer, malwarebeskyttelse,
+              sikker brug af links og vedhæftninger, backup og klare regler for social engineering. Det kan
+              lyde lavpraktisk, men lavpraktiske fejl er ofte indgangen til store hændelser.
+            </p>
+            <p>
+              Malware, hardening og zero-days viser spændet mellem almindelig drift og avancerede trusler.
+              Hardening betyder, at systemer konfigureres sikkert: unødige services fjernes, standardpasswords
+              ændres, adgang begrænses, og logs aktiveres. Zero-days er sårbarheder, der endnu ikke findes
+              en patch til. Dem kan man ikke patche sig ud af med det samme, så man må bruge lagdelte
+              kontroller: segmentering, least privilege, overvågning, backup og begrænset eksponering.
+            </p>
+            <p>
+              IoC og IoA er nyttige begreber. Indicators of Compromise er tegn på, at noget allerede kan
+              være kompromitteret, for eksempel kendte ondsindede IP-adresser, filhashes eller domæner.
+              Indicators of Attack er tegn på angrebsadfærd, for eksempel usædvanlige loginmønstre,
+              scanning, privilege escalation eller store dataudtræk. IoA er ofte mere robust, fordi angribere
+              kan skifte IP og filnavne, men adfærdsmønstre er sværere at skjule helt.
+            </p>
+            <p>
+              DLP, Data Loss Prevention, handler om at opdage eller forhindre datalæk. For Hvedebro kan det
+              være relevant ved følsomme CAD-tegninger, kundelister og kontrakter. Men DLP virker bedst, hvis
+              man først ved, hvilke data der er vigtige, og hvor de ligger. Ellers bliver det endnu et værktøj
+              uden klar retning.
+            </p>
+            <div class="callout">
+              <p>
+                Den stærke eksamensvinkel er at sige: “Vi prioriterer ikke ud fra frygt, men ud fra et
+                konkret trusselsbillede kombineret med Hvedebros aktiver og sårbarheder.”
+              </p>
+            </div>
+          </article>
+          <aside class="side">
+            <div class="term-card">
+              <h3>Begreber du skal kunne</h3>
+              <ul>
+                <li>Trusselsaktører: kriminelle, stater, hacktivister, insider.</li>
+                <li>Ransomware-kæden fra adgang til kryptering.</li>
+                <li>Cyberhygiejne og awareness.</li>
+                <li>Hardening, patching og zero-day.</li>
+                <li>IoC, IoA, SIEM og DLP.</li>
+              </ul>
+            </div>
+            <div class="note-card">
+              <h3>Hvedebro-kobling</h3>
+              <p>
+                Hvedebro skal især kunne modstå ransomware og datalæk, fordi de både har driftskritiske
+                systemer og forretningskritiske tegninger/data.
+              </p>
+            </div>
+            <div class="exam-card">
+              <h3>Mini-svar til eksamen</h3>
+              <p>
+                “Jeg ville bruge trusselsvurderinger til at begrunde ransomware som top-scenarie og derefter
+                prioritere MFA, segmentering, offline backup, restore-test, awareness og logovervågning.”
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="module" id="modul-6">
+        <div class="module-header">
+          <div>
+            <span class="module-label">Modul 6 · Leverandørstyring</span>
+            <h2>Sikkerhed stopper ikke ved virksomhedens egen dør</h2>
+            <p class="module-intro">
+              Modul 6 handler om leverandører, kontrakter og adgang. Det er særligt vigtigt i moderne
+              virksomheder, fordi meget IT, cloud, drift og specialviden ligger uden for organisationen.
+            </p>
+          </div>
+          <div class="one-liner">
+            <small>Sig det sådan</small>
+            <p>“Leverandørstyring er at sikre, at eksterne parter ikke bliver en ukendt bagdør ind i vores drift.”</p>
+          </div>
+        </div>
+        <div class="module-body">
+          <article class="prose">
+            <h3>Hvad modulet handler om</h3>
+            <p>
+              Modul 6 er ekstremt relevant for Hvedebro. Virksomheden er afhængig af leverandører til
+              software, robotter, økonomisystemer, fjernsupport, cloud og måske også drift. Når man outsourcer
+              en funktion, outsourcer man ikke risikoen fuldstændigt. Man kan flytte opgaver, men ansvaret
+              for at forstå og styre risikoen bliver hos virksomheden og ledelsen.
+            </p>
+            <p>
+              En god leverandørvurdering starter med kritikalitet. Ikke alle leverandører skal behandles ens.
+              Kantineleverandøren og robotleverandøren har ikke samme sikkerhedsbetydning. Man bør derfor
+              vurdere, hvilke leverandører der har adgang til kritiske systemer, følsomme data eller drift.
+              Jo mere kritisk leverandøren er, jo flere krav og mere dokumentation giver mening.
+            </p>
+            <p>
+              Man kan stille spørgsmål om leverandørens sikkerhedspolitik, certificeringer, incident response,
+              backup, beredskab, underleverandører, geografisk placering, databehandling, supportmodel,
+              patching, sårbarhedshåndtering og revisionserklæringer. Men man skal stille relevante krav.
+              Hvis man beder alle små leverandører om en fuld ISO 27001-certificering, bliver det måske
+              urealistisk. Hvis en leverandør har fjernadgang til OT, er krav om MFA, logning, tidsbegrænsning
+              og godkendelse derimod meget rimelige.
+            </p>
+            <p>
+              Kontrakten er vigtig, fordi mundtlige forventninger ikke er nok. Aftalen bør beskrive SLA,
+              support, incident notification, audit/revisionsret, underleverandører, dataplacering,
+              sikkerhedskrav, exit-plan, adgangsstyring og ansvar ved ændringer. Exit-strategi er ofte
+              undervurderet: hvis Hvedebro vil skifte ERP, cloud, servicepartner eller robotleverandør,
+              kan de så få data ud, dokumentation med og drift videre?
+            </p>
+            <p>
+              Leverandøradgang er en særlig risiko. Fjernadgang bør ikke stå åben permanent “fordi det er
+              nemt”. Den bør være behovsstyret, tidsbegrænset, godkendt, MFA-beskyttet og logget. I OT kan
+              man også bruge jump hosts eller separate supportmiljøer, så leverandøren ikke får bred adgang
+              til hele netværket. Skærmdeling kan i nogle tilfælde være bedre end fuld VPN, fordi Hvedebro
+              bevarer mere kontrol.
+            </p>
+            <p>
+              Underleverandører er også vigtige. Hvis Hvedebros leverandør igen bruger en cloududbyder,
+              supportpartner eller udviklingshus, kan risikoen flytte sig længere ned i kæden. NIS2 lægger
+              netop vægt på supply chain security. Derfor skal krav så vidt muligt flyde videre til relevante
+              underleverandører, og Hvedebro skal kende de vigtigste afhængigheder.
+            </p>
+            <p>
+              Den gode eksamensvinkel er at koble leverandørstyring til risikoanalyse. Man skal ikke sige
+              “alle leverandører skal have alt”. Man skal sige: “Kritiske leverandører skal have tydelige
+              krav, dokumentation, adgangskontrol, opfølgning og exit-mulighed, fordi de kan påvirke vores
+              drift og data.”
+            </p>
+            <div class="callout">
+              <p>
+                Husk sætningen: Man kan outsource en opgave, men man kan ikke outsource ledelsens ansvar
+                for risikoen.
+              </p>
+            </div>
+          </article>
+          <aside class="side">
+            <div class="term-card">
+              <h3>Begreber du skal kunne</h3>
+              <ul>
+                <li>Leverandørkritikalitet og due diligence.</li>
+                <li>SLA, auditret, incident notification og exit.</li>
+                <li>Underleverandører og flowdown-krav.</li>
+                <li>Leverandørfjernadgang, MFA, logging og tidsstyring.</li>
+                <li>NIS2 og forsyningskædesikkerhed.</li>
+              </ul>
+            </div>
+            <div class="note-card">
+              <h3>Hvedebro-kobling</h3>
+              <p>
+                Robotleverandører, ERP/cloud og eksterne IT-konsulenter kan alle være kritiske, hvis de
+                har adgang til produktion, data eller recovery.
+              </p>
+            </div>
+            <div class="exam-card">
+              <h3>Mini-svar til eksamen</h3>
+              <p>
+                “Jeg ville klassificere leverandører efter kritikalitet og stille stærkest krav til dem,
+                der har adgang til OT, backup, ERP eller følsomme data.”
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="module" id="modul-7">
+        <div class="module-header">
+          <div>
+            <span class="module-label">Modul 7 · Implementering og konsulentrollen</span>
+            <h2>Fra analyse til forandring, processer og KPI</h2>
+            <p class="module-intro">
+              Modul 7 samler faget: hvordan man som konsulent vurderer modenhed, anbefaler løsninger,
+              får dem implementeret og skaber løbende forbedring.
+            </p>
+          </div>
+          <div class="one-liner">
+            <small>Sig det sådan</small>
+            <p>“En god cybersikkerhedsanbefaling er ikke bare teknisk rigtig; den kan gennemføres, måles og ejes af organisationen.”</p>
+          </div>
+        </div>
+        <div class="module-body">
+          <article class="prose">
+            <h3>Hvad modulet handler om</h3>
+            <p>
+              Modul 7 handler meget om konsulentrollen. En konsulent kan bruges, fordi virksomheden mangler
+              specialviden, ressourcer, overblik eller en neutral person, der kan sige det, ledelsen har brug
+              for at høre. Men en konsulent skal ikke bare komme med en dyr rapport. Konsulenten skal kunne
+              forklare trusselsbilledet, lave en gap-analyse, prioritere indsatser, vurdere ressourcer og
+              hjælpe virksomheden med at komme fra nuværende situation til ønsket modenhed.
+            </p>
+            <p>
+              En god assessment starter med scope: hvad undersøger vi? Hele virksomheden, OT, backup,
+              leverandører, adgangsstyring eller incident response? Derefter vælger man en model. Det kan
+              være CFCS-anbefalinger, SektorCERT, CIS Controls, NIST eller en simpel grøn/gul/rød model.
+              Modellen behøver ikke være kompleks, men den skal give et retfærdigt billede af modenheden.
+            </p>
+            <p>
+              Gap-analyse betyder, at man sammenligner nuværende niveau med ønsket niveau. Hvis Hvedebro
+              i dag har uformelle workarounds, uklar backup-test og bred leverandøradgang, og målet er
+              dokumenteret recovery, styret adgang og leverandørkrav, så er gappet tydeligt. Derefter skal
+              man prioritere. Alt kan ikke implementeres samtidig, så man bør starte med det, der reducerer
+              størst risiko hurtigst.
+            </p>
+            <p>
+              Processer er modulets anden store del. Cybersikkerhed er ikke en engangsopgave. Trusler ændrer
+              sig, systemer ændrer sig, leverandører ændrer sig, og medarbejdere ændrer adfærd. Derfor skal
+              sikkerhed bygges ind i faste processer: adgangsreview, backup-test, patch management, change
+              management, incident response, leverandøropfølgning og ledelsesrapportering.
+            </p>
+            <p>
+              Incident response er vigtigt at kunne forklare. Man skal kunne opdage, vurdere, inddæmme,
+              fjerne, gendanne og lære af hændelser. Under en hændelse er det for sent at diskutere, hvem
+              der ringer til hvem. Derfor skal roller, kontaktlister, beslutningsmandat og kommunikation
+              være tænkt igennem på forhånd. For Hvedebro er det ekstra vigtigt, fordi nedetid i produktion
+              hurtigt kan blive dyrt og påvirke kunder.
+            </p>
+            <p>
+              Change management handler om at styre ændringer, så de ikke skaber nye risici. Hvis en
+              leverandør opdaterer et OT-system, ændrer en firewallregel eller installerer ny software, skal
+              det dokumenteres og godkendes. Ellers mister Hvedebro overblik over, hvad der er ændret, og
+              hvorfor noget eventuelt fejler. Det er også her, RACI og governance fra modul 2 vender tilbage.
+            </p>
+            <p>
+              KPI'er er målepunkter, der viser, om sikkerhedsarbejdet bevæger sig. Gode KPI'er måler ikke
+              bare aktivitet, men effekt. “Vi har holdt et møde” er svagt. “95 % af kritiske systemer har
+              bestået restore-test” er stærkere. “100 % af kritiske konti har MFA og kvartalsvis adgangsreview”
+              er konkret. “0 røde risici over 30 dage uden accepteret plan” kobler direkte til ledelsesstyring.
+            </p>
+            <p>
+              Det bedste eksamenssvar i dette modul viser, at du kan tænke som en rådgiver: ikke bare
+              identificere problemer, men lave en realistisk roadmap. Først fundamentet: ansvar, risiko,
+              adgang, backup og segmentering. Så stabilisering: leverandørkrav, logning, patching og
+              processer. Til sidst løbende forbedring: KPI, awareness, audits og tabletop-øvelser.
+            </p>
+            <div class="callout">
+              <p>
+                Konsulentens stærkeste bidrag er at oversætte tekniske problemer til beslutninger, ressourcer
+                og konkrete forbedringer, som ledelsen kan stå på mål for.
+              </p>
+            </div>
+          </article>
+          <aside class="side">
+            <div class="term-card">
+              <h3>Begreber du skal kunne</h3>
+              <ul>
+                <li>Assessment, gap-analyse og modenhed.</li>
+                <li>Roadmap, prioritering og ressourcer.</li>
+                <li>Incident response og beredskab.</li>
+                <li>Change management og RACI.</li>
+                <li>KPI, rapportering og løbende forbedring.</li>
+              </ul>
+            </div>
+            <div class="note-card">
+              <h3>Hvedebro-kobling</h3>
+              <p>
+                Hvedebro har brug for en plan, der kan gennemføres i drift: ikke bare flotte principper,
+                men ansvar, deadlines, kontroller og opfølgning.
+              </p>
+            </div>
+            <div class="exam-card">
+              <h3>Mini-svar til eksamen</h3>
+              <p>
+                “Jeg ville afslutte med et roadmap og KPI'er, så ledelsen kan følge risikoreduktionen:
+                restore-test, MFA/adgangsreview og røde risici med plan.”
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="quick" id="repetition">
+        <h2>Hurtig repetition før eksamen</h2>
+        <div class="quick-card">
+          <h3>Den røde tråd</h3>
+          <p>
+            Start med Hvedebros situation: vækst, IT/OT, leverandørafhængighed, personafhængighed og
+            manglende dokumentation. Brug derefter risikoanalyse til at prioritere. Bind løsningerne til
+            CIA, governance, tekniske kontroller, leverandørstyring og processer.
+          </p>
+        </div>
+        <div class="quick-card">
+          <h3>Hvis du går i stå</h3>
+          <p>
+            Vend tilbage til fem spørgsmål: Hvad er aktivet? Hvad kan gå galt? Hvorfor er det sandsynligt?
+            Hvad bliver konsekvensen? Hvilken kontrol reducerer risikoen mest realistisk?
+          </p>
+        </div>
+        <div class="quick-card">
+          <h3>Top-sætninger</h3>
+          <ul>
+            <li>“Vi prioriterer efter risiko, ikke efter mavefornemmelse.”</li>
+            <li>“Backup er først en kontrol, når gendannelse er testet.”</li>
+            <li>“Leverandøradgang skal være styret, tidsbegrænset, MFA-beskyttet og logget.”</li>
+            <li>“Compliance kræver evidens, ikke bare intentioner.”</li>
+            <li>“OT kræver særlig forsigtighed, fordi cybersikkerhed kan blive til fysisk driftsstop.”</li>
+          </ul>
+        </div>
+        <div class="quick-card">
+          <h3>Mini-roadmap for Hvedebro</h3>
+          <ul>
+            <li>0-6 måneder: risikotabel, ejerskab, MFA, luk åben fjernadgang, backup 3-2-1 og restore-test.</li>
+            <li>6-12 måneder: segmentering, leverandørkrav, logning, patchproces og incident response.</li>
+            <li>12-24 måneder: modenhedsløft, awareness, tabletop-øvelser, auditspor og KPI-rapportering.</li>
+          </ul>
+        </div>
+        <div class="quick-card">
+          <h3>Sådan lyder et stærkt svar</h3>
+          <p>
+            “Jeg ser cybersikkerhed i Hvedebro som en forretningsrisiko. Derfor starter jeg med aktiver og
+            CIA, vurderer risici med sandsynlighed og konsekvens, prioriterer de røde risici og foreslår
+            kontroller, der både er teknisk relevante og organisatorisk mulige at implementere.”
+          </p>
+        </div>
+        <div class="quick-card">
+          <h3>Det du ikke skal gøre</h3>
+          <p>
+            Undgå at liste værktøjer uden begrundelse. Sig ikke bare “køb SIEM, køb firewall, køb backup”.
+            Forklar altid hvilken risiko løsningen reducerer, hvem der ejer den, og hvordan man måler, om
+            den virker.
+          </p>
+        </div>
+      </section>
+
+      <section class="source" id="kilder">
+        <h2>Lokale materialer brugt</h2>
+        <p>
+          Bogen er skrevet ud fra de lokale undervisningsmaterialer i projektmappen:
+          <code>undervisning-slides/Modul1.md</code>,
+          <code>Modul2.md</code>,
+          <code>Modul3.md</code>,
+          <code>Modul4.md</code>,
+          <code>Modul5.md</code>,
+          <code>Modul6.md</code>,
+          <code>Modul7.md</code>,
+          <code>Modulsammenhæng og Status på Hvedebro Maskinfabrik.md</code>
+          og de samlede noter til grundkurset.
+        </p>
+        <p>
+          Min anbefaling: brug siden som “første gennemlæsning”, og brug derefter præsentationen og dine
+          noter til at øve korte, mundtlige svar.
+        </p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
