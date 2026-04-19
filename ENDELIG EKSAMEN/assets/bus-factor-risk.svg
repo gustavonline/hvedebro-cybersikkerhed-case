@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-label="Bus factor visualisering af høj personafhængighed">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#061514"/>
+      <stop offset="0.52" stop-color="#0e2b25"/>
+      <stop offset="1" stop-color="#16213f"/>
+    </linearGradient>
+    <linearGradient id="bus" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00a884"/>
+      <stop offset="1" stop-color="#91f2dd"/>
+    </linearGradient>
+    <linearGradient id="warn" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffb84d"/>
+      <stop offset="1" stop-color="#ff6b57"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="20" stdDeviation="18" flood-color="#000" flood-opacity="0.28"/>
+    </filter>
+    <filter id="soft" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#001c17" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="560" rx="32" fill="url(#bg)"/>
+  <circle cx="960" cy="80" r="210" fill="#ffb84d" opacity="0.1"/>
+  <circle cx="280" cy="470" r="260" fill="#00a884" opacity="0.13"/>
+
+  <text x="64" y="70" font-family="Avenir Next, Gill Sans, Trebuchet MS, sans-serif" font-size="20" font-weight="900" letter-spacing="5" fill="#91f2dd">BUS FACTOR</text>
+  <text x="64" y="122" font-family="Iowan Old Style, Georgia, serif" font-size="48" font-weight="800" fill="#fff6e6">Når driften afhænger af én person</text>
+  <text x="66" y="158" font-family="Avenir Next, Gill Sans, Trebuchet MS, sans-serif" font-size="21" fill="#c9d8d1">Hvis nøglepersonen er væk, mangler virksomheden viden, adgang og tempo i recovery.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="64" y="205" width="330" height="258" rx="26" fill="#fffaf0" fill-opacity="0.97"/>
+    <text x="96" y="254" font-family="Avenir Next, Gill Sans, Trebuchet MS, sans-serif" font-size="25" font-weight="900" fill="#16213f">Nøglepersonen ved:</text>
+    <text x="96" y="296" font-family="Avenir Next, Gill Sans, Trebuchet MS, sans-serif" font-size="18" fill="#596963">• OT-fjernadgang og admin-login</text>
+    <text x="96" y="329" font-family="Avenir Next, Gill Sans, Trebuchet MS, sans-serif" font-size="18" fill="#596963">• backup-gendannelse i praksis</text>
+    <text x="96" y="362" font-family="Avenir Next, Gill Sans, Trebuchet MS, sans-serif" font-size="18" fill="#596963">• leverandørkontakter</text>
+    <text x="96" y="395" font-family="Avenir Next, Gill Sans, Trebuchet MS, sans-serif" font-size="18" fill="#596963">• lokale nøglefiler og workarounds</text>
+    <rect x="96" y="421" width="206" height="36" rx="18" fill="#ffe8e3"/>
+    <text x="199" y="445" text-anchor="middle" font-family="Avenir Next, Gill Sans, Trebuchet MS, sans-serif" font-size="16" font-weight="900" fill="#b43228">Single point of failure</text>
+  </g>
+
+  <g transform="translate(490 252)" filter="url(#soft)">
+    <path d="M26 52 C26 26, 45 12, 82 12 L272 12 C316 12, 340 34, 340 72 L340 154 C340 177, 326 190, 303 190 L63 190 C40 190, 26 177, 26 154Z" fill="url(#bus)"/>
+    <rect x="58" y="44" width="58" height="48" rx="10" fill="#eafff8" opacity="0.9"/>
+    <rect x="128" y="44" width="58" height="48" rx="10" fill="#eafff8" opacity="0.9"/>
+    <rect x="198" y="44" width="74" height="48" rx="10" fill="#eafff8" opacity="0.9"/>
+    <rect x="288" y="57" width="30" height="76" rx="9" fill="#063a34" opacity="0.5"/>
+    <rect x="64" y="116" width="200" height="17" rx="8" fill="#063a34" opacity="0.28"/>
+    <circle cx="100" cy="191" r="28" fill="#0a1f1d"/>
+    <circle cx="268" cy="191" r="28" fill="#0a1f1d"/>
+    <circle cx="100" cy="191" r="12" fill="#fffaf0" opacity="0.9"/>
+    <circle cx="268" cy="191" r="12" fill="#fffaf0" opacity="0.9"/>
+    <text x="183" y="162" text-anchor="middle" font-family="Avenir Next, Gill Sans, Trebuchet MS, sans-serif" font-size="24" font-weight="900" fill="#062b27">BUS</text>
+  </g>
+
+  <g font-family="Avenir Next, Gill Sans, Trebuchet MS, sans-serif">
+    <path d="M840 340 C900 340, 915 340, 976 340" stroke="#ff6b57" stroke-width="8" stroke-linecap="round" stroke-dasharray="10 14"/>
+    <polygon points="993,340 964,321 964,359" fill="#ff6b57"/>
+    <rect x="1002" y="292" width="132" height="96" rx="22" fill="#fffaf0" filter="url(#shadow)"/>
+    <text x="1068" y="330" text-anchor="middle" font-size="20" font-weight="900" fill="#b43228">Risiko</text>
+    <text x="1068" y="357" text-anchor="middle" font-size="15" fill="#596963">driftsstop</text>
+    <text x="1068" y="378" text-anchor="middle" font-size="15" fill="#596963">forsinkelse</text>
+  </g>
+
+  <g filter="url(#shadow)" font-family="Avenir Next, Gill Sans, Trebuchet MS, sans-serif">
+    <rect x="458" y="186" width="205" height="46" rx="23" fill="#fffaf0"/>
+    <circle cx="483" cy="209" r="12" fill="#ffb84d"/>
+    <text x="506" y="215" font-size="16" font-weight="900" fill="#16213f">Nøgleperson ombord</text>
+
+    <rect x="682" y="186" width="306" height="46" rx="23" fill="#fffaf0"/>
+    <circle cx="707" cy="209" r="12" fill="#00a884"/>
+    <text x="730" y="215" font-size="16" font-weight="900" fill="#16213f">Løsning: viden ud af bussen</text>
+  </g>
+
+  <g transform="translate(498 468)" font-family="Avenir Next, Gill Sans, Trebuchet MS, sans-serif">
+    <rect x="0" y="0" width="588" height="50" rx="25" fill="#fffaf0" fill-opacity="0.13" stroke="#fffaf0" stroke-opacity="0.24"/>
+    <circle cx="34" cy="25" r="12" fill="#00a884"/>
+    <text x="58" y="31" font-size="18" font-weight="800" fill="#fff6e6">Dokumentér processer</text>
+    <circle cx="246" cy="25" r="12" fill="#ffb84d"/>
+    <text x="270" y="31" font-size="18" font-weight="800" fill="#fff6e6">Fordel ansvar</text>
+    <circle cx="414" cy="25" r="12" fill="#ff6b57"/>
+    <text x="438" y="31" font-size="18" font-weight="800" fill="#fff6e6">Test recovery</text>
+  </g>
+</svg>

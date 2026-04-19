@@ -255,7 +255,7 @@
 
     .axis {
       display: grid;
-      grid-template-columns: 90px repeat(4, minmax(0,1fr));
+      grid-template-columns: 58px repeat(4, minmax(0,1fr));
       gap: 6px;
       margin-bottom: 6px;
       align-items: center;
@@ -284,20 +284,20 @@
 
     .phase-grid {
       display: grid;
-      grid-template-columns: 90px repeat(4, minmax(0,1fr));
+      grid-template-columns: 58px repeat(4, minmax(0,1fr));
       gap: 6px;
     }
     .phase-y {
       writing-mode: vertical-rl;
       transform: rotate(180deg);
       text-align: center;
-      border: 1px solid rgba(20, 35, 32, 0.1);
-      border-radius: 12px;
-      background: rgba(255, 253, 247, 0.72);
+      border: 0;
+      border-radius: 0;
+      background: transparent;
       font-size: .74rem;
       color: var(--muted);
       font-weight: 800;
-      padding: 6px 3px;
+      padding: 4px 0;
     }
 
     .phase-box {
@@ -388,6 +388,112 @@
     .single-asset img {
       max-height: 126px;
       object-fit: contain;
+    }
+
+    .asset-strip {
+      display: grid;
+      gap: 8px;
+      margin-top: 9px;
+    }
+    .asset-strip.six { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .asset-strip.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .asset-strip.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .asset-tile {
+      border: 1px solid rgba(20, 35, 32, 0.1);
+      border-radius: 16px;
+      background: rgba(255, 253, 247, 0.9);
+      box-shadow: 0 10px 24px rgba(8, 26, 23, 0.1);
+      overflow: hidden;
+      min-height: 92px;
+    }
+    .asset-tile img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 320 / 190;
+      height: auto;
+      object-fit: cover;
+    }
+    .asset-tile.contain {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px;
+    }
+    .asset-tile.contain img {
+      max-height: 98px;
+      width: 100%;
+      aspect-ratio: auto;
+      object-fit: contain;
+      border-radius: 11px;
+    }
+    .support-assets {
+      margin-top: 11px;
+    }
+    .source-strip {
+      margin: 7px 0 8px;
+    }
+    .source-strip.asset-strip.three {
+      grid-template-columns: repeat(3, 205px);
+    }
+    .source-strip .asset-tile {
+      min-height: 0;
+    }
+    .source-strip .asset-tile img {
+      height: auto;
+      aspect-ratio: 320 / 190;
+      object-position: top;
+    }
+    .source-evidence {
+      display: grid;
+      grid-template-columns: 635px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .source-evidence ul {
+      font-size: .82rem;
+      line-height: 1.32;
+    }
+    .org-map {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .org-row {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .org-node {
+      border: 1px solid rgba(20, 35, 32, 0.1);
+      border-radius: 15px;
+      background: rgba(255, 253, 247, 0.88);
+      padding: 8px 10px;
+      min-height: 48px;
+      box-shadow: 0 8px 20px rgba(8, 26, 23, 0.08);
+    }
+    .org-node strong {
+      display: block;
+      color: var(--ink-blue);
+      font-size: .84rem;
+      line-height: 1.1;
+    }
+    .org-node span {
+      color: var(--muted);
+      font-size: .66rem;
+      font-weight: 700;
+    }
+    .org-node.lead {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(0, 168, 132, 0.13), rgba(255, 253, 247, 0.92));
+      border-color: rgba(0, 168, 132, 0.22);
+    }
+    .org-arrow {
+      text-align: center;
+      color: #006e5d;
+      font-weight: 900;
+      line-height: 1;
+      margin: -2px 0;
     }
 
     .kpi-grid {
@@ -570,7 +676,7 @@
         </ul>
       </div>
       <div class="card brand-card">
-        <img class="brand-logo" src="assets/Gemini_Generated_Image_jzztysjzztysjzzt.png" alt="Hvedebro logo" />
+        <img class="brand-logo" src="assets/hvedebro-logo.png" alt="Hvedebro logo" />
         <p class="mini">Planen er lavet, så sikkerhed bliver et middel til stabil drift, tillid og vækst.</p>
         <div>
           <span class="pill">Risikobaseret</span>
@@ -730,10 +836,10 @@
 
   <section class="slide">
     <div class="kicker">Slide 5 · Initiativer + roadmap</div>
-    <h2>Roadmap: tid på x-akse, områder/indsatser på y-akse</h2>
+    <h2>Roadmap: tid på x-akse, områder på y-akse</h2>
     <div class="phase-canvas">
       <div class="axis">
-        <div class="yl">Akser</div>
+        <div class="yl">Tid</div>
         <div class="x"><span>0 mdr</span><span>6 mdr</span><span>12 mdr</span><span>24 mdr</span><span>36 mdr</span></div>
         <div></div>
         <div class="phase-head">Fase 1</div>
@@ -743,7 +849,7 @@
       </div>
 
       <div class="phase-grid">
-        <div class="phase-y">Y-akse: områder/indsatser</div>
+        <div class="phase-y">Områder</div>
 
         <div class="phase-box p1 priority-phase">
           <h4><img class="phase-icon" src="assets/icon-iam-mfa.svg" alt="IAM/MFA ikon" />Fundament (0-6 mdr) · prioriteret</h4>
@@ -804,7 +910,14 @@
       <div class="legend">Fase 1 er markeret som prioriteret, fordi den reducerer de største risici hurtigst.</div>
     </div>
 
-    <div class="img-wrap single-asset"><img src="assets/backup-3-2-1.png" alt="3-2-1 backup rule" /></div>
+    <div class="asset-strip six">
+      <div class="asset-tile"><img src="assets/visual-policy-cover.png" alt="Forside for IT-sikkerhedspolitik" /></div>
+      <div class="asset-tile"><img src="assets/visual-mfa-entra.png" alt="MFA og Entra ID kontrol" /></div>
+      <div class="asset-tile"><img src="assets/visual-backup-321.png" alt="3-2-1 backup med testet gendannelse" /></div>
+      <div class="asset-tile"><img src="assets/visual-erp-finance.png" alt="ERP og økonomisystem" /></div>
+      <div class="asset-tile"><img src="assets/visual-ai-audit-cover.png" alt="AI-politik og AI-audit" /></div>
+      <div class="asset-tile"><img src="assets/visual-awareness.png" alt="Awareness-program og phishing-måling" /></div>
+    </div>
   </section>
 
   <section class="slide">
@@ -830,6 +943,11 @@
         </tbody>
       </table>
     </div>
+    <div class="asset-strip three support-assets">
+      <div class="asset-tile"><img src="assets/visual-remote-access-control.png" alt="Fjernadgang med godkendelse, MFA og logning" /></div>
+      <div class="asset-tile"><img src="assets/visual-backup-321.png" alt="3-2-1 backup og restore-test som fase 1-2 kontrol" /></div>
+      <div class="asset-tile"><img src="assets/visual-itot-zones.png" alt="IT og OT segmentering i zoner" /></div>
+    </div>
   </section>
 
   <section class="slide">
@@ -854,6 +972,11 @@
           <tr><td>OT-sikkerhedsprogram</td><td>OT-lead</td><td>Asset/patch/backup disciplin</td><td>Sikrer produktionens kontinuitet</td></tr>
         </tbody>
       </table>
+    </div>
+    <div class="asset-strip three support-assets">
+      <div class="asset-tile"><img src="assets/visual-erp-migration.png" alt="ERP-migrering med foranalyse, pilot og fallback" /></div>
+      <div class="asset-tile"><img src="assets/visual-ai-governance-flow.png" alt="AI-governance med register, review og audit" /></div>
+      <div class="asset-tile"><img src="assets/visual-supplier-ot-program.png" alt="Leverandørstyring og OT-program med SLA og audit-ret" /></div>
     </div>
   </section>
 
@@ -921,12 +1044,19 @@
     </div>
     <div class="card" style="margin-top:10px;">
       <h3>Ekstern pejling: officiel praksis bag risikoreduktionen</h3>
-      <ul>
-        <li><strong>Cybertruslen mod Danmark 2025:</strong> cyberkriminalitet og ransomware er aktuelle trusler for danske organisationer, og OT-manipulation indgår i trusselsbilledet.</li>
-        <li><strong>Reducer risikoen for ransomware (SAMSIK/CFCS, 2023):</strong> understøtter fase 1-2 fokus på MFA/fjernadgang, segmentering, backup, offline kopi og testet reetablering.</li>
-        <li><strong>Vejledning i risikostyring (Sikkerdigital, 2025):</strong> understøtter S x K-metode, ledelsesforankring, leverandørkæde og dokumenteret risikohåndtering.</li>
-        <li><strong>Konklusion:</strong> Roadmappet følger officiel dansk praksis: styr risiko, reducer ransomware-impact, dokumentér ansvar og mål effekten med KPI'er.</li>
-      </ul>
+      <div class="source-evidence">
+        <div class="asset-strip three source-strip">
+          <div class="asset-tile"><img src="assets/visual-source-cybertruslen.png" alt="Cybertruslen mod Danmark kildekort" /></div>
+          <div class="asset-tile"><img src="assets/visual-source-ransomware.png" alt="Reducer risikoen for ransomware kildekort" /></div>
+          <div class="asset-tile"><img src="assets/visual-source-risk.png" alt="Vejledning i risikostyring kildekort" /></div>
+        </div>
+        <ul>
+          <li><strong>Cybertruslen mod Danmark 2025:</strong> cyberkriminalitet og ransomware er aktuelle trusler for danske organisationer, og OT-manipulation indgår i trusselsbilledet.</li>
+          <li><strong>Reducer risikoen for ransomware (SAMSIK/CFCS, 2023):</strong> understøtter fase 1-2 fokus på MFA/fjernadgang, segmentering, backup, offline kopi og testet reetablering.</li>
+          <li><strong>Vejledning i risikostyring (Sikkerdigital, 2025):</strong> understøtter S x K-metode, ledelsesforankring, leverandørkæde og dokumenteret risikohåndtering.</li>
+          <li><strong>Konklusion:</strong> Roadmappet følger officiel dansk praksis: styr risiko, reducer ransomware-impact, dokumentér ansvar og mål effekten med KPI'er.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -957,6 +1087,19 @@
         </ul>
         <h3 style="margin-top:10px;">Afslutning</h3>
         <p>Planen er eksekverbar, fordi ansvar og beslutningsveje er tydelige.</p>
+      </div>
+    </div>
+    <div class="org-map">
+      <div class="org-node lead"><strong>Direktion + bestyrelse</strong><span>risikovillighed, prioritering og accept</span></div>
+      <div class="org-arrow">↓</div>
+      <div class="org-node lead"><strong>Månedlig sikkerhedsstyregruppe</strong><span>risici, KPI, afvigelser og roadmap-beslutninger</span></div>
+      <div class="org-arrow">↓</div>
+      <div class="org-row">
+        <div class="org-node"><strong>IT/IAM</strong><span>MFA, Entra ID, adgange</span></div>
+        <div class="org-node"><strong>OT</strong><span>zoner, backup, leverandøradgang</span></div>
+        <div class="org-node"><strong>Indkøb</strong><span>SLA, audit-ret, exitkrav</span></div>
+        <div class="org-node"><strong>HR</strong><span>awareness og træning</span></div>
+        <div class="org-node"><strong>Dataejere</strong><span>klassifikation og risici</span></div>
       </div>
     </div>
   </section>
